@@ -1,5 +1,10 @@
+import Layout from "../Components/layouts/Layout";
+
 function Bookings(){
-    return <h1>Booking</h1>
+    return <Layout>
+        <h1>Booking</h1>
+    </Layout>
+    
 }
 
 export default Bookings;

@@ -1,9 +1,13 @@
+import Layout from "../Components/layouts/Layout";
 import SlideshowContainer from "../Components/slideshowContainer/SlideshowContainer";
+import {useUserAuth} from '../Context/Context'
 
 function Homepage(){
-    return(<div>
+    const {user} = useUserAuth();
+    console.log(user);
+    return(<Layout>
              <SlideshowContainer />  
-         </div>
+         </Layout>
     )
     
    

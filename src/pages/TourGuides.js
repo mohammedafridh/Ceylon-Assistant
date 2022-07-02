@@ -1,5 +1,11 @@
+import Layout from "../Components/layouts/Layout";
+
 function TourGuides(){
-    return <h1>TourGuides</h1>
+    return (<Layout>
+        <h1>Tour Guides</h1>
+    </Layout>
+   
+    )
 }
 
 export default TourGuides;

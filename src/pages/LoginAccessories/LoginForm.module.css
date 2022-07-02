@@ -1,0 +1,43 @@
+.card{
+    width: 20rem;
+    margin: 5rem auto;
+    margin-bottom: 0;
+    border-radius: 6px;
+    position: relative;
+    top: 1rem;
+}
+
+.heading{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form{
+    width: 18rem;
+    margin: 0 auto;
+}
+
+.fill{
+    margin: 1rem 0;
+    /* width: 18rem; */
+}
+
+.buttons{
+    position: relative;
+    left: 1.5rem;
+}
+
+.login{
+    width: 18rem;
+    margin: 1rem 0;
+}
+
+.gglBtn{
+    width: 18rem;
+    margin: 0.5rem 0 2rem;
+}
+
+.signIn_Btn{
+    text-align: left;
+    margin: 0 0 1rem 1rem;
+}

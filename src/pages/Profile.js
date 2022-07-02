@@ -1,5 +1,12 @@
+import Layout from "../Components/layouts/Layout";
+import { useUserAuth } from "../Context/Context";
+
 function Profile(){
-    return <h1>Profile</h1>
+    const {user} = useUserAuth();
+    return <Layout>
+        <h1>Profile</h1>
+        {user && user.email}
+    </Layout>
 }
 
 export default Profile;
