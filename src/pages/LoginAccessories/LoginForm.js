@@ -58,7 +58,7 @@ function LoginForm() {
               
           </Form>
           <div className = {classes.signIn_Btn}>
-      Do not have an account? <Link to = '/signUp'>Sign Up</Link>
+      Do not have an account? <Link to = '/newSignup'>Sign Up</Link>
     </div>
       </Card.Body>
     </Card>

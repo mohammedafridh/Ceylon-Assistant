@@ -1,0 +1,66 @@
+.card{
+    width: 50rem;
+    margin: 4rem auto;
+    margin-top: 3rem;
+    padding: 1.5rem;
+}
+
+.heading{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.form{
+    width: 100%;
+    margin: 0rem auto;
+}
+
+.label{
+    margin: 1rem 0;
+}
+
+.fill1{
+    width: 100%;
+}
+
+.fill2{
+    width: 50%;
+    margin-left: 9rem;
+}
+
+.fill3{
+    width: 60%;
+}
+
+.fill4{
+    width: 20%;
+    margin-left: 9rem;
+}
+
+.fill5{
+    width: 100%;
+}
+
+.fill6{
+    width: 60%;
+    margin-left: 5rem;
+}
+
+.fill10{
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.fill11{
+    width: 100%;
+}
+
+.register_Btn{
+    width: 20rem;
+    margin: 2rem 0rem 1.5rem;
+}
+
+.signIn_Btn{
+    text-align: center;
+    margin-top: 1rem;
+}
