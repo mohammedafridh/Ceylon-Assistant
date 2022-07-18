@@ -4,22 +4,31 @@ import classes from '../Signup.module.css'
 import {Link, useNavigate} from 'react-router-dom'
 import { useUserAuth } from '../../../Context/Context';
 import LoginBackground from '../../../backgrounds/LoginBackground';
+// import addTourGuide from '../../../Firebase'
+import {db } from '../../../Firebase';
+import {collection,addDoc} from 'firebase/firestore'
 
 export default function NewSignup() {
 
-    const [email,setEmail] = useState('');
-    const [name,setName] = useState('');
-    const[password,setPassword] = useState('')
+    const [newName,setNewName] = useState('');
+    const[newEmail,setNewEmail] = useState('')
+    const[newPassword,setNewPassword] = useState('')
     const [error,setError] = useState('')
     const {signUp} = useUserAuth();
     const navigate = useNavigate()
 
+    const usersCollectionRef = collection(db, "users")
+
+    const createUser = async()=>{
+        await addDoc(usersCollectionRef, {name:newName, email:newEmail})
+    }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setError('')
         try{
-            await signUp(email,password);
+            await signUp(newEmail,newPassword);
+            await createUser()
             navigate('/home')
         }catch(err){
             setError(err.message)
@@ -36,36 +45,36 @@ export default function NewSignup() {
             <Form className={classes.form} onSubmit = {handleSubmit}>
                 <Form.Group id = 'name'>
                     <Form.Label className = {classes.label}>Name</Form.Label>
-                    <Form.Control type = 'text' onChange = {(e)=>setName(e.target.value)}/>
+                    <Form.Control type = 'text' onChange = {(e)=>setNewName(e.target.value)}/>
                 </Form.Group>
-{/*                 
+                
                 <Form.Group id = 'gender'>
                     <Form.Label  className = {classes.label}>Gender</Form.Label>
-                    <Form.Select aria-label="Default select example" ref = {gender}>
+                    <Form.Select aria-label="Default select example" >
                     <option required>Select Gender</option>
-                    <option value="male" ref = {gender}>Male</option>
-                    <option value="female" ref = {gender}>Female</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group id = 'contactNumber'>
                     <Form.Label  className = {classes.label}>Contact Number</Form.Label>
-                    <Form.Control type = 'number' ref = {contactNumber} required />
+                    <Form.Control type = 'number' />
                 </Form.Group>
                 <Form.Group id = 'address'>
                     <Form.Label  className = {classes.label}>Address</Form.Label>
-                    <Form.Control type = 'text' ref = {address} required />
+                    <Form.Control type = 'text'/>
                 </Form.Group>
                 <Form.Group id = 'district'>
                     <Form.Label  className = {classes.label}>District</Form.Label>
-                    <Form.Control type = 'text' ref = {district} required />
-                </Form.Group>  */}
+                    <Form.Control type = 'text'/>
+                </Form.Group> 
                 <Form.Group id = 'email'>
                     <Form.Label  className = {classes.label}>E-mail</Form.Label>
-                    <Form.Control type = 'email' onChange = {(e)=> setEmail(e.target.value)} />
+                    <Form.Control type = 'email' onChange = {(e)=> setNewEmail(e.target.value)} />
                 </Form.Group>
                 <Form.Group id = 'password1'>
                     <Form.Label  className = {classes.label}>Password</Form.Label>
-                    <Form.Control type = 'password' onChange = {(e)=> setPassword(e.target.value)} />
+                    <Form.Control type = 'password' onChange = {(e)=> setNewPassword(e.target.value)} />
                 </Form.Group>
                 {/* <Form.Group id = 'password2'>
                     <Form.Label  className = {classes.label}>Confirm Password</Form.Label>
