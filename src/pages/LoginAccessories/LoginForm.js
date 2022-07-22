@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import classes from './LoginForm.module.css'
 import {Form,Button,Card,Alert} from 'react-bootstrap'
-import GoogleButton from 'react-google-button'
+// import GoogleButton from 'react-google-button'
 import {Link, useNavigate} from 'react-router-dom'
 import {useUserAuth} from '../../Context/Context'
 
@@ -12,7 +12,7 @@ function LoginForm() {
     const [error,setError] = useState('')
     const {logIn} = useUserAuth();
     const navigate = useNavigate()
-    const {googleSignIn} = useUserAuth()
+    // const {googleSignIn} = useUserAuth()
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -25,15 +25,15 @@ function LoginForm() {
         }
     }
 
-    const handleGoogleSignIn = async (e)=>{
-        e.preventDefault();
-        try{
-          await googleSignIn();
-          navigate('/home')
-        }catch(err){
-          setError(err.message);
-        }
-    }
+    // const handleGoogleSignIn = async (e)=>{
+    //     e.preventDefault();
+    //     try{
+    //       await googleSignIn();
+    //       navigate('/home')
+    //     }catch(err){
+    //       setError(err.message);
+    //     }
+    // }
 
   return (<div>
     <Card className = {classes.card}>
@@ -51,14 +51,20 @@ function LoginForm() {
               </Form.Group>
             
                 <Button type = 'submit' className = {classes.login}>Login</Button>
-            <div className={classes.buttons}>
+            {/* <div className={classes.buttons}>
                 <GoogleButton className = {classes.gglBtn} onClick = {handleGoogleSignIn}></GoogleButton>
-            </div>
+            </div> */}
                
               
           </Form>
           <div className = {classes.signIn_Btn}>
       Do not have an account? <Link to = '/tourGuideReg'>Sign Up</Link>
+    </div>
+    <div>
+      <center>
+        <Button className = {classes.regBtn}><Link to = '/tourGuideReg'>Tour Guide Registration</Link></Button>
+        <Button className = {classes.regBtn}><Link to = '/touristReg'>Tourist Registration</Link></Button>
+      </center>
     </div>
       </Card.Body>
     </Card>

@@ -6,11 +6,9 @@ import Search from './pages/Search';
 import Bookings from './pages/Bookings';
 import Profile from './pages/Profile';
 import Login from './pages/LoginAccessories/Login'
-// import Signup from './pages/LoginAccessories/Signup';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
-// import TourGuideReg from './pages/LoginAccessories/TourGuideReg';
-import NewSignup from './pages/LoginAccessories/testing/NewSignup';
 import TourGuideReg from './pages/LoginAccessories/TourGuideReg';
+import TouristReg from './pages/LoginAccessories/TouristReg';
 
 function App() {
 
@@ -29,7 +27,7 @@ function App() {
         <Routes>
             <Route path = '/' element = {<Login />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
-            <Route path = '/newSignup' element = {<NewSignup />}/>
+            <Route path = '/touristReg' element = {<TouristReg />}/>
             <Route path = '/home' element = {<ProtectedRoute><Homepage /></ProtectedRoute>} />
             <Route path = '/guides' element = {<ProtectedRoute><TourGuides /></ProtectedRoute>} />
             <Route path = '/search' element = {<ProtectedRoute><Search /></ProtectedRoute>} />

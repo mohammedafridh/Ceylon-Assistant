@@ -1,5 +1,5 @@
 .card{
-    width: 50rem;
+    width: 40rem;
     margin: 4rem auto;
     margin-top: 3rem;
     padding: 1.5rem;
@@ -25,17 +25,18 @@
 }
 
 .fill2{
-    width: 50%;
-    margin-left: 9rem;
+    width: 100%;
+    margin-left: 0rem;
 }
 
 .fill3{
     width: 60%;
+    margin-left: 3rem;
 }
 
 .fill4{
-    width: 20%;
-    margin-left: 9rem;
+    width: 100%;
+    margin-left: 3rem;
 }
 
 .fill5{
@@ -45,6 +46,21 @@
 .fill6{
     width: 60%;
     margin-left: 5rem;
+}
+
+.fill7{
+    width: 100%;
+    margin-left: 0rem;
+}
+
+.fill8{
+    width: 100%;
+    margin-left: 1rem;
+}
+
+.fill9{
+    width: 80%;
+    margin-left: 2rem;
 }
 
 .fill10{

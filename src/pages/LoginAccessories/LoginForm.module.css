@@ -41,3 +41,17 @@
     text-align: left;
     margin: 0 0 1rem 1rem;
 }
+
+.regBtn {
+
+    width: 13rem;
+    margin: 0.5rem;
+    
+
+}
+
+.regBtn a{
+    color: white;
+    text-decoration: none;
+    
+}
