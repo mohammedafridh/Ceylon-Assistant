@@ -23,7 +23,8 @@ function MainNavigation(){
                 <li><Link to = '/guides'><Icons.FaUsers  className = {classes.icon}/> Tour Guides</Link></li>
                 <li><Link to = '/search'><Icons.FaSearch className = {classes.icon}/> Search</Link></li>
                 <li><Link to = '/bookings'><Icons.FaBook className = {classes.icon}/> Bookings</Link></li>
-                <li><Link to = '/profile'><Icons.FaUser className = {classes.icon}/> Profile</Link></li>    
+                <li><Link to = '/profile'><Icons.FaUser className = {classes.icon}/> Profile</Link></li>  
+                <li><Link to = '/inbox'><Icons.FaInbox className = {classes.icon1}/></Link></li>  
             </ul>
             <button className = {classes.signOut} onClick = {handleLogOut}>Sign Out</button>
         </header>

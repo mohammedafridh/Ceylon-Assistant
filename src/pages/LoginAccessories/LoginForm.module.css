@@ -43,7 +43,10 @@
 }
 
 .regBtn {
-
+    background-color: #03122E;
+    padding: 5px;
+    border-radius: 6px;
+    border: none;
     width: 13rem;
     margin: 0.5rem;
     
@@ -51,7 +54,8 @@
 }
 
 .regBtn a{
-    color: white;
+    color: rgb(255, 255, 255);
     text-decoration: none;
+    font-family: inherit;
     
 }

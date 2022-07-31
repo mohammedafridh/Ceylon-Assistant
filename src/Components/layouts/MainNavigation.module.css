@@ -1,6 +1,7 @@
 .header{
     width: 100%;
-    background-color: #CCD1D1;
+    /* background-color: #CCD1D1; */
+    background-color: transparent;
     color: white;
     display:flex;
     align-items: center;
@@ -16,12 +17,12 @@
     display: flex;
     position: relative;
     top: 0.5rem;
-    left: 8rem;
+    left: 10rem;
     
 }
 
 .header li{
-    margin-left: 3rem;
+    margin-left: 2rem;
     list-style: none;
 }
 
@@ -64,6 +65,13 @@
 .icon{
     position: relative;
     top: -0.1rem;
+    color: #FF5733;
+}
+
+.icon1{
+    position: relative;
+    top: 0rem;
+   
     color: #FF5733;
 }
 

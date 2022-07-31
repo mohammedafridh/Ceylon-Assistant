@@ -62,8 +62,8 @@ function LoginForm() {
     </div>
     <div>
       <center>
-        <Button className = {classes.regBtn}><Link to = '/tourGuideReg'>Tour Guide Registration</Link></Button>
-        <Button className = {classes.regBtn}><Link to = '/touristReg'>Tourist Registration</Link></Button>
+        <button className = {classes.regBtn}><Link to = '/tourGuideReg'>Tour Guide Registration</Link></button>
+        <button className = {classes.regBtn}><Link to = '/touristReg'>Tourist Registration</Link></button>
       </center>
     </div>
       </Card.Body>

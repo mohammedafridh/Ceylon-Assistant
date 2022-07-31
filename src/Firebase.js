@@ -5,7 +5,7 @@ import {getStorage} from 'firebase/storage'
 
 const firebaseConfig = {
   apiKey: "AIzaSyD6wDMvKeUmt5nzf75baXlTSnQszVgGmMI",
-  authDomain: "ceylon-assistant.firebaseapp.com",
+  authDomain:"ceylon-assistant.firebaseapp.com",
   projectId: "ceylon-assistant",
   storageBucket: "ceylon-assistant.appspot.com",
   messagingSenderId: "1085508934061",

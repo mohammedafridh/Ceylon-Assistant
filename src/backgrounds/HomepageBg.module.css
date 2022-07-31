@@ -1,0 +1,11 @@
+.homeBg{
+    position: relative;
+    background-image: url('https://cdn1.tripoto.com/media/filter/tst/img/1524784/Image/1572863801_sri_lanka_2.jpg');
+    width: 100%;
+    height: 30rem;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin:0;
+}

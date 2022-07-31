@@ -9,6 +9,7 @@ import Login from './pages/LoginAccessories/Login'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import TourGuideReg from './pages/LoginAccessories/TourGuideReg';
 import TouristReg from './pages/LoginAccessories/TouristReg';
+import Inbox from './pages/Inbox';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
     return(<div>
         <Routes>
             <Route path = '/' element = {<Login />} />
+            <Route path = '/inbox' element = {<Inbox />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
             <Route path = '/touristReg' element = {<TouristReg />}/>
             <Route path = '/home' element = {<ProtectedRoute><Homepage /></ProtectedRoute>} />

@@ -9,6 +9,7 @@ import {db,storage } from '../../Firebase';
 import {collection,addDoc} from 'firebase/firestore'
 import {ref, uploadBytes} from 'firebase/storage'
 import {v4} from 'uuid'
+import {Multiselect} from 'multiselect-react-dropdown'
 
 function TourGuideReg() {
 
@@ -23,6 +24,8 @@ function TourGuideReg() {
     const [newPassengers,setNewPassengers] = useState('');
     const[newEmail,setNewEmail] = useState('')
     const[newPassword,setNewPassword] = useState('')
+    const[newLanguage,setNewLanguage] = useState('')
+    const[newRate,setNewRate] = useState('')
     const [imageUpload,setImageUpload] = useState(null)
     const [error,setError] = useState('')
     const {signUp} = useUserAuth();
@@ -30,9 +33,19 @@ function TourGuideReg() {
 
     const usersCollectionRef = collection(db, "users")
 
+    const languages = [
+        {Language:'Tamil', id:1},
+        {Language:'Sinhala', id:2},
+        {Language:'English', id:3},
+        {Language:'French', id:4},
+        {Language:'Telugu', id:5},
+    ]
+
+    const [selection] = useState(languages);
+
     const createUser = async()=>{
         await addDoc(usersCollectionRef, {name:newName, email:newEmail, gender:newGender, 
-        contact_Number:newContactNumber, age:newAge, address:newAddress, district:newDistrict,
+        contact_Number:newContactNumber, age:newAge, languages: newLanguage, rate:newRate, address:newAddress, district:newDistrict,
     vehicle_type:newVehType, model:newModel,No_of_passengers:newPassengers})
     }
 
@@ -103,6 +116,22 @@ function TourGuideReg() {
                 </Form.Group>
                 </div>
             </div>
+
+            <div class = 'row'>
+                <div class = 'col-6'>        
+                <Form.Group id = 'language' className = {classes.fill20}>
+                    <Form.Label  className = {classes.label}>Known Languages</Form.Label>
+                    <Multiselect options = {selection} displayValue = 'Language' onChange = {(e)=>setNewLanguage(e.target.value)} />
+                </Form.Group>
+                </div> 
+                <div class = 'col-6'>
+                <Form.Group id = 'rate'>
+                    <Form.Label  className = {classes.label}>Rate</Form.Label>
+                    <Form.Control type = 'text' onChange = {(e)=>setNewRate(e.target.value)} required />
+                </Form.Group>
+                </div>
+            </div>
+
             <div class = 'row'>
                 <div class = 'col-7'>
                 <Form.Group id = 'address' className = {classes.fill5}>
