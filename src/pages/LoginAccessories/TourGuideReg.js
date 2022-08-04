@@ -4,10 +4,12 @@ import classes from './TourGuideReg.module.css'
 import LoginBackground from '../../backgrounds/LoginBackground';
 import {Link, useNavigate} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context';
+//import Avatar from '@mui/material/Avatar'
 
 import {db,storage } from '../../Firebase';
 import {collection,addDoc} from 'firebase/firestore'
-import {ref, uploadBytes} from 'firebase/storage'
+//import {ref} from 'firebase/storage'
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import {Multiselect} from 'multiselect-react-dropdown'
 
@@ -26,13 +28,13 @@ function TourGuideReg() {
     const[newPassword,setNewPassword] = useState('')
     const[newLanguage,setNewLanguage] = useState('')
     const[newRate,setNewRate] = useState('')
-    const [imageUpload,setImageUpload] = useState(null)
+    const [image,setImage] = useState(null)
+    const[url,setUrl] = useState(null)
     const [error,setError] = useState('')
     const {signUp} = useUserAuth();
     const navigate = useNavigate()
 
-    const usersCollectionRef = collection(db, "users")
-
+    //multi select dropdown options
     const languages = [
         {Language:'Tamil', id:1},
         {Language:'Sinhala', id:2},
@@ -43,16 +45,49 @@ function TourGuideReg() {
 
     const [selection] = useState(languages);
 
-    const createUser = async()=>{
-        await addDoc(usersCollectionRef, {name:newName, email:newEmail, gender:newGender, 
-        contact_Number:newContactNumber, age:newAge, languages: newLanguage, rate:newRate, address:newAddress, district:newDistrict,
-    vehicle_type:newVehType, model:newModel,No_of_passengers:newPassengers})
+
+    //adding data to firebase
+
+    const usersCollectionRef = collection(db, "Tour_Guides")
+
+    // const createUser = async()=>{
+    //     await addDoc(usersCollectionRef, {name:newName, email:newEmail, gender:newGender, 
+    //     contact_Number:newContactNumber, age:newAge, languages: newLanguage, rate:newRate, 
+    //     address:newAddress, district:newDistrict, vehicle_type:newVehType, model:newModel,
+    //     No_of_passengers:newPassengers})
+    // }
+
+    // const uploadImage = async ()=>{
+    //     if(newImageUpload == null) return; 
+    //     const imageRef = ref(storage, `Tour_Guide_Images/${newImageUpload.name + v4()}`);
+    //     uploadBytes(imageRef, newImageUpload)
+    // }
+
+    //getting image
+    const handleImageChange = (e)=>{
+        if(e.target.files[0]){
+            setImage(e.target.files[0])
+        }
     }
 
-    const uploadImage = async ()=>{
-        if(imageUpload == null) return; 
-        const imageRef = ref(storage, `Tour_Guide_Images/${imageUpload.name + v4()}`);
-        uploadBytes(imageRef, imageUpload)
+    //getting image url and adding details to storage and firestore db
+    const createUser = async()=>{
+        const imageRef = ref(storage,`Tour_Guide_Images/${image.name + v4()}`);
+        uploadBytes(imageRef, image).then(()=>{
+            getDownloadURL(imageRef).then((url)=>{
+                setUrl(url);
+                //add details part
+                addDoc(usersCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
+                         contact_Number:newContactNumber, age:newAge, languages: newLanguage, rate:newRate, 
+                         address:newAddress, district:newDistrict, vehicle_type:newVehType, model:newModel,
+                         No_of_passengers:newPassengers})
+            }).catch((err)=>{
+                setError(err.message,'error getting the image')
+            })
+            setImage(null)
+        }).catch((err)=>{
+            setError(err)
+        })
     }
 
     const handleSubmit = async (e)=>{
@@ -61,7 +96,7 @@ function TourGuideReg() {
         try{
             await signUp(newEmail,newPassword);
             await createUser();
-            await uploadImage();
+            // await uploadImage();
             navigate('/home')
         }catch(err){
             setError(err.message)
@@ -83,10 +118,11 @@ function TourGuideReg() {
                     <Form.Control type = 'text' onChange = {(e)=> setNewName(e.target.value)} required/>
                 </Form.Group>
                 </div> 
+
                 <div class = 'col-6'>
                 <Form.Group id = 'image'>
                     <Form.Label  className = {classes.label}>Add your real image</Form.Label>
-                    <Form.Control type = 'file' onChange = {(e)=>setImageUpload(e.target.value)} required />
+                    <Form.Control type = 'file' onChange = {handleImageChange} required />
                 </Form.Group>
                 </div>
             </div>

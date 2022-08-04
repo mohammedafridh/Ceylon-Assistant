@@ -68,7 +68,6 @@ function LoginForm() {
     </div>
       </Card.Body>
     </Card>
-    
   </div>
   )
 }
