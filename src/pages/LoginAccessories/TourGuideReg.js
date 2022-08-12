@@ -12,6 +12,9 @@ import {collection,addDoc} from 'firebase/firestore'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import {Multiselect} from 'multiselect-react-dropdown'
+// import Select from 'react-select'
+// import MultiSelect from 'react-multiple-select-dropdown-lite'
+// import  'react-multiple-select-dropdown-lite/dist/index.css'
 
 function TourGuideReg() {
 
@@ -36,32 +39,23 @@ function TourGuideReg() {
 
     //multi select dropdown options
     const languages = [
-        {Language:'Tamil', id:1},
-        {Language:'Sinhala', id:2},
-        {Language:'English', id:3},
-        {Language:'French', id:4},
-        {Language:'Telugu', id:5},
+        // {Language:'Tamil', id:1},
+        // {Language:'Sinhala', id:2},
+        // {Language:'English', id:3},
+        // {Language:'French', id:4},
+        // {Language:'Telugu', id:5},
+        {Language:'Tamil', value:'Tamil'},
+        {Language:'Sinhala', value:'Sinhala'},
+        {Language:'English', value:'English'},
+        {Language:'French', value:'French'},
+        {Language:'Telugu', value:'Telugu'},
     ]
 
     const [selection] = useState(languages);
 
-
     //adding data to firebase
 
     const usersCollectionRef = collection(db, "Tour_Guides")
-
-    // const createUser = async()=>{
-    //     await addDoc(usersCollectionRef, {name:newName, email:newEmail, gender:newGender, 
-    //     contact_Number:newContactNumber, age:newAge, languages: newLanguage, rate:newRate, 
-    //     address:newAddress, district:newDistrict, vehicle_type:newVehType, model:newModel,
-    //     No_of_passengers:newPassengers})
-    // }
-
-    // const uploadImage = async ()=>{
-    //     if(newImageUpload == null) return; 
-    //     const imageRef = ref(storage, `Tour_Guide_Images/${newImageUpload.name + v4()}`);
-    //     uploadBytes(imageRef, newImageUpload)
-    // }
 
     //getting image
     const handleImageChange = (e)=>{
@@ -128,7 +122,7 @@ function TourGuideReg() {
             </div>
 
             <div class='row'> 
-                <div class = 'col-4'> 
+                <div class = 'col-5'> 
                 <Form.Group id = 'gender' className = {classes.fill2}>
                     <Form.Label  className = {classes.label}>Gender</Form.Label>
                     <Form.Select aria-label="Default select example" onChange = {(e)=>setNewGender(e.target.value)} required>
@@ -139,7 +133,7 @@ function TourGuideReg() {
                 </Form.Group>
                 </div>           
             
-                <div class = 'col-5'>
+                <div class = 'col-4'>
                 <Form.Group id = 'contactNumber' className = {classes.fill3}>
                     <Form.Label  className = {classes.label}>Contact Number</Form.Label>
                     <Form.Control type = 'text' onChange = {(e)=>setNewContactNumber(e.target.value)} required/>
@@ -155,10 +149,10 @@ function TourGuideReg() {
 
             <div class = 'row'>
                 <div class = 'col-6'>        
-                <Form.Group id = 'language' className = {classes.fill20}>
-                    <Form.Label  className = {classes.label}>Known Languages</Form.Label>
-                    <Multiselect options = {selection} displayValue = 'Language' onChange = {(e)=>setNewLanguage(e.target.value)} />
-                </Form.Group>
+                    <Form.Group id = 'language' className = {classes.fill20}>
+                        <Form.Label  className = {classes.label}>Known Languages</Form.Label>
+                        <Multiselect options = {selection} displayValue = 'Language' onChange = {(e)=>setNewLanguage(e.target.value)} />
+                    </Form.Group>
                 </div> 
                 <div class = 'col-6'>
                 <Form.Group id = 'rate'>

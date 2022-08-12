@@ -10,19 +10,20 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import TourGuideReg from './pages/LoginAccessories/TourGuideReg';
 import TouristReg from './pages/LoginAccessories/TouristReg';
 import Inbox from './pages/Inbox';
+import SetBooking from './PopupPages/SetBooking';
 
 function App() {
 
-    var docWidth = document.documentElement.offsetWidth;
+//     var docWidth = document.documentElement.offsetWidth;
 
-[].forEach.call(
-  document.querySelectorAll('*'),
-  function(el) {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
-    }
-  }
-);
+// [].forEach.call(
+//   document.querySelectorAll('*'),
+//   function(el) {
+//     if (el.offsetWidth > docWidth) {
+//       console.log(el);
+//     }
+//   }
+// );
 
     return(<div>
         <Routes>
@@ -35,6 +36,7 @@ function App() {
             <Route path = '/search' element = {<ProtectedRoute><Search /></ProtectedRoute>} />
             <Route path = '/bookings' element = {<ProtectedRoute><Bookings /></ProtectedRoute>} />
             <Route path = '/profile' element = {<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path = '/setBookings' element = {<ProtectedRoute><SetBooking /></ProtectedRoute>} />
         </Routes>    
     </div>  
     )
