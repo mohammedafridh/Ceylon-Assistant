@@ -1,0 +1,31 @@
+.card{
+    width: 30rem;
+    margin: 3rem auto;
+    padding: 1rem;
+    z-index: 10;
+}
+
+.actions{
+    margin: 1.5rem 1rem 0;
+    text-align: right;
+}
+
+.closeAll{
+    text-align: right;
+}
+
+.close{
+    width: 3rem;
+    padding: 3px;
+    background-color: red;
+    border: none;
+    color: white;
+}
+
+.cncl{
+    margin: 0 1rem;
+}
+
+.book{
+
+}
