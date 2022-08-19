@@ -1,6 +1,29 @@
+/* Search bar Css */
+.card{
+    width: 30rem;
+    height: 12rem;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.heading{
+    margin-bottom: 1rem;
+}
+
+.bttn{
+    margin: 1rem;
+    padding: 0.3rem !important;
+    width: 5rem;
+    background-color: #1bb91b !important;
+    border: none !important;
+    color: white !important;
+    
+}
+
+/* Tour guide details view */
 .list{
     list-style: none;
-    margin: 0 auto;
+    margin: 2rem auto;
     padding: 0; 
     width: 50rem;
 }

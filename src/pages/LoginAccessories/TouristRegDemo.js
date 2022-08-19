@@ -24,25 +24,14 @@ function TouristReg() {
     const {user} = useUserAuth()
     const navigate = useNavigate()
 
-
-    //adding data to firebase
-
-    const touristCollectionRef = collection(db, "Tourists")
-
-    //getting image
-    const handleImageChange = (e)=>{
-        if(e.target.files[0]){
-            setImage(e.target.files[0])
-        }
-    }
-
-    //getting image url and adding details to storage and firestore db
+    // getting image url and adding details to storage and firestore db
     const createUser = async()=>{
         const imageRef = ref(storage,`Tourist Images/${image.name + v4()}`);
         uploadBytes(imageRef, image).then(()=>{
             getDownloadURL(imageRef).then((url)=>{
                 setUrl(url);
                 //add details part
+                const touristCollectionRef = collection(db, "Tourists")
                 addDoc(touristCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
                          contact_Number:newContactNumber})
             }).catch((err)=>{
@@ -86,7 +75,7 @@ function TouristReg() {
                 <div class = 'col-6'>
                 <Form.Group id = 'image'>
                     <Form.Label  className = {classes.label}>Add your real image</Form.Label>
-                    <Form.Control type = 'file' onChange = {handleImageChange} required />
+                    <Form.Control type = 'file' onChange = {(e)=>setImage(e.target.files[0])} required />
                 </Form.Group>
                 </div>
             </div>
@@ -125,10 +114,6 @@ function TouristReg() {
                 </Form.Group>
                 </div>
                 </center>
-                {/* <Form.Group id = 'password2'>
-                    <Form.Label  className = {classes.label}>Confirm Password</Form.Label>
-                    <Form.Control type = 'password' ref = {password2} required />
-                </Form.Group> */}
                 
                 <center><Button type = 'submit' className = {classes.register_Btn}>Register</Button></center>
             </Form>

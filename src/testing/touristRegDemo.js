@@ -10,7 +10,7 @@ import {collection,addDoc} from 'firebase/firestore'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 
-function TouristReg() {
+function TouristRegDemo() {
 
     const [newName,setNewName] = useState('');
     const [newGender,setNewGender] = useState('');
@@ -21,7 +21,6 @@ function TouristReg() {
     const[url,setUrl] = useState(null)
     const [error,setError] = useState('')
     const {signUp} = useUserAuth();
-    const {user} = useUserAuth()
     const navigate = useNavigate()
 
 
@@ -36,15 +35,18 @@ function TouristReg() {
         }
     }
 
-    //getting image url and adding details to storage and firestore db
-    const createUser = async()=>{
-        const imageRef = ref(storage,`Tourist Images/${image.name + v4()}`);
-        uploadBytes(imageRef, image).then(()=>{
+    //new coding
+    const addUser = ()=>{
+        setError('')
+        signUp(newEmail,newPassword)
+        .then(async(result)=>{
+            const imageRef = ref(storage,`Tourist Images/${image.name + v4()}`);
+            uploadBytes(imageRef, image).then(()=>{
             getDownloadURL(imageRef).then((url)=>{
                 setUrl(url);
                 //add details part
-                addDoc(touristCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
-                         contact_Number:newContactNumber})
+                 addDoc(touristCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
+                         contact_Number:newContactNumber},result.user.uid)
             }).catch((err)=>{
                 setError(err.message,'error getting the image')
             })
@@ -52,14 +54,34 @@ function TouristReg() {
         }).catch((err)=>{
             setError(err)
         })
+        })
     }
+
+    //getting image url and adding details to storage and firestore db
+    // const createUser = async()=>{
+    //     const imageRef = ref(storage,`Tourist Images/${image.name + v4()}`);
+    //     uploadBytes(imageRef, image).then(()=>{
+    //         getDownloadURL(imageRef).then((url)=>{
+    //             setUrl(url);
+    //             //add details part
+    //             addDoc(touristCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
+    //                      contact_Number:newContactNumber})
+    //         }).catch((err)=>{
+    //             setError(err.message,'error getting the image')
+    //         })
+    //         setImage(null)
+    //     }).catch((err)=>{
+    //         setError(err)
+    //     })
+    // }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setError('')
         try{
-            await signUp(newEmail,newPassword);
-            await createUser();
+            addUser()
+            // await signUp(newEmail,newPassword);
+            // await createUser();
             // await uploadImage();
             navigate('/home')
         }catch(err){
@@ -141,4 +163,4 @@ function TouristReg() {
   )
 }
 
-export default TouristReg;
+export default TouristRegDemo;

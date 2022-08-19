@@ -38,9 +38,13 @@ function LoginForm() {
   return (<div>
     <Card className = {classes.card}>
       <Card.Body className = {classes.body}>
+        <div className = {classes.logo}>
+        <img src ='https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-08-17%20at%2010.55.49%20PM%20(1).jpeg?alt=media&token=72c21d23-5832-4cf4-9001-aa34f4b4f702' alt = 'logo' />
+        </div>
           <h2 className = {classes.heading}>Login</h2>
           {error && <Alert variant = 'danger'>{error}</Alert>}
           <Form className={classes.form} onSubmit = {handleSubmit}>
+            <div className = {classes.credentials}>
               <Form.Group id = 'email'>
                   {/* <Form.Label  className = {classes.label}>E-mail</Form.Label> */}
                   <Form.Control type = 'email' placeholder = 'Email' className = {classes.fill} onChange = {(e)=> setEmail(e.target.value)} />
@@ -49,21 +53,19 @@ function LoginForm() {
                   {/* <Form.Label  className = {classes.label}>Password</Form.Label> */}
                   <Form.Control type = 'password' placeholder = 'Password' className = {classes.fill} onChange = {(e)=>setPassword(e.target.value)} />
               </Form.Group>
-            
+              </div>
+              <div className = {classes.loginBtn}>
                 <Button type = 'submit' className = {classes.login}>Login</Button>
-            {/* <div className={classes.buttons}>
-                <GoogleButton className = {classes.gglBtn} onClick = {handleGoogleSignIn}></GoogleButton>
-            </div> */}
-               
+              </div>               
               
           </Form>
           <div className = {classes.signIn_Btn}>
       Do not have an account? <Link to = '/tourGuideReg'>Sign Up</Link>
     </div>
-    <div>
+    <div className = {classes.actions}>
       <center>
         <button className = {classes.regBtn}><Link to = '/tourGuideReg'>Tour Guide Registration</Link></button>
-        <button className = {classes.regBtn}><Link to = '/touristReg'>Tourist Registration</Link></button>
+        <button className = {classes.regBtn}><Link to = '/touristRegDemo'>Tourist Registration</Link></button>
       </center>
     </div>
       </Card.Body>

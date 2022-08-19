@@ -1,9 +1,9 @@
 import Layout from "../Components/layouts/Layout";
 
-function Search(){
+function Tours(){
     return <Layout>
         <h1>Search</h1>
     </Layout>
 }
 
-export default Search;
+export default Tours;

@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react'
 import Layout from "../Components/layouts/Layout";
 import {db} from '../Firebase'
-import Card from '../ui/Card';
+import Cards from '../ui/Cards';
 import {useNavigate} from 'react-router-dom'
 import { collection, onSnapshot } from 'firebase/firestore'
 import {useState} from 'react'
 import classes from './TourGuide.module.css'
 import SetBooking from '../PopupPages/SetBooking'
-import Back from '../backgrounds/Back'
+import {Form, Card, Button} from 'react-bootstrap'
 
 function TourGuides() {
 
-    const [guides,setGuides] = useState([])
+    const [guides,setGuides] = useState([]);
+    const [selectedGuide, setSelectedGuide] = useState(null)
     const [loading,setLoading] = useState(false)
     const [error,setError] = useState('')
     const navigate = useNavigate();
     const [openBooking,setOpenBooking] = useState(false)
 
-    function makeBooking(){
+    function makeBooking(guide){
+        setSelectedGuide(guide)
+        console.log(guide)
         setOpenBooking(true)
     }
 
@@ -49,9 +52,29 @@ function TourGuides() {
 
   return (<Layout>
     <center><h1>Tour Guides</h1></center>
+
+    {/* Search Bar */}
+    <div>
+    <Card className = {classes.card}>
+        <Card.Body>
+            <center><h4 className = {classes.heading}>Search Tour Guides</h4></center>
+            {/* {error && <Alert variant = 'danger'>{error}</Alert>} */}
+            <Form className={classes.form}>         
+                <Form.Group id = 'search' className = {classes.fill1}>
+                    <Form.Control type = 'text' placeholder = "Search Tour Guide"/>
+                </Form.Group>
+                <div className = {classes.actions}>
+                    <Button className = {classes.bttn}>Search</Button>
+                </div>
+            </Form>
+        </Card.Body>
+    </Card>
+    </div>
+    
+    
         <ul className = {classes.list}>
         {guides && guides.map((guide)=>(
-        <Card key = {guide.id}>
+        <Cards key = {guide.id}>
         <li>
             <div class = 'row'>
             <div class = 'col-6'>
@@ -67,7 +90,7 @@ function TourGuides() {
                     <p><b>Contact Number : </b>{guide.contact_Number}</p>
                     <p><b>Age : </b>{guide.age}</p>
                     <p><b>Languages : </b>{guide.languages}</p>
-                    <p><b>Rate : </b>{guide.rate}</p>
+                    <p><b>Rate (per day) : </b>{guide.rate}</p>
                     <p><b>Address : </b>{guide.address}</p>
                     <p><b>District : </b>{guide.district}</p>
                     <p><b>Vehicle Type : </b>{guide.vehicle_type}</p>
@@ -76,21 +99,19 @@ function TourGuides() {
                     <p><b>Email : </b>{guide.email}</p>
 
                     <div className = {classes.actions}>
-                        {/* <button onClick = {() => navigate('/setBookings') }>Book Tour Guide</button> */}
-                        <button onClick = {makeBooking}>Book Tour Guide</button>
-                        {openBooking && <SetBooking onCancel = {cancelBooking} />}
-                        {openBooking && <Back/>}
+                        <button onClick = {() => makeBooking(guide)}>Book Tour Guide</button>          
                     </div>   
                 </div> 
             </div> 
             </div> 
         </li>
-        </Card>
+        </Cards>
         ))}
-        </ul>        
+        </ul> 
+   
+        {openBooking && <SetBooking showSetBooking={openBooking} guideName={selectedGuide.name}  onCancel = {cancelBooking} />}      
     </Layout>
   )
 }
 
 export default TourGuides;
-

@@ -1,8 +1,26 @@
+.container {
+    position: fixed !important;
+    top: 0rem;
+    left: 0rem;
+    z-index: 1;
+    width: 100% !important;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.75) !important;
+    padding: 5rem;
+}
+
 .card{
-    width: 30rem;
-    margin: 3rem auto;
+    width: 40rem;
+    margin: 4rem auto !important;
     padding: 1rem;
-    z-index: 10;
+    position: relative !important;
+    top: -2rem !important;
+    left: 0rem !important;
+    z-index: 10 !important;
+}
+
+.details{
+    margin: 1.5rem;
 }
 
 .actions{
@@ -17,15 +35,25 @@
 .close{
     width: 3rem;
     padding: 3px;
-    background-color: red;
+    background-color: rgb(255, 0, 0) !important;
     border: none;
     color: white;
 }
 
-.cncl{
-    margin: 0 1rem;
+.close:hover{
+    background-color: rgb(190, 7, 7);
 }
 
-.book{
+.cncl{
+    margin: 0 1rem;
+    background-color: red !important;
+    border: none;
+}
 
+.cncl:hover{
+    background-color: rgb(190, 7, 7);
+}
+
+.label{
+    margin-top: 1rem;
 }

@@ -4,6 +4,13 @@ import {getFirestore} from '@firebase/firestore'
 import {getStorage} from 'firebase/storage'
 
 const firebaseConfig = {
+  // apiKey:process.env.CEYLON_ASSISTANT_FIREBASE_API_KEY,
+  // authDomain: process.env.CEYLON_ASSISTANT_FIREBASE_AUTH_DOMAIN ,
+  // projectId: process.env.CEYLON_ASSISTANT_FIREBASE_PROJECT_ID,
+  // storageBucket: process.env.CEYLON_ASSISTANT_FIREBASE_STORAGE_BUCKET,
+  // messagingSenderId: process.env.CEYLON_ASSISTANT_FIREBASE_MESSAGING_SENDER_ID,
+  // appId: process.env.CEYLON_ASSISTANT_FIREBASE_APP_ID
+
   apiKey: "AIzaSyD6wDMvKeUmt5nzf75baXlTSnQszVgGmMI",
   authDomain:"ceylon-assistant.firebaseapp.com",
   projectId: "ceylon-assistant",
@@ -11,12 +18,6 @@ const firebaseConfig = {
   messagingSenderId: "1085508934061",
   appId: "1:1085508934061:web:0c961e457e54157ceb2924"
 
-  // apiKey:process.env.CEYLON_ASSISTANT_FIREBASE_API_KEY,
-  // authDomain: process.env.CEYLON_ASSISTANT_FIREBASE_AUTH_DOMAIN ,
-  // projectId: process.env.CEYLON_ASSISTANT_FIREBASE_PROJECT_ID,
-  // storageBucket: process.env.CEYLON_ASSISTANT_FIREBASE_STORAGE_BUCKET,
-  // messagingSenderId: process.env.CEYLON_ASSISTANT_FIREBASE_MESSAGING_SENDER_ID,
-  // appId: process.env.CEYLON_ASSISTANT_FIREBASE_APP_ID
 };
 
 

@@ -2,7 +2,7 @@ import './App.css';
 import {Routes,Route} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import TourGuides from './pages/TourGuides';
-import Search from './pages/Search';
+import Tours from './pages/Tours';
 import Bookings from './pages/Bookings';
 import Profile from './pages/Profile';
 import Login from './pages/LoginAccessories/Login'
@@ -11,29 +11,31 @@ import TourGuideReg from './pages/LoginAccessories/TourGuideReg';
 import TouristReg from './pages/LoginAccessories/TouristReg';
 import Inbox from './pages/Inbox';
 import SetBooking from './PopupPages/SetBooking';
+import TouristRegDemo from './pages/LoginAccessories/TouristRegDemo';
+
 
 function App() {
 
-//     var docWidth = document.documentElement.offsetWidth;
+    var docWidth = document.documentElement.offsetWidth;
 
-// [].forEach.call(
-//   document.querySelectorAll('*'),
-//   function(el) {
-//     if (el.offsetWidth > docWidth) {
-//       console.log(el);
-//     }
-//   }
-// );
+[].forEach.call(
+  document.querySelectorAll('*'),
+  function(el) {
+    if (el.offsetWidth > docWidth) {
+      console.log(el);
+    }
+  }
+);
 
     return(<div>
         <Routes>
             <Route path = '/' element = {<Login />} />
             <Route path = '/inbox' element = {<Inbox />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
-            <Route path = '/touristReg' element = {<TouristReg />}/>
+            <Route path = '/touristRegDemo' element = {<TouristRegDemo />}/>
             <Route path = '/home' element = {<ProtectedRoute><Homepage /></ProtectedRoute>} />
             <Route path = '/guides' element = {<ProtectedRoute><TourGuides /></ProtectedRoute>} />
-            <Route path = '/search' element = {<ProtectedRoute><Search /></ProtectedRoute>} />
+            <Route path = '/tours' element = {<ProtectedRoute><Tours /></ProtectedRoute>} />
             <Route path = '/bookings' element = {<ProtectedRoute><Bookings /></ProtectedRoute>} />
             <Route path = '/profile' element = {<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path = '/setBookings' element = {<ProtectedRoute><SetBooking /></ProtectedRoute>} />
