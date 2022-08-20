@@ -6,7 +6,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context';
 
 import {db,storage } from '../../Firebase';
-import {collection,addDoc} from 'firebase/firestore'
+import {collection,addDoc,doc,setDoc} from 'firebase/firestore'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 
@@ -25,30 +25,34 @@ function TouristReg() {
     const navigate = useNavigate()
 
     // getting image url and adding details to storage and firestore db
-    const createUser = async()=>{
+        const createUser = async()=>{
         const imageRef = ref(storage,`Tourist Images/${image.name + v4()}`);
         uploadBytes(imageRef, image).then(()=>{
             getDownloadURL(imageRef).then((url)=>{
                 setUrl(url);
                 //add details part
-                const touristCollectionRef = collection(db, "Tourists")
-                addDoc(touristCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
-                         contact_Number:newContactNumber})
+                console.log(user.uid)
+                const addDetails = doc(db, "Tourists",user.uid)
+                setDoc(addDetails,{name:newName, image:url, email:newEmail, gender:newGender, 
+                         contact_Number:newContactNumber})      
             }).catch((err)=>{
                 setError(err.message,'error getting the image')
             })
             setImage(null)
         }).catch((err)=>{
             setError(err)
-        })
+        })   
     }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setError('')
         try{
-            await signUp(newEmail,newPassword);
-            await createUser();
+            await signUp(newEmail,newPassword)
+            setTimeout(() => {
+                createUser();
+            }, 2000);
+            
             // await uploadImage();
             navigate('/home')
         }catch(err){

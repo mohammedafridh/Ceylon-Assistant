@@ -17,6 +17,8 @@ function TourGuides() {
     const [error,setError] = useState('')
     const navigate = useNavigate();
     const [openBooking,setOpenBooking] = useState(false)
+    const [query,setQuery] = useState('')
+    const [search,setSearch] = useState('')
 
     function makeBooking(guide){
         setSelectedGuide(guide)
@@ -61,7 +63,7 @@ function TourGuides() {
             {/* {error && <Alert variant = 'danger'>{error}</Alert>} */}
             <Form className={classes.form}>         
                 <Form.Group id = 'search' className = {classes.fill1}>
-                    <Form.Control type = 'text' placeholder = "Search Tour Guide"/>
+                    <Form.Control type = 'text' placeholder = "Search Tour Guide"  onChange = {(e)=>setQuery(e.target.value)}/>
                 </Form.Group>
                 <div className = {classes.actions}>
                     <Button className = {classes.bttn}>Search</Button>
@@ -73,7 +75,8 @@ function TourGuides() {
     
     
         <ul className = {classes.list}>
-        {guides && guides.map((guide)=>(
+        {guides.filter((guide)=>guide.email.toLowerCase().includes(query))
+        .map((guide)=>(
         <Cards key = {guide.id}>
         <li>
             <div class = 'row'>

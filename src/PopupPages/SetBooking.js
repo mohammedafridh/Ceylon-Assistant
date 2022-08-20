@@ -1,8 +1,10 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Form, Card, Button} from 'react-bootstrap';
 import classes from './PopupPages.module.css'
 import { useUserAuth } from "../Context/Context";
 import {addDoc} from 'firebase/firestore'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from '../Firebase';
 
 function SetBooking(props){
 
@@ -14,10 +16,38 @@ function SetBooking(props){
   const [date,setDate] = useState('')
   const [time,setTime] = useState('')
   const [days,setDays] = useState('')
+  // const [loading,setLoading] = (false)
+  const [tourists,setTourists] = ([])
+  const [error,setError] = useState('')
 
   function createBooking(){
-
+      
   }
+
+//   useEffect(()=>{
+//     // setLoading(true);
+//     const unsub = onSnapshot(collection(db,"Tourists"),(snapshot)=>{
+        
+//         let list = [];
+//         snapshot.docs.forEach((doc)=>{
+//           console.log(doc)
+//             list.push({
+//                 id:doc.id,
+//                 ...doc.data()
+//             })
+//         });
+//         setTourists(list);
+//         console.log(tourists)
+//         // setLoading(false)
+//     },
+//     (error)=>{
+//         setError(error.message);
+//     }
+//     );
+//     return ()=>{
+//         unsub()
+//     };
+// },[]);
 
   return (
       <div className = {classes.container}>
