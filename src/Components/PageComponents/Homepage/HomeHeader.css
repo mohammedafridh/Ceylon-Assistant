@@ -1,0 +1,60 @@
+.explore{
+    position: relative;
+    top: -4rem;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    border-radius: 6px;
+    padding: 0 12px;
+}
+
+.explore a{
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.explore a:hover{
+    color: blue;
+}
+
+.searchContainer{
+    height: 30px;
+    background-color: white;
+    border: 3px solid #febb02;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px;
+    border-radius: 6px;
+    position: relative;
+    width: 100%;
+    max-width: 1024px;
+    top: -5.5rem;
+    left: 10rem;
+    z-index: 2;
+}
+
+.searchIcon{
+    color: blue;
+}
+
+.searchItem{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selectItem{
+    width: 10rem;
+}
+
+.date{
+    position: absolute;
+    top: 3.2rem;
+    z-index: 2;
+}
+
+.searchDate{
+    cursor: pointer;
+}

@@ -1,16 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Form, Button, Card, Alert} from 'react-bootstrap'
 import classes from './TourGuideReg.module.css'
-import LoginBackground from '../../backgrounds/LoginBackground';
+import RegisterBg from '../../backgrounds/RegisterBg';
 import {Link, useNavigate} from 'react-router-dom'
-import { useUserAuth } from '../../Context/Context';
 
-import {db,storage } from '../../Firebase';
+import {db,storage, auth } from '../../Firebase';
+import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {collection,addDoc,doc,setDoc} from 'firebase/firestore'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
+import { async } from '@firebase/util';
 
-function TouristReg() {
+function TouristRegDemo() {
 
     const [newName,setNewName] = useState('');
     const [newGender,setNewGender] = useState('');
@@ -20,49 +21,65 @@ function TouristReg() {
     const [image,setImage] = useState(null)
     const[url,setUrl] = useState(null)
     const [error,setError] = useState('')
-    const {signUp} = useUserAuth();
-    const {user} = useUserAuth()
     const navigate = useNavigate()
 
+
+    useEffect(() => {
+        
+    }, [])
+
+
     // getting image url and adding details to storage and firestore db
-        const createUser = async()=>{
+        const getImageUrl = async()=> {
         const imageRef = ref(storage,`Tourist Images/${image.name + v4()}`);
         uploadBytes(imageRef, image).then(()=>{
             getDownloadURL(imageRef).then((url)=>{
                 setUrl(url);
                 //add details part
-                console.log(user.uid)
-                const addDetails = doc(db, "Tourists",user.uid)
-                setDoc(addDetails,{name:newName, image:url, email:newEmail, gender:newGender, 
-                         contact_Number:newContactNumber})      
+                console.log("I'm here")
+                // const addDetails = doc(db, "Tourists")
+                // setDoc(addDetails,{name:newName, image:url, email:newEmail, gender:newGender, 
+                //          contact_Number:newContactNumber})   
+                
+             
             }).catch((err)=>{
                 setError(err.message,'error getting the image')
             })
-            setImage(null)
+            
         }).catch((err)=>{
             setError(err)
         })   
     }
 
+
+
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setError('')
+
         try{
-            await signUp(newEmail,newPassword)
-            setTimeout(() => {
-                createUser();
-            }, 2000);
-            
-            // await uploadImage();
-            navigate('/home')
+            createUserWithEmailAndPassword(auth,newEmail, newPassword).then((data) => {
+            console.log(data.user.uid)
+            const addDetails = doc(db, "Tourists", data.user.uid)
+            const details = {name:newName, image:url, email:newEmail, gender:newGender, contact_Number:newContactNumber}
+             setDoc(addDetails,details)
+            }).catch((error) => {
+                console.log(error)
+            })
+            await getImageUrl()
+           
         }catch(err){
             setError(err.message)
+            console.log(err)
+        }  finally {
+            
+            navigate('/')
         }
     }
 
   return (
     <div>
-      <LoginBackground />
+      <RegisterBg />
       <Card className = {classes.card}>
         <Card.Body>
             <h2 className = {classes.heading}>Tourist Sign up</h2>
@@ -130,4 +147,4 @@ function TouristReg() {
   )
 }
 
-export default TouristReg;
+export default TouristRegDemo;

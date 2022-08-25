@@ -5,7 +5,7 @@ function Profile(){
     const {user} = useUserAuth();
     return <Layout>
         <h1>Profile</h1>
-        {user && user.uid}
+        {user && user.email} 
     </Layout>
 }
 

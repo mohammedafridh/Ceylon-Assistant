@@ -95,3 +95,23 @@ function TourGuides() {
 }
 
 export default TourGuides;
+
+
+
+{/* Search Bar */}
+<div>
+<Card className = {classes.card}>
+    <Card.Body>
+        <center><h4 className = {classes.heading}>Search Tour Guides</h4></center>
+        {/* {error && <Alert variant = 'danger'>{error}</Alert>} */}
+        <Form className={classes.form}>         
+            <Form.Group id = 'search' className = {classes.fill1}>
+                <Form.Control type = 'text' placeholder = "Search Tour Guide"  onChange = {(e)=>setQuery(e.target.value)}/>
+            </Form.Group>
+            <div className = {classes.action}>
+                <center><Button className = {classes.bttn}><b>Search</b></Button></center>
+            </div>
+        </Form>
+    </Card.Body>
+</Card>
+</div>

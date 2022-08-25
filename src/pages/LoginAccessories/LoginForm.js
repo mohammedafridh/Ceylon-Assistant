@@ -19,7 +19,7 @@ function LoginForm() {
         setError('')
         try{
             await logIn(email,password)
-            navigate('/home')
+            navigate('/')
         }catch(err){
             setError(err.message)
         }
@@ -38,9 +38,9 @@ function LoginForm() {
   return (<div>
     <Card className = {classes.card}>
       <Card.Body className = {classes.body}>
-        <div className = {classes.logo}>
+        {/* <div className = {classes.logo}>
         <img src ='https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-08-17%20at%2010.55.49%20PM%20(1).jpeg?alt=media&token=72c21d23-5832-4cf4-9001-aa34f4b4f702' alt = 'logo' />
-        </div>
+        </div> */}
           <h2 className = {classes.heading}>Login</h2>
           {error && <Alert variant = 'danger'>{error}</Alert>}
           <Form className={classes.form} onSubmit = {handleSubmit}>
@@ -60,7 +60,7 @@ function LoginForm() {
               
           </Form>
           <div className = {classes.signIn_Btn}>
-      Do not have an account? <Link to = '/tourGuideReg'>Sign Up</Link>
+      Do not have an account? <b>Sign Up</b>
     </div>
     <div className = {classes.actions}>
       <center>

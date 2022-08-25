@@ -61,7 +61,7 @@ function TouristReg() {
             await signUp(newEmail,newPassword);
             await createUser();
             // await uploadImage();
-            navigate('/home')
+            navigate('/')
         }catch(err){
             setError(err.message)
         }

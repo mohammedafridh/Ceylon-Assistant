@@ -12,28 +12,29 @@ import TouristReg from './pages/LoginAccessories/TouristReg';
 import Inbox from './pages/Inbox';
 import SetBooking from './PopupPages/SetBooking';
 import TouristRegDemo from './pages/LoginAccessories/TouristRegDemo';
+import Users from './pages/Users';
 
 
 function App() {
 
-    var docWidth = document.documentElement.offsetWidth;
+//     var docWidth = document.documentElement.offsetWidth;
 
-[].forEach.call(
-  document.querySelectorAll('*'),
-  function(el) {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
-    }
-  }
-);
+// [].forEach.call(
+//   document.querySelectorAll('*'),
+//   function(el) {
+//     if (el.offsetWidth > docWidth) {
+//       console.log(el);
+//     }
+//   }
+// );
 
     return(<div>
         <Routes>
-            <Route path = '/' element = {<Login />} />
-            <Route path = '/inbox' element = {<Inbox />} />
+            <Route path = '/login' element = {<Login />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
             <Route path = '/touristRegDemo' element = {<TouristRegDemo />}/>
-            <Route path = '/home' element = {<ProtectedRoute><Homepage /></ProtectedRoute>} />
+            <Route path = '/' element = {<Homepage />} />
+            <Route path = '/users' element = {<ProtectedRoute><Users /></ProtectedRoute>} />
             <Route path = '/guides' element = {<ProtectedRoute><TourGuides /></ProtectedRoute>} />
             <Route path = '/tours' element = {<ProtectedRoute><Tours /></ProtectedRoute>} />
             <Route path = '/bookings' element = {<ProtectedRoute><Bookings /></ProtectedRoute>} />

@@ -1,26 +1,16 @@
-import HomepageBg from "../backgrounds/HomepageBg";
-import Layout from "../Components/layouts/Layout";
-// import SlideshowContainer from "../Components/slideshowContainer/SlideshowContainer";
-import * as Icons from 'react-icons/fa'
-import classes from './Homepage.module.css'
-import {Link} from 'react-router-dom'
-import {useUserAuth} from '../Context/Context'
+import React from 'react'
+import HomeHeader from '../Components/PageComponents/Homepage/HomeHeader'
+import Layout from '../Components/layouts/Layout'
+import TopGuides from '../Components/PageComponents/Homepage/TopGuides'
 
-function Homepage(){
-    const {user} = useUserAuth();
-    console.log(user);
-    return(<Layout>
-             <HomepageBg />  
-             
-                <center>
-                <button className = {classes.explore}><Link to = '/guides'>
-                    Explore more <Icons.FaArrowRight className = {classes.icon}/></Link></button>
-                </center>
-             
-         </Layout>
-    )
+function Homepage() {
+  return (
+    <Layout>
+        <HomeHeader />
+        <TopGuides />
+    </Layout>
     
-   
+  )
 }
 
-export default Homepage;
+export default Homepage

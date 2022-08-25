@@ -164,3 +164,6 @@ function TouristRegDemo() {
 }
 
 export default TouristRegDemo;
+
+
+

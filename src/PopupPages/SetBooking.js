@@ -24,31 +24,6 @@ function SetBooking(props){
       
   }
 
-//   useEffect(()=>{
-//     // setLoading(true);
-//     const unsub = onSnapshot(collection(db,"Tourists"),(snapshot)=>{
-        
-//         let list = [];
-//         snapshot.docs.forEach((doc)=>{
-//           console.log(doc)
-//             list.push({
-//                 id:doc.id,
-//                 ...doc.data()
-//             })
-//         });
-//         setTourists(list);
-//         console.log(tourists)
-//         // setLoading(false)
-//     },
-//     (error)=>{
-//         setError(error.message);
-//     }
-//     );
-//     return ()=>{
-//         unsub()
-//     };
-// },[]);
-
   return (
       <div className = {classes.container}>
         <Card className = {classes.card} >
@@ -73,10 +48,6 @@ function SetBooking(props){
             </Form.Group>
             </div>
             </div>
-            <Form.Group className="mb-3">
-              <Form.Label><b>Image url : </b></Form.Label><br></br>
-              <Form.Control type = 'text' value = {props.guideName} disabled />
-            </Form.Group>
             <div class = 'row'>
               <div class = 'col-6'>
               <Form.Group id = 'pickup' className = {classes.fill1}>
@@ -91,7 +62,6 @@ function SetBooking(props){
                 </Form.Group>
               </div>
             </div>
-
             <div class = 'row'>
             <div class = 'col-4'>
             <Form.Group id = 'date' className = {classes.fill1}>

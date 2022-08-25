@@ -6,6 +6,7 @@ const Footer = () => {
   return (
     <footer className = {classes.container}>
           <div className = {classes.copyright}>
+            
             Copyright &copy; Ceylon Assistant
           </div> 
     </footer>

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Layout from "../Components/layouts/Layout";
 import {db} from '../Firebase'
 import Cards from '../ui/Cards';
-import {useNavigate} from 'react-router-dom'
 import { collection, onSnapshot } from 'firebase/firestore'
 import {useState} from 'react'
 import classes from './TourGuide.module.css'
@@ -15,14 +14,18 @@ function TourGuides() {
     const [selectedGuide, setSelectedGuide] = useState(null)
     const [loading,setLoading] = useState(false)
     const [error,setError] = useState('')
-    const navigate = useNavigate();
     const [openBooking,setOpenBooking] = useState(false)
     const [query,setQuery] = useState('')
     const [search,setSearch] = useState('')
 
+    function searchHandler(e){
+        e.preventDefault();
+        setSearch(query)  
+    }
+
     function makeBooking(guide){
         setSelectedGuide(guide)
-        console.log(guide)
+        // console.log(guide)
         setOpenBooking(true)
     }
 
@@ -52,30 +55,11 @@ function TourGuides() {
         };
     },[]);
 
-  return (<Layout>
-    <center><h1>Tour Guides</h1></center>
-
-    {/* Search Bar */}
-    <div>
-    <Card className = {classes.card}>
-        <Card.Body>
-            <center><h4 className = {classes.heading}>Search Tour Guides</h4></center>
-            {/* {error && <Alert variant = 'danger'>{error}</Alert>} */}
-            <Form className={classes.form}>         
-                <Form.Group id = 'search' className = {classes.fill1}>
-                    <Form.Control type = 'text' placeholder = "Search Tour Guide"  onChange = {(e)=>setQuery(e.target.value)}/>
-                </Form.Group>
-                <div className = {classes.actions}>
-                    <Button className = {classes.bttn}>Search</Button>
-                </div>
-            </Form>
-        </Card.Body>
-    </Card>
-    </div>
-    
-    
+  return (<div>
+    <center><h1>Our Guides</h1></center> 
+    {/* mapping database data */}
         <ul className = {classes.list}>
-        {guides.filter((guide)=>guide.email.toLowerCase().includes(query))
+        {guides.filter((guide)=>guide.name.toLowerCase().includes(query))
         .map((guide)=>(
         <Cards key = {guide.id}>
         <li>
@@ -102,7 +86,7 @@ function TourGuides() {
                     <p><b>Email : </b>{guide.email}</p>
 
                     <div className = {classes.actions}>
-                        <button onClick = {() => makeBooking(guide)}>Book Tour Guide</button>          
+                        <button onClick = {() => makeBooking(guide)} className = {classes.bookBtn}><b>Book Tour Guide</b></button>          
                     </div>   
                 </div> 
             </div> 
@@ -111,9 +95,8 @@ function TourGuides() {
         </Cards>
         ))}
         </ul> 
-   
-        {openBooking && <SetBooking showSetBooking={openBooking} guideName={selectedGuide.name}  onCancel = {cancelBooking} />}      
-    </Layout>
+    {openBooking && <SetBooking showSetBooking={openBooking} guideName={selectedGuide.name}  onCancel = {cancelBooking} />}      
+ </div>
   )
 }
 

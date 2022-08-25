@@ -38,6 +38,7 @@
     background-color: rgb(255, 0, 0) !important;
     border: none;
     color: white;
+    border: none !important;
 }
 
 .close:hover{
@@ -48,6 +49,7 @@
     margin: 0 1rem;
     background-color: red !important;
     border: none;
+    border: none !important;
 }
 
 .cncl:hover{

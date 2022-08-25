@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Form, Button, Card, Alert} from 'react-bootstrap'
 import classes from './TourGuideReg.module.css'
-import LoginBackground from '../../backgrounds/LoginBackground';
+import RegisterBg from '../../backgrounds/RegisterBg';
 import {Link, useNavigate} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context';
 //import Avatar from '@mui/material/Avatar'
@@ -91,7 +91,7 @@ function TourGuideReg() {
             await signUp(newEmail,newPassword);
             await createUser();
             // await uploadImage();
-            navigate('/home')
+            navigate('/')
         }catch(err){
             setError(err.message)
         }
@@ -99,7 +99,7 @@ function TourGuideReg() {
 
   return (
     <div>
-      <LoginBackground />
+      <RegisterBg />
       <Card className = {classes.card}>
         <Card.Body>
             <h2 className = {classes.heading}>Tour Guide Sign up</h2>
