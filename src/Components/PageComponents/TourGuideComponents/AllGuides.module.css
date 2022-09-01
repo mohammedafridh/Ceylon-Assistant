@@ -1,0 +1,104 @@
+.searchItem{
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.guideImg{
+    width: 200px;
+    height: 220px;
+    object-fit: cover;
+    margin-top: 4px;
+}
+
+.guideDetails{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+    padding-right: 15px;
+}
+
+.guideName{
+    font-size: 25px;
+    color: #16A085;
+}
+
+.guideVehicle{
+    background-color: green;
+    color: white;
+    font-size: 14px;
+    padding: 0 10px;
+    width: max-content;
+}
+
+.subTitle{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.guideCancel{
+    font-size: 14px;
+    color: green;
+    font-weight: bold;
+}
+
+.guideCancelText{
+    font-size: 14px;
+    color: #2471A3;    
+    font-weight: bold;
+}
+
+.otherDetails{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.ratingBar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.ratingBar>span{
+    font-weight: bold;
+}
+
+.ratingNumber{
+    background-color: #0D2F7D;
+    color: white;
+    padding: 3px 5px;
+}
+
+.otherText{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    gap: 5px;
+}
+
+.district{
+    font-size: 28px;
+}
+
+.rate{
+    font-size: 23px;
+}
+
+.rateText{
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+.moreBtn{
+    font-weight: bold !important;
+}

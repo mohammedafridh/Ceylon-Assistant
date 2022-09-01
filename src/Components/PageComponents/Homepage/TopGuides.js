@@ -4,7 +4,7 @@ import classes from './TopGuides.css'
 function TopGuides() {
   return (<div>
     <div className = 'title'>
-        <center><h3>Our Top Guides</h3></center>
+        <center><h4>Our Top Guides</h4></center>
     </div>
     <div className = 'featured'>
         <div className = 'featuredItem'>

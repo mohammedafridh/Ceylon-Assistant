@@ -37,16 +37,17 @@
 
 .searchIcon{
     color: blue;
+    
 }
 
-.searchItem{
+.searchItems{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.selectItem{
-    width: 10rem;
+.selectItems{
+    width: 13rem;
 }
 
 .date{
@@ -58,3 +59,4 @@
 .searchDate{
     cursor: pointer;
 }
+

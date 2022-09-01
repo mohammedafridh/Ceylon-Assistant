@@ -13,6 +13,9 @@ import Inbox from './pages/Inbox';
 import SetBooking from './PopupPages/SetBooking';
 import TouristRegDemo from './pages/LoginAccessories/TouristRegDemo';
 import Users from './pages/Users';
+import List from './Components/PageComponents/TourGuideComponents/List';
+import NewTourGuide from './pages/NewTourGuide';
+import SelectedGuide from './Components/PageComponents/TourGuideComponents/SelectedGuide';
 
 
 function App() {
@@ -34,8 +37,11 @@ function App() {
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
             <Route path = '/touristRegDemo' element = {<TouristRegDemo />}/>
             <Route path = '/' element = {<Homepage />} />
+            <Route path = '/selectedGuide' element = {<SelectedGuide />} />
+            {/* <Route path = '/newTourGuides' element = {<List />} /> */}
+            <Route path = '/newTourGuides' element = {<NewTourGuide />} />
             <Route path = '/users' element = {<ProtectedRoute><Users /></ProtectedRoute>} />
-            <Route path = '/guides' element = {<ProtectedRoute><TourGuides /></ProtectedRoute>} />
+            {/* <Route path = '/guides' element = {<ProtectedRoute><TourGuides /></ProtectedRoute>} /> */}
             <Route path = '/tours' element = {<ProtectedRoute><Tours /></ProtectedRoute>} />
             <Route path = '/bookings' element = {<ProtectedRoute><Bookings /></ProtectedRoute>} />
             <Route path = '/profile' element = {<ProtectedRoute><Profile /></ProtectedRoute>} />

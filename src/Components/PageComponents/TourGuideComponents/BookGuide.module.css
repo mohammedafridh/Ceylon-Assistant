@@ -1,0 +1,28 @@
+.bookingContainer{
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    position: relative;
+}
+
+.title{
+    font-size: 18px;
+    background-color: lawngreen;
+    color: white;
+    font-weight: bold;
+    padding: 8px 5px;
+}
+
+.bookingInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 15px;
+    margin-top: 2rem;
+}
+
+.bookingInputs>input{
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid darkblue;
+}
+

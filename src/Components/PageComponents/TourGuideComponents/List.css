@@ -1,0 +1,71 @@
+.listContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.listWrapper{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+}
+
+.listSearch{
+    flex: 1;
+    background-color: #fdda16;
+    padding: 10px 20px;
+    border-radius: 6px;
+    position: sticky;
+    top: 80px;
+    height: max-content;
+}
+
+.searchTitle{
+    font-size: 30px;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.searchItem{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.selectDistrict{
+    width: 100%;
+}
+
+.searchItem>label{
+    font-size: 18px;
+}
+
+.searchItem>input{
+    height: 30px;
+    border: none;
+    padding:5px 10px;
+    width: 100%;
+}
+
+.searchItem>span{
+    height: 35px;
+    border: none;
+    background-color: white;
+    padding:5px 10px;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.listResult{
+    flex: 3;
+}
+
+.srchBtn{
+    width: 100%;
+    margin: 10px 0px;
+}

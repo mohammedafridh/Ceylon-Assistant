@@ -4,7 +4,7 @@ import classes from './Footer.module.css'
 
 const Footer = () => {
   return (
-    <footer className = {classes.container}>
+    <footer className = {classes.footer}>
           <div className = {classes.copyright}>
             
             Copyright &copy; Ceylon Assistant
