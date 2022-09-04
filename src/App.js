@@ -16,7 +16,7 @@ import Users from './pages/Users';
 import List from './Components/PageComponents/TourGuideComponents/List';
 import NewTourGuide from './pages/NewTourGuide';
 import SelectedGuide from './Components/PageComponents/TourGuideComponents/SelectedGuide';
-
+import SelectedBooker from './Components/PageComponents/BookingComponents/SelectedBooker'
 
 function App() {
 
@@ -38,6 +38,7 @@ function App() {
             <Route path = '/touristRegDemo' element = {<TouristRegDemo />}/>
             <Route path = '/' element = {<Homepage />} />
             <Route path = '/selectedGuide' element = {<SelectedGuide />} />
+            <Route path = '/selectedBooker' element = {<SelectedBooker />}/>
             {/* <Route path = '/newTourGuides' element = {<List />} /> */}
             <Route path = '/newTourGuides' element = {<NewTourGuide />} />
             <Route path = '/users' element = {<ProtectedRoute><Users /></ProtectedRoute>} />

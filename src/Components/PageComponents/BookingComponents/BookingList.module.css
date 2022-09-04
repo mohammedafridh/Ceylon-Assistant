@@ -1,0 +1,44 @@
+.bookingContainer{
+    width: 100%;
+    max-width: 1024px;
+    margin: 0rem auto;
+    padding: 0 6.5rem;
+    margin-bottom: 2.5rem;
+}
+
+/* .bookingWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid;
+} */
+
+.bookingList{
+    display: flex;
+    padding: 15px;
+    gap: 30px;
+    border: 1px solid rgb(0,0,0,0.40);
+}
+
+.bookingList>img{
+    width: 200px;
+    height: 220px;
+}
+
+.bookingDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detailsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.buttonContainer{
+    display: flex;
+    gap: 20px;
+    margin-left: 27rem;
+}

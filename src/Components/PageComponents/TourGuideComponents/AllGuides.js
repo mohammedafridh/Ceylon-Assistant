@@ -3,7 +3,7 @@ import {db} from '../../../Firebase'
 import {collection, onSnapshot} from 'firebase/firestore'
 import classes from './AllGuides.module.css'
 import {Button} from 'react-bootstrap'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 function AllGuides() {
 
@@ -59,8 +59,8 @@ function AllGuides() {
           <span className = {classes.district}>{guide.district}</span>
           <span className = {classes.rate}>Rs.{guide.rate}</span>
           <span className = {classes.rateText}>Other charges applicable based on the tour</span>
-          <Button className = {classes.moreBtn}
-          onClick = {() => moreDetailsHandler(guide)}>See More Details</Button>
+          <Button className = {classes.moreBtn} 
+          onClick =  {moreDetailsHandler}>See More Details</Button>
         </div>
       </div>
     </div> 
@@ -72,3 +72,5 @@ function AllGuides() {
 }
 
 export default AllGuides;
+
+// onClick = {() => moreDetailsHandler(guide)}

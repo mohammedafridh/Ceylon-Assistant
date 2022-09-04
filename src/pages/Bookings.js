@@ -1,8 +1,15 @@
 import Layout from "../Components/layouts/Layout";
+import BookingHeader from "../Components/PageComponents/BookingComponents/BookingHeader";
+import BookingList from "../Components/PageComponents/BookingComponents/BookingList";
+import MailList from '../Components/PageComponents/Homepage/MailList'
 
 function Bookings(){
     return <Layout>
-        <h1>Booking</h1>
+        <BookingHeader />
+        <BookingList />
+        <BookingList />
+        <BookingList />
+        <MailList />
     </Layout>
     
 }

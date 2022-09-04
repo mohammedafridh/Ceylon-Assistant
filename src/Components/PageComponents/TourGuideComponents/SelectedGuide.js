@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 import Layout from '../../layouts/Layout'
 import MailList from '../Homepage/MailList';
 import classes from './SelectedGuide.module.css'
@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import BookGuide from './BookGuide';
 
-function SelectedGuide() {
+function SelectedGuide(props) {
+
   return (
     <Layout>
         <div className = {classes.guideContainer}>
@@ -17,7 +18,7 @@ function SelectedGuide() {
                     alt = 'abc' className = {classes.guideImage}/>
                     <div className = {classes.guideDescription}>
                         <div className = {classes.main}>
-                            <h1 className = {classes.guideName}>Guide Name</h1>
+                            <h3 className = {classes.guideName}>Guide Name</h3>
                             <div className = {classes.location}>
                                 <FontAwesomeIcon icon = {faLocationDot} className = {classes.locationIcon} />
                                 <span>Matara</span>
@@ -45,6 +46,7 @@ function SelectedGuide() {
                                 <span><b>Address : </b></span>
                                 <span><b>Vehicle Type : </b></span>
                                 <span><b>Vehicle Model : </b></span>
+                                <span><b>Per KM rate : </b></span>
                                 <span><b>Max Passengers : </b></span>
                             </div>
                         </div>       
