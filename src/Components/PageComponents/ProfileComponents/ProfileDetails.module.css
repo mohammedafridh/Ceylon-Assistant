@@ -1,0 +1,29 @@
+.profileContainer{
+    width: 100%;
+    max-width: 1024px;
+    margin: 0rem auto;
+    background-color: transparent;
+    /* border: 1px solid lightgray; */
+    padding: 1rem;
+    position: relative;
+    top: -4rem;
+    height: 31rem;
+}
+
+.profileDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: max-content;
+}
+
+.profileDetails img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    /* margin: 1rem; */
+    position: relative;
+    top: -10rem;
+    left: -4rem;
+    border: 8px solid white;
+}
