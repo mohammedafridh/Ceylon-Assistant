@@ -1,12 +1,20 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Layout from '../../layouts/Layout'
 import MailList from '../Homepage/MailList';
 import classes from './SelectedGuide.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import BookGuide from './BookGuide';
+import {useLocation} from 'react-router-dom'
 
 function SelectedGuide(props) {
+
+    const location = useLocation()
+    console.log(location)
+
+    useEffect(()=>{
+
+    },[])
 
   return (
     <Layout>
@@ -14,14 +22,14 @@ function SelectedGuide(props) {
             <div className={classes.guideWrapper}>
                 <div className = {classes.guideDetails}>
                 <div className = {classes.mainDetails}>
-                    <img src = "https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/Tour_Guide_Images%2Fff2ab708-d1ef-4400-9c02-1adabd3a2a27.jpg428f69cd-af41-4d8b-b7dc-fa46fdcb994c?alt=media&token=aabcbf7d-4f43-47da-9cef-674db5357da5"
-                    alt = 'abc' className = {classes.guideImage}/>
+                    <img src = {location.state.image}
+                    alt = {location.state.name} className = {classes.guideImage}/>
                     <div className = {classes.guideDescription}>
                         <div className = {classes.main}>
-                            <h3 className = {classes.guideName}>Guide Name</h3>
+                            <h3 className = {classes.guideName}>{location.state.name}</h3>
                             <div className = {classes.location}>
                                 <FontAwesomeIcon icon = {faLocationDot} className = {classes.locationIcon} />
-                                <span>Matara</span>
+                                <span>{location.state.district}</span>
                         </div> 
                         </div>            
                         <div className = {classes.ratingBar}>
@@ -29,8 +37,9 @@ function SelectedGuide(props) {
                             <span className = {classes.rank}>5.0</span>
                         </div>  
                         <div className= {classes.rateTab}>
-                            <span className = {classes.rate}>$123</span>
+                            <span className = {classes.rate}>{location.state.rate}</span>
                             <span className = {classes.day}>per day</span>
+                            <span className = {classes.day}> + {location.state.perKmRate} Per Travelling KM</span>
                         </div>
                         <span className = {classes.cancel}>* Cancellation Free</span>    
                         <span className = {classes.intro}>Book to get the best services. Hurry up!</span>
@@ -39,15 +48,15 @@ function SelectedGuide(props) {
                     <div className = {classes.guideAbout}>
                             <h2 className = {classes.about}>About</h2><hr></hr>
                             <div className = {classes.moreDetails}>
-                                <span><b>Email : </b></span>
-                                <span><b>Phone : </b></span>
-                                <span><b>Age : </b></span>
-                                <span><b>Gender : </b></span>
-                                <span><b>Address : </b></span>
-                                <span><b>Vehicle Type : </b></span>
-                                <span><b>Vehicle Model : </b></span>
-                                <span><b>Per KM rate : </b></span>
-                                <span><b>Max Passengers : </b></span>
+                                <span><b>Email : </b>{location.state.email}</span>
+                                <span><b>Phone : </b>{location.state.contact_Number}</span>
+                                <span><b>Age : </b>{location.state.age}</span>
+                                <span><b>Gender : </b>{location.state.gender}</span>
+                                <span><b>Address : </b>{location.state.address}</span>
+                                <span><b>Vehicle Type : </b>{location.state.vehicle_type}</span>
+                                <span><b>Vehicle Model : </b>{location.state.model}</span>
+                                <span><b>Languages : </b></span>
+                                <span><b>Max Passengers : </b>{location.state.No_of_passengers}</span>
                             </div>
                         </div>       
                 </div>

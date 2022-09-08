@@ -1,11 +1,13 @@
 import Layout from "../Components/layouts/Layout";
-import { useUserAuth } from "../Context/Context";
+import ProfileHeader from "../Components/PageComponents/ProfileComponents/ProfileHeader";
+// import { useUserAuth } from "../Context/Context";
 
 function Profile(){
-    const {user} = useUserAuth();
+    // const {user} = useUserAuth();
     return <Layout>
-        <h1>Profile</h1>
-        {user && user.email} 
+        {/* <h1>Profile</h1>
+        {user && user.email}  */}
+        <ProfileHeader />
     </Layout>
 }
 

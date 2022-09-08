@@ -15,7 +15,7 @@ function AllGuides() {
 
   function moreDetailsHandler(guide){
     setSelectedGuide(guide)
-    navigate('/selectedGuide')
+    navigate('/selectedGuide', {state:guide})
   }
 
   useEffect(()=>{
@@ -60,7 +60,7 @@ function AllGuides() {
           <span className = {classes.rate}>Rs.{guide.rate}</span>
           <span className = {classes.rateText}>Other charges applicable based on the tour</span>
           <Button className = {classes.moreBtn} 
-          onClick =  {moreDetailsHandler}>See More Details</Button>
+          onClick =  {()=>moreDetailsHandler(guide)}>See More Details</Button>
         </div>
       </div>
     </div> 
