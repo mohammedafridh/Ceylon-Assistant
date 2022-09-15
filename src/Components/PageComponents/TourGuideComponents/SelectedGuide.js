@@ -37,9 +37,11 @@ function SelectedGuide(props) {
                             <span className = {classes.rank}>5.0</span>
                         </div>  
                         <div className= {classes.rateTab}>
-                            <span className = {classes.rate}>{location.state.rate}</span>
-                            <span className = {classes.day}>per day</span>
-                            <span className = {classes.day}> + {location.state.perKmRate} Per Travelling KM</span>
+                            <div className = {classes.rates}>
+                                <span className = {classes.rate}>Rs.{location.state.rate}</span>
+                                <span className = {classes.day}>per day</span>
+                            </div>
+                            <span className = {classes.perRate}> ( Rs.{location.state.per_Km_Rate} Per Travelling KM )</span>
                         </div>
                         <span className = {classes.cancel}>* Cancellation Free</span>    
                         <span className = {classes.intro}>Book to get the best services. Hurry up!</span>
@@ -52,10 +54,10 @@ function SelectedGuide(props) {
                                 <span><b>Phone : </b>{location.state.contact_Number}</span>
                                 <span><b>Age : </b>{location.state.age}</span>
                                 <span><b>Gender : </b>{location.state.gender}</span>
+                                <span><b>Languages : </b></span>
                                 <span><b>Address : </b>{location.state.address}</span>
                                 <span><b>Vehicle Type : </b>{location.state.vehicle_type}</span>
                                 <span><b>Vehicle Model : </b>{location.state.model}</span>
-                                <span><b>Languages : </b></span>
                                 <span><b>Max Passengers : </b>{location.state.No_of_passengers}</span>
                             </div>
                         </div>       
@@ -69,7 +71,7 @@ function SelectedGuide(props) {
                         <div className = {classes.formulaCal}>
                             <span>Guide rate (per day)</span>
                             <span>+</span>
-                            <span>(number of Kms travelled * per Km rate)</span>
+                            <span>(number of Kms travelled * per Travelling KM)</span>
                         </div>   
                     </div>
                 </div>

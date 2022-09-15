@@ -1,20 +1,17 @@
-import React, {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Form, Button, Card, Alert} from 'react-bootstrap'
 import classes from './TourGuideReg.module.css'
 import RegisterBg from '../../backgrounds/RegisterBg';
 import {Link, useNavigate} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context';
-//import Avatar from '@mui/material/Avatar'
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import {db,storage } from '../../Firebase';
-import {collection,addDoc} from 'firebase/firestore'
+import {collection,addDoc,doc,setDoc} from 'firebase/firestore'
 //import {ref} from 'firebase/storage'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import {Multiselect} from 'multiselect-react-dropdown'
-// import Select from 'react-select'
-// import MultiSelect from 'react-multiple-select-dropdown-lite'
-// import  'react-multiple-select-dropdown-lite/dist/index.css'
+import {auth} from '../../Firebase'
 
 function TourGuideReg() {
 
@@ -29,8 +26,9 @@ function TourGuideReg() {
     const [newPassengers,setNewPassengers] = useState('');
     const[newEmail,setNewEmail] = useState('')
     const[newPassword,setNewPassword] = useState('')
-    const[newLanguage,setNewLanguage] = useState('')
+    const[newLanguage,setNewLanguage] = useState([])
     const[newRate,setNewRate] = useState('')
+    const [perKmRate,setPerKmRate] = useState('')
     const [image,setImage] = useState(null)
     const[url,setUrl] = useState(null)
     const [error,setError] = useState('')
@@ -53,49 +51,76 @@ function TourGuideReg() {
 
     const [selection] = useState(languages);
 
-    //adding data to firebase
-
-    const usersCollectionRef = collection(db, "Tour_Guides")
-
-    //getting image
-    const handleImageChange = (e)=>{
-        if(e.target.files[0]){
-            setImage(e.target.files[0])
-        }
-    }
-
-    //getting image url and adding details to storage and firestore db
-    const createUser = async()=>{
-        const imageRef = ref(storage,`Tour_Guide_Images/${image.name + v4()}`);
-        uploadBytes(imageRef, image).then(()=>{
-            getDownloadURL(imageRef).then((url)=>{
-                setUrl(url);
-                //add details part
-                addDoc(usersCollectionRef, {name:newName, image:url, email:newEmail, gender:newGender, 
-                         contact_Number:newContactNumber, age:newAge, languages: newLanguage, rate:newRate, 
-                         address:newAddress, district:newDistrict, vehicle_type:newVehType, model:newModel,
-                         No_of_passengers:newPassengers})
-            }).catch((err)=>{
-                setError(err.message,'error getting the image')
-            })
-            setImage(null)
-        }).catch((err)=>{
-            setError(err)
-        })
-    }
-
-    const handleSubmit = async (e)=>{
+    useEffect(() => {
+        const getImageUrl = async () => {
+            const imageRef = ref(storage, `Tour_Guide_Images/${image.name + v4()}`);
+            uploadBytes(imageRef, image)
+              .then(() => {
+                getDownloadURL(imageRef)
+                  .then((url) => {
+                    console.log({ url });
+                    setUrl(url);
+                    //add details part
+                    console.log("I'm here");
+                    // const addDetails = doc(db, "Tourists")
+                    // setDoc(addDetails,{name:newName, image:url, email:newEmail, gender:newGender,
+                    //          contact_Number:newContactNumber})
+                  })
+                  .catch((err) => {
+                    setError(err.message, "error getting the image");
+                  });
+              })
+              .catch((err) => {
+                setError(err);
+              });
+          };
+        const imageUrl = async () => {
+          await getImageUrl();
+        };
+        imageUrl();
+      }, [image]);
+    
+      // getting image url and adding details to storage and firestore db
+      
+      //
+    
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('')
-        try{
-            await signUp(newEmail,newPassword);
-            await createUser();
-            // await uploadImage();
-            navigate('/')
-        }catch(err){
-            setError(err.message)
+        setError("");
+        try {
+          createUserWithEmailAndPassword(auth, newEmail, newPassword)
+            .then((data) => {
+              console.log({ url });
+              const addDetails = doc(db, "Tour_Guides", data.user.uid);
+              const details = {
+                name: newName,
+                image: url,
+                email: newEmail,
+                gender: newGender,
+                contact_Number: newContactNumber,
+                age: newAge,
+                address: newAddress,
+                district: newDistrict,
+                vehicle_type: newVehType,
+                model: newModel,
+                No_of_passengers: newPassengers,
+                age: newAge,
+                languages: newLanguage,
+                rate:newRate,
+                per_Km_Rate: perKmRate
+              };
+              setDoc(addDetails, details);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch (err) {
+          setError(err.message);
+          console.log(err);
+        } finally {
+          navigate("/");
         }
-    }
+      };
 
   return (
     <div>
@@ -116,7 +141,7 @@ function TourGuideReg() {
                 <div class = 'col-6'>
                 <Form.Group id = 'image'>
                     <Form.Label  className = {classes.label}>Add your real image</Form.Label>
-                    <Form.Control type = 'file' onChange = {handleImageChange} required />
+                    <Form.Control type = 'file' onChange = {(e) => setImage(e.target.files[0])} required />
                 </Form.Group>
                 </div>
             </div>
@@ -154,10 +179,16 @@ function TourGuideReg() {
                         <Multiselect options = {selection} displayValue = 'Language' onChange = {(e)=>setNewLanguage(e.target.value)} />
                     </Form.Group>
                 </div> 
-                <div class = 'col-6'>
+                <div class = 'col-3'>
                 <Form.Group id = 'rate'>
                     <Form.Label  className = {classes.label}>Rate</Form.Label>
                     <Form.Control type = 'text' onChange = {(e)=>setNewRate(e.target.value)} required />
+                </Form.Group>
+                </div>
+                <div class = 'col-3'>
+                <Form.Group id = 'perKmRate'>
+                    <Form.Label  className = {classes.label}>Per Km Rate</Form.Label>
+                    <Form.Control type = 'text' onChange = {(e)=>setPerKmRate(e.target.value)} required />
                 </Form.Group>
                 </div>
             </div>

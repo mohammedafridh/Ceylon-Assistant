@@ -17,7 +17,85 @@
     height: max-content;
 }
 
-.profileDetails img{
+.head{
+    display: flex;
+}
+
+.head>button{
+    position: absolute;
+    left: 9.7rem;
+    top: 2rem;
+    border-radius: 50%;
+    padding: 4px 8px;
+    border: 1px solid;
+}
+
+.headContents{
+    display: flex;
+    justify-content: space-between;
+}
+
+.headContainer{
+    position: absolute;
+    left: 14rem;
+    display: flex;
+    flex-direction: column;
+    /* top: -10px; */
+}
+
+.sub{
+    display: flex;
+    gap: 30px;
+    color: gray;
+}
+
+.ratingsContainer{
+    position: relative;
+    left: 25rem;
+    top: 0.8rem;
+    font-size: 15px;
+}
+
+.ratingBar{
+    display: flex;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.ratingText{
+    position: relative;
+    top: 0.2rem;
+}
+
+.rating{
+    background-color: #0D2F7D;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.bodyItems{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: absolute;
+    top: 9rem;
+    left: -1.5rem;
+}
+
+.btn{
+    width: 150px;
+    position: absolute;
+    top: 31.5rem;
+    left: 20rem;
+}
+
+.pencilIcon{
+    color: rgb(216, 216, 216) !important;
+    margin-right: 10px;
+}
+
+.head img{
     width: 250px;
     height: 250px;
     border-radius: 50%;

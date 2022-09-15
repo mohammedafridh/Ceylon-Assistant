@@ -21,6 +21,7 @@
     margin-right: 20px;
     border-radius: 50%;
     flex: 1.9;
+    border: 3px solid lightslategray;
 }
 
 .guideDetails{
@@ -71,7 +72,13 @@
 
 .rateTab{
     display: flex;
-    gap: 7px;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.rates{
+    display: flex;
+    gap: 10px;
 }
 
 .rate{
@@ -82,6 +89,12 @@
 .day{
     position: relative;
     top: 0.7rem;
+}
+
+.perRate{
+    color: rgb(228, 27, 27);
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .location{
