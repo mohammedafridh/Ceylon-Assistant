@@ -1,0 +1,10 @@
+.loginBg{
+    position: fixed;
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/22/67/641/sri-lanka-nature-rock-trees-wallpaper-preview.jpg');
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

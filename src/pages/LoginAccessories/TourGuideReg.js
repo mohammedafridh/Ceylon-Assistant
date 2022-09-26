@@ -123,8 +123,7 @@ function TourGuideReg() {
       };
 
   return (
-    <div>
-      <RegisterBg />
+    <div className = {classes.tGuideBg}>
       <Card className = {classes.card}>
         <Card.Body>
             <h2 className = {classes.heading}>Tour Guide Sign up</h2>

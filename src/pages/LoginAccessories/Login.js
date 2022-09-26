@@ -1,10 +1,9 @@
-import LoginBackground from '../../backgrounds/LoginBackground';
-// import classes from './Login.module.css'
+// import LoginBackground from '../../backgrounds/LoginBackground';
+import classes from './Login.module.css'
 import LoginForm from './LoginForm';
 
 function Login(){
-        return (<div>
-          <LoginBackground />
+        return (<div className = {classes.loginBg}>
           <LoginForm />
         </div>
          
