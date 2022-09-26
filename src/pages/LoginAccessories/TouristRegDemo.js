@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import classes from "./TourGuideReg.module.css";
-import RegisterBg from "../../backgrounds/RegisterBg";
 import { Link, useNavigate } from "react-router-dom";
 
 import { db, storage, auth } from "../../Firebase";
@@ -86,8 +85,7 @@ function TouristRegDemo() {
   };
 
   return (
-    <div>
-      <RegisterBg />
+    <div className = {classes.tGuideBg}>
       <Card className={classes.card}>
         <Card.Body>
           <h2 className={classes.heading}>Tourist Sign up</h2>

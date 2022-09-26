@@ -253,7 +253,7 @@ function TourGuideReg() {
                 <center><Button type = 'submit' className = {classes.register_Btn}>Register</Button></center>
             </Form>
             <div className = {classes.signIn_Btn}>
-        Already have an account? <Link to = '/'>Log in</Link>
+        Already have an account? <Link to = '/login'>Log in</Link>
       </div>
         </Card.Body>
       </Card>
