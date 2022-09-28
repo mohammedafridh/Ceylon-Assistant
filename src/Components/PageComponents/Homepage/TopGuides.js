@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './TopGuides.css'
 
 function TopGuides() {
-  return (<div>
+  return (<div className= 'topGuidesContainer'>
     <div className = 'title'>
         <center><h4>Our Top Guides</h4></center>
     </div>

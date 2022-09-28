@@ -1,18 +1,17 @@
-import React, {useState} from 'react'
-import classes from './LoginForm.module.css'
+// import LoginBackground from '../../backgrounds/LoginBackground';
+import classes from './Login.module.css'
+import {useState} from 'react'
 import {Form,Button,Card,Alert} from 'react-bootstrap'
-// import GoogleButton from 'react-google-button'
 import {Link, useNavigate} from 'react-router-dom'
 import {useUserAuth} from '../../Context/Context'
 
-function LoginForm() {
+function Login(){
 
-    const [email,setEmail] = useState('');
+  const [email,setEmail] = useState('');
     const[password,setPassword] = useState('')
     const [error,setError] = useState('')
     const {logIn} = useUserAuth();
     const navigate = useNavigate()
-    // const {googleSignIn} = useUserAuth()
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -25,22 +24,9 @@ function LoginForm() {
         }
     }
 
-    // const handleGoogleSignIn = async (e)=>{
-    //     e.preventDefault();
-    //     try{
-    //       await googleSignIn();
-    //       navigate('/home')
-    //     }catch(err){
-    //       setError(err.message);
-    //     }
-    // }
-
-  return (<div>
+  return (<div className = {classes.loginBg}>
     <Card className = {classes.card}>
       <Card.Body className = {classes.body}>
-        {/* <div className = {classes.logo}>
-        <img src ='https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-08-17%20at%2010.55.49%20PM%20(1).jpeg?alt=media&token=72c21d23-5832-4cf4-9001-aa34f4b4f702' alt = 'logo' />
-        </div> */}
           <h2 className = {classes.heading}>Login</h2>
           {error && <Alert variant = 'danger'>{error}</Alert>}
           <Form className={classes.form} onSubmit = {handleSubmit}>
@@ -65,13 +51,15 @@ function LoginForm() {
     <div className = {classes.actions}>
       <center>
         <button className = {classes.regBtn}><Link to = '/tourGuideReg'>Tour Guide Registration</Link></button>
-        <button className = {classes.regBtn}><Link to = '/touristRegDemo'>Tourist Registration</Link></button>
+        <button className = {classes.regBtn}><Link to = '/touristReg'>Tourist Registration</Link></button>
       </center>
     </div>
       </Card.Body>
     </Card>
   </div>
-  )
+  );
 }
 
-export default LoginForm
+
+
+export default Login;

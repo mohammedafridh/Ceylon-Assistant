@@ -1,6 +1,6 @@
 import React from 'react'
-import List from '../Components/PageComponents/TourGuideComponents/List';
-import Layout from '../Components/layouts/Layout';
+import List from '../../../Components/PageComponents/TourGuideComponents/List';
+import Layout from '../../../Components/layouts/Layout';
 
 function NewTourGuide() {
   return (

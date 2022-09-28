@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 import {Form, Button, Card, Alert} from 'react-bootstrap'
 import classes from './TourGuideReg.module.css'
-import RegisterBg from '../../backgrounds/RegisterBg';
 import {Link, useNavigate} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context';
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -79,10 +78,6 @@ function TourGuideReg() {
         };
         imageUrl();
       }, [image]);
-    
-      // getting image url and adding details to storage and firestore db
-      
-      //
     
       const handleSubmit = async (e) => {
         e.preventDefault();

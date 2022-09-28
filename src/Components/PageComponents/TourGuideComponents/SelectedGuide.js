@@ -14,7 +14,6 @@ import { getDoc,doc } from 'firebase/firestore';
 function SelectedGuide(props) {
 
     const location = useLocation()
-    // console.log(location)
     const {user} = useUserAuth()
     const [tourGuide,setTourGuide] = useState('');
     const [tourist,setTourist] = useState('')
@@ -35,10 +34,6 @@ function SelectedGuide(props) {
             }
         })
     },[])
-
-    // useEffect(()=>{
-
-    //  },[])
 
 if(tourist){
     return (

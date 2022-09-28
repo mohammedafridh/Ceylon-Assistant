@@ -1,4 +1,4 @@
-import Layout from "../Components/layouts/Layout";
+import Layout from "../../../Components/layouts/Layout";
 
 function Tours(){
     return <Layout>

@@ -25,7 +25,7 @@ function HomeHeader() {
   ]);
 
   const handleSearch = () => {
-    navigate("/newTourGuides", { state: { searchDistrict, date } });
+    navigate("/tourGuides", { state: { searchDistrict, date } });
   };
 
   return (
