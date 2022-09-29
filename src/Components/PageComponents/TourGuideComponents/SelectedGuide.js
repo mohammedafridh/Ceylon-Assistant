@@ -26,9 +26,9 @@ function SelectedGuide(props) {
                 const tourGuide = await getDoc(doc(db,'Tour_Guides',user.uid))
                 const tourGuideData = tourGuide.data()
 
-                if(touristData==undefined){
-                    setTourGuide(tourGuideData)
-                }else if(tourGuideData==undefined){
+                if(touristData===undefined){
+                    setTourGuide(tourGuideData)           
+                }else if(tourGuideData===undefined){                   
                     setTourist(touristData)
                 }
             }
@@ -97,7 +97,7 @@ if(tourist){
                     </div>
     
                     <div className = {classes.bookingForm}>
-                        <BookGuide />
+                        <BookGuide tourGuideId = {location.state.id}/>
                     </div>
                         
                     </div>

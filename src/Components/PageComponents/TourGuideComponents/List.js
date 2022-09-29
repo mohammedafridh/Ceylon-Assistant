@@ -19,7 +19,7 @@ function List() {
     const [openDate,setOpenDate] = useState(false)
 
   return (
-    <div>
+    <div className = 'guideBackground'>
         <div className='listContainer'>
             <div className='listWrapper'>
                 <div className = 'listSearch'>

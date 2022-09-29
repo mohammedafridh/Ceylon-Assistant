@@ -26,8 +26,8 @@ function MainNavigation(){
             <h1 className={classes.title1}>Ceylon Assistant</h1>
             <ul>
                 <li><Link to = '/'><FontAwesomeIcon icon={faHouse} className = {classes.icon}/> Home</Link></li>
-                {/* <li><Link to = '/users'><Icons.FaUsers  className = {classes.icon}/> All Users</Link></li>
-                <li><Link to = '/guides'><Icons.FaUsers  className = {classes.icon}/> Tour Guides</Link></li> */}
+                {/* <li><Link to = '/users'><Icons.FaUsers  className = {classes.icon}/> All Users</Link></li> */}
+                <li><Link to = '/tourGuides'><Icons.FaUsers  className = {classes.icon}/>Guides</Link></li>
                 <li><Link to = '/bookings'><Icons.FaBook className = {classes.icon}/> Bookings</Link></li>
                 <li><Link to = '/tours'><Icons.FaCar className = {classes.icon}/> Tours</Link></li>
                 <li><Link to = '/profile'><Icons.FaUser className = {classes.icon}/> Profile</Link></li>  

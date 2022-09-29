@@ -8,20 +8,20 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format, set} from 'date-fns'
 import {Button} from 'react-bootstrap'
 import {auth, db} from '../../../Firebase'
-import {addDoc, collection, getDoc,doc} from 'firebase/firestore'
+import {addDoc, collection, getDoc,doc,setDoc} from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth';
 import { useLocation } from 'react-router-dom';
+import {useUserAuth} from '../../../Context/Context'
 
-function BookGuide() {
+function BookGuide(props) {
 
     const location = useLocation()
+    const {user} = useUserAuth()
     const [openDate,setOpenDate] = useState(false)
-    const [name,setName] = useState('')
-    const [image,setImage] = useState('')
-    const [email,setEmail] = useState('')
     const [tour,setTour] = useState('')
     const [pickup,setPickup] = useState('')
     const [time,setTime] = useState('')
+    const [tourGuideId, setTourGuideId] = useState('')
     const [date, setDate] = useState([
         {
           startDate: new Date(),
@@ -30,10 +30,21 @@ function BookGuide() {
         }
       ]);
 
+      useEffect(()=>{
+        setTourGuideId(props.tourGuideId)
+        onAuthStateChanged(auth, async(user)=>{
+            if(user){
+                const tourist = await getDoc(doc(db,'Tourists',user.uid))
+                const touristData = tourist.data()
+            }
+        })
+      },[])
+
       function bookingHandler(){
-        const collectionRef = collection(db,'booking')
-        addDoc(collectionRef,{email:email, travel_location:tour, pickup_location:pickup,
-        time:time, date:date})
+
+        const collectionRef = doc(db,'booking',user.uid)
+        setDoc(collectionRef,{travel_location:tour, pickup_location:pickup,
+        time:time, date:date, touristId: user.uid, tourGuideId:props.tourGuideId})
       }
 
   return (

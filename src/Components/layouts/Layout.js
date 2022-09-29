@@ -7,7 +7,6 @@ import Header from './Header'
 function Layout(props){
     return(<div>
         <MainNavigation />
-        {/* <Header /> */}
         <main className = {classes.main}>{props.children}</main>
         <Footer />
     </div>
