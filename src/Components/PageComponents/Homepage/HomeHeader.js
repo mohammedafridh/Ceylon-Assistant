@@ -30,7 +30,7 @@ function HomeHeader() {
 
   return (
     <div className="homeBg">
-      <div className="searchContainer">
+      {/* <div className="searchContainer">
         <Form className="selectItems">
           <Form.Group id="district">
             <Form.Select
@@ -87,7 +87,7 @@ function HomeHeader() {
             Search
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

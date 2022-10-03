@@ -1,0 +1,114 @@
+.contentsContainer{
+    margin: 0 3rem ;
+    text-align: center;
+}
+
+.introContainer{
+    margin-bottom: 2rem;
+}
+
+.introduction{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 8rem;
+    font-family: 'Raleway';
+    font-weight: 500;
+    color: rgb(0,0,0,0.75);
+}
+
+.introTitle{
+    color: rgb(22, 128, 124);
+    font-weight: 500;
+}
+
+.options{
+    width: 75%;
+    margin: 3rem auto;
+    margin-top: 7rem;
+    justify-content: center;
+    display: grid;
+    color: black;
+    grid-template-rows: 80.5px;
+    grid-template-columns: repeat(3, 300px);
+    gap: 20px;
+    font-family: 'Raleway';
+    font-weight: 900;
+    font-size: 27px;
+    /* border: 1px solid black; */
+    box-shadow:-3px 3px 100px 6px #ccc; 
+    background: transparent;
+}
+
+.option:hover{
+    transform: translateX(10px)
+}
+
+.optionTile1{
+    box-shadow: 0px 0px 100px 50px rgb(208, 201, 201);
+    border-radius: 6px;
+    display: grid;
+    grid-template-rows: 80px;
+    grid-template-columns: 100px 150px;
+    gap: 20px;
+    padding: 0px;
+}
+
+.optionTile1 img{
+    height: 100%;
+    width: 100px;
+    border-radius: 6px;
+}
+
+.optionTile1 :hover{
+    transform: translateX(10px);
+    transition: all .38s ease;
+}
+
+.optionTile2 :hover{
+    transform: translateX(10px);
+    transition: all .38s ease;
+}
+
+.optionTile3 :hover{
+    transform: translateX(10px);
+    transition: all .38s ease;
+}
+
+.optionTile2{
+    display: grid;
+    grid-template-rows: 80px;
+    grid-template-columns: 100px 150px;
+    gap: 20px;
+    padding: 0px;
+    box-shadow: 60px 0px 130px 50px rgb(208, 201, 201);
+    border-radius: 6px;
+}
+
+.optionTile2 img{
+    height: 100%;
+    width: 100px;
+    border-radius: 6px;
+}
+
+.optionTile3{
+    display: grid;
+    grid-template-rows: 80px;
+    grid-template-columns: 100px 150px;
+    gap: 20px;
+    padding: 0px;
+    box-shadow: 20px 10px 100px 50px rgb(208, 201, 201);
+    border-radius: 6px;
+}
+
+.optionTile3 img{
+    height: 100%;
+    width: 100px;
+    border-radius: 6px;
+}
+
+.options a{
+    text-decoration: none;
+    color: black;
+}
+

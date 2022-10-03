@@ -10,7 +10,7 @@ function Homepage() {
     <Layout>
         <HomeHeader />
         <HomeContents />
-        <TopGuides />
+        {/* <TopGuides /> */}
         <MailList />
     </Layout>
   )

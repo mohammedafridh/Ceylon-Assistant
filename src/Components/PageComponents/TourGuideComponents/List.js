@@ -14,9 +14,10 @@ import AllGuides from './AllGuides'
 function List() {
 
     const location = useLocation();
-    const [searchDistrict, setSearchDistrict] = useState(location.state.searchDistrict)
-    const [date, setDate] = useState(location.state.date)
+    const [searchDistrict, setSearchDistrict] = useState('')
+    const [date, setDate] = useState('')
     const [openDate,setOpenDate] = useState(false)
+    console.log(location.state)
 
   return (
     <div className = 'guideBackground'>
@@ -63,7 +64,7 @@ function List() {
                     </div>
                     <div className = 'searchItem'>
                         <label><b>Check-in Date</b></label>
-                        <span onClick = {()=>setOpenDate(!openDate)}>
+                        {/* <span onClick = {()=>setOpenDate(!openDate)}>
                             {`${format(date[0].startDate, "MM/dd/yyyy")} to 
                             ${format(date[0].endDate, "MM/dd/yyyy")}`}
                         </span>
@@ -73,7 +74,7 @@ function List() {
                             minDate = {new Date()}
                             ranges = {date}
                         />
-                        )}
+                        )} */}
                     </div>
                         <Button className = 'srchBtn'>Search</Button>
                     </div>

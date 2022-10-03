@@ -1,9 +1,33 @@
+.bookingComponents{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bookings{
+    display: flex;
+    flex-direction: column;
+}
+
+.bookingImage{
+    margin-bottom: 5rem;
+}
+
+.toursContainer{
+    flex: 0.7;
+    border: 1px solid black;
+    height: max-content;
+}
+
 .bookingContainer{
     width: 100%;
-    max-width: 1024px;
-    margin: 0rem auto;
+    /* max-width: 1024px; */
+    /* margin: 0rem auto; */
     padding: 0 6.5rem;
     margin-bottom: 2.5rem;
+    flex: 2.3;
+    height: max-content;
 }
 
 /* .bookingWrapper{
@@ -18,17 +42,18 @@
     padding: 15px;
     gap: 30px;
     border: 1px solid rgb(0,0,0,0.40);
+    margin-bottom: 25px;
 }
 
 .bookingList>img{
-    width: 200px;
-    height: 220px;
+    width: 220px;
+    height: 250px;
 }
 
 .bookingDetails{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
 .detailsContainer{
@@ -41,4 +66,21 @@
     display: flex;
     gap: 20px;
     margin-left: 27rem;
+}
+
+.actionContainer{
+    display: flex;
+    gap: 20px;
+}
+
+.updateBookingsContainer{
+    border: 1px solid black;
+    height: max-content;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: sticky;
+    top: 80px;
+    margin-right: 5px;
 }

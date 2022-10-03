@@ -23,7 +23,9 @@ function MainNavigation(){
             {/* <div className = {classes.logo}>
                 <img src ='https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-08-17%20at%2010.55.49%20PM%20(1).jpeg?alt=media&token=72c21d23-5832-4cf4-9001-aa34f4b4f702' alt = 'logo' />
             </div>  */}
-            <h1 className={classes.title1}>Ceylon Assistant</h1>
+            <h1 className={classes.title}>
+                Ceylon<span className = {classes.titleSub}>Assistant</span>
+            </h1>
             <ul>
                 <li><Link to = '/'><FontAwesomeIcon icon={faHouse} className = {classes.icon}/> Home</Link></li>
                 {/* <li><Link to = '/users'><Icons.FaUsers  className = {classes.icon}/> All Users</Link></li> */}

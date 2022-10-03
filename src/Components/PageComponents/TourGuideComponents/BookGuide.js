@@ -22,6 +22,8 @@ function BookGuide(props) {
     const [pickup,setPickup] = useState('')
     const [time,setTime] = useState('')
     const [tourGuideId, setTourGuideId] = useState('')
+    const [startDate,setStartDate] = useState('')
+    const [endDate,setEndDate] = useState('')
     const [date, setDate] = useState([
         {
           startDate: new Date(),
@@ -42,9 +44,9 @@ function BookGuide(props) {
 
       function bookingHandler(){
 
-        const collectionRef = doc(db,'booking',user.uid)
-        setDoc(collectionRef,{travel_location:tour, pickup_location:pickup,
-        time:time, date:date, touristId: user.uid, tourGuideId:props.tourGuideId})
+        const collectionRef = collection(db,'booking')
+        addDoc(collectionRef,{travel_location:tour, pickup_location:pickup,
+        time:time, touristId: user.uid, tourGuideId:props.tourGuideId})
       }
 
   return (
@@ -69,7 +71,7 @@ function BookGuide(props) {
                 <span onClick = {()=>setOpenDate(!openDate)} className = {classes.searchDate}>
                     {`${format(date[0].startDate, "MM/dd/yyyy")} to 
                     ${format(date[0].endDate, "MM/dd/yyyy")}`}
-                </span>
+                </span> 
                 {openDate && <DateRange
                     editableDateInputs={true}
                     onChange={item => setDate([item.selection])}
