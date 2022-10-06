@@ -1,23 +1,21 @@
+.bookings{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 1.5rem;
+}
+
 .bookingComponents{
     width: 100%;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
-}
-
-.bookings{
-    display: flex;
-    flex-direction: column;
+ 
 }
 
 .bookingImage{
-    margin-bottom: 5rem;
-}
-
-.toursContainer{
-    flex: 0.7;
-    border: 1px solid black;
-    height: max-content;
+    width: 100%;
+    margin-bottom: 3rem;
 }
 
 .bookingContainer{
@@ -43,17 +41,20 @@
     gap: 30px;
     border: 1px solid rgb(0,0,0,0.40);
     margin-bottom: 25px;
+    box-shadow:3px 3px 4px 1px #ccc;
 }
 
 .bookingList>img{
-    width: 220px;
-    height: 250px;
+    width: 200px;
+    height: 210px;
+    margin-right: 3rem;
 }
 
 .bookingDetails{
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 11px;
+    margin-bottom: 1rem;
 }
 
 .detailsContainer{
@@ -68,19 +69,58 @@
     margin-left: 27rem;
 }
 
-.actionContainer{
-    display: flex;
-    gap: 20px;
+.actionContainer button{
+    margin-right: 1rem!important;
 }
 
 .updateBookingsContainer{
-    border: 1px solid black;
+    border: 1px solid lightgray;
     height: max-content;
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 30px;
     position: sticky;
-    top: 80px;
+    top: 110px;
     margin-right: 5px;
+    font-family: 'RALEWAY';
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 2px rgb(230, 233, 235);
+    /* background-image: url('https://www.touropia.com/gfx/d/best-places-to-visit-in-sri-lanka/bentota.jpg'); */
+    background-image: url('https://www.steuartholidays.com/blog/wp-content/uploads/sites/9/2019/06/cycling-at-dusk-f.jpg');
+    color: white;
+    background-size: cover;
+}
+
+.updateBookingsContainer input{
+    margin: 10px 5px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 3px 3px 20px 1px #ccc;
+    /* opacity: 20%; */
+    background:transparent;
+    color: rgb(164, 255, 17);
+    font-weight:600;
+}
+
+.updateButtonContainer{
+    text-align: right;
+    margin: 2rem 0 0.5rem;
+}
+
+.updateButtonContainer button{
+    padding: 4px 30px;
+    border-radius: 8px;
+    border: none;
+    opacity: 85%;
+    background-color: rgb(37, 192, 140);
+    color: white;
+    font-weight: 600;
+    border: 1px solid black;
+}
+
+.updateButtonContainer button:hover{
+    color: black;
+    background-color: orangered;
 }

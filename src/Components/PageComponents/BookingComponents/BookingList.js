@@ -75,11 +75,7 @@ if(tourist){
       <div className = {classes.bookings}>
         <img src  ='https://www.srilankan.com/Images/pages/myb-header-image.jpg' 
         alt = 'abc' className={classes.bookingImage}/>
-          <div className = {classes.bookingComponents}>
-          <div className = {classes.toursContainer}>
-              <h3>View Tours</h3>
-          </div>
-
+        <div className = {classes.bookingComponents}>
           <div className = {classes.bookingContainer}>
           {bookings.map((booking)=>(
                 <div className = {classes.bookingList} key = {booking.id}>
@@ -108,8 +104,15 @@ if(tourist){
               <label>Tour Location</label>
               <input type = 'text'></input>
               <label>Pickup Destination</label>
+              <input type = 'text'></input>
               <label>Tour Date Range</label>
+              <input type = 'date'></input>
               <label>Pick-up Time</label>
+              <input type = 'time'></input>
+              <div className = {classes.updateButtonContainer}>
+                  <button>Update</button>
+              </div>
+              
           </div>
             
         </div>

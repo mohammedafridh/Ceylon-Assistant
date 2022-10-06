@@ -11,18 +11,24 @@
 }
 
 .guideImg{
+    flex: 1;
     width: 200px;
     height: 220px;
     object-fit: cover;
-    margin-top: 4px;
+    margin-right: 1rem;
 }
 
 .guideDetails{
     display: flex;
     flex-direction: column;
-    text-align: left;
-    gap: 10px;
+    /* text-align: left; */
+    /* gap: 50px; */
     padding-right: 15px;
+    flex: 1.5;
+}
+
+.guideDetails span{
+    margin-bottom: 10px;
 }
 
 .guideName{

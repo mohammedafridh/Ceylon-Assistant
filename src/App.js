@@ -12,6 +12,11 @@ import TouristReg from './pages/AuthenticationPages/TouristReg';
 import List from './Components/PageComponents/TourGuideComponents/List';
 import SelectedGuide from './Components/PageComponents/TourGuideComponents/SelectedGuide';
 import SelectedBooker from './Components/PageComponents/BookingComponents/SelectedBooker'
+import Contact from './pages/CommonPages/Contact/Contact';
+import ThingsToDo from './pages/CommonPages/ThingsToDo/ThingsToDo';
+import About from './pages/CommonPages/About/About';
+import ToursGallery from './pages/CommonPages/ToursGallery/ToursGallery';
+import AddThingsToDo from './Components/PageComponents/ThingsToDoComponents/AddThingsToDo';
 
 function App() {
 
@@ -35,9 +40,14 @@ function App() {
             <Route path = '/selectedGuide' element = {<SelectedGuide />} />
             <Route path = '/selectedBooker' element = {<SelectedBooker />}/>
             <Route path = '/tourGuides' element = {<TourGuides />} />
-            <Route path = '/tours' element = {<ProtectedRoute><Tours /></ProtectedRoute>} />
-            <Route path = '/bookings' element = {<ProtectedRoute><Bookings /></ProtectedRoute>} />
-            <Route path = '/profile' element = {<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path = '/tours' element = {<Tours />} />
+            <Route path = '/bookings' element = {<Bookings /> }/>
+            <Route path = '/profile' element = {<Profile />} />
+            <Route path = '/contact' element = {<Contact />} />
+            <Route path = '/thingsToDo' element = {<ThingsToDo />} />
+            <Route path = '/about' element = {<About />} />
+            <Route path = '/toursGallery' element = {<ToursGallery />} />
+            <Route path = '/addThingsToDo' element = {<AddThingsToDo />} />
         </Routes>    
     </div>  
     )

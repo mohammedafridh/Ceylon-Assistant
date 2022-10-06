@@ -8,16 +8,15 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from 'date-fns'
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import AllGuides from './AllGuides'
 
 function List() {
 
-    const location = useLocation();
+    // const location = useLocation();
     const [searchDistrict, setSearchDistrict] = useState('')
     const [date, setDate] = useState('')
     const [openDate,setOpenDate] = useState(false)
-    console.log(location.state)
 
   return (
     <div className = 'guideBackground'>

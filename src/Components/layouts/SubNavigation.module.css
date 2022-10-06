@@ -1,0 +1,38 @@
+.header{
+    width: 100%;
+    background-color: rgb(16, 16, 77);
+    color: black;
+    position: fixed;
+    top: 3.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Raleway';
+    font-weight: 600;
+    height: 2rem;
+    z-index: 2;
+}
+
+.header ul{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    position: absolute;
+}
+
+.header li{
+    margin-left: 1.8rem;
+    list-style: none;
+}
+
+.header a{
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.header a:hover{
+    color: orange;
+}

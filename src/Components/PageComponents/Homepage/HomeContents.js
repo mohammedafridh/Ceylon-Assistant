@@ -16,8 +16,41 @@ function HomeContents() {
                 </div>
             </div>
             <div className = {classes.optionsContainer}>
-                <div className = {classes.options}>
+                {/* <div className = {classes.options}>     */}
                   <Link to = '/tourGuides'>
+                    <div className = {classes.tiles}>
+                      <div className={classes.imageContainer}>
+                        <img src = 'https://lh3.googleusercontent.com/p/AF1QipOZLaOBgO8nHL7f8pFugf1i1wUhIPBm_bVlM8iP=w768-h768-n-o-v1' />
+                      </div>
+                      <div className = {classes.textContainer}>
+                          <p>Guides</p>
+                      </div>
+                    </div>
+                    </Link>
+
+                    <Link to = '/bookings'>
+                    <div className = {classes.tiles}>
+                      <div className={classes.imageContainer}>
+                      <img src = 'https://st2.depositphotos.com/1579454/6699/i/450/depositphotos_66997573-stock-photo-online-booking-concept.jpg' />
+                      </div>
+                      <div className = {classes.textContainer}>
+                          <p>Bookings</p>
+                      </div>
+                    </div>
+                    </Link>
+
+                    <Link to = '/tours'>
+                    <div className = {classes.tiles}>
+                      <div className={classes.imageContainer}>
+                        <img src = 'http://www.marktours.lk/assets/img/main/couple-in-a-car.jpg' />
+                      </div>
+                      <div className = {classes.textContainer}>
+                          <p>Tours</p>
+                      </div>
+                    </div>
+                    </Link>
+
+                  {/* <Link to = '/tourGuides'>
                     <div className = {classes.optionTile1}>
                       <img src = 'https://lh3.googleusercontent.com/p/AF1QipOZLaOBgO8nHL7f8pFugf1i1wUhIPBm_bVlM8iP=w768-h768-n-o-v1' />
                       <span>Guides</span>
@@ -37,7 +70,7 @@ function HomeContents() {
                     <span>Tours</span>
                   </div>
                   </Link>
-                </div>
+                </div> */}
                 
             </div>
             <TopGuides />
