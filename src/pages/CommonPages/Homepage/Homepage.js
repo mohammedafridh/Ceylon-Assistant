@@ -15,7 +15,6 @@ function Homepage() {
     <Layout>
         <HomeHeader />
         <HomeContents />
-        {/* <TopGuides /> */}
         <MailList />
 
     </Layout>
