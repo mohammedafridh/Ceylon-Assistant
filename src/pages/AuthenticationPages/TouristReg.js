@@ -16,7 +16,6 @@ function TouristRegDemo() {
   const [newContactNumber, setNewContactNumber] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [userType, setUserType] = useState('tourist')
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState(null);
   const [error, setError] = useState("");
@@ -69,7 +68,6 @@ function TouristRegDemo() {
             email: newEmail,
             gender: newGender,
             contact_Number: newContactNumber,
-            user_Type:userType
           };
           setDoc(addDetails, details);
         })

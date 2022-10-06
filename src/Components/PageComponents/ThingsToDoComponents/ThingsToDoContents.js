@@ -21,6 +21,8 @@ function ThingsToDoContents() {
             </div>
         </div>
 
+        <AddThingsToDo />
+
         <div className = {classes.mapouter}>
             <div className={classes.gmap_canvas}>
                 <iframe width="1009" height="435" id="gmap_canvas" src="https://maps.google.com/maps?q=sri%20lanka&t=k&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
