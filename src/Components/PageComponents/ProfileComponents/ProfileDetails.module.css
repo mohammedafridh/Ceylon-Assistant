@@ -1,9 +1,160 @@
-.profileContainer{
+.profile{
+    width: 100%;
+    font-family: 'Raleway';
+}
+
+.profileImg{
+    width: 100%;
+    background-image: url('https://visitinsrilanka.com/wp-content/uploads/2020/04/IMG_9078-1024x599.png');
+    background-size: 100% 17rem;
+    background-repeat: no-repeat;
+    height: 17rem;
+    object-fit: cover;
+}
+
+.profileImg span{
+    position: absolute;
+    left: 35rem;
+    top: 13rem;   
+    color: white;
+    font-size: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.profileBody{
+    position: relative;
+    display: grid;
+    grid-template-columns: 20rem auto;
+    gap: 5rem;
+    margin: 2rem;
+    padding: 1rem;
+}
+/* 
+card */
+
+.ProfileCard{
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 1rem;
+    overflow-x: clip;
+    background-color: var(--cardColor);
+    box-shadow: 3px 3px 5px 6px #ccc;
+}
+
+.profileImages{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileImages>img:nth-of-type(1){
+    width: 100%;
+}
+
+.profileImages>img:nth-of-type(2){
+    border-radius: 50%;
+    width: 8rem;
+    position: absolute;
+    bottom: -4rem;
+    box-shadow: var(--profileShadow);
+}
+
+.profileName{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profileName>span:nth-of-type(1){
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.otherDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.otherDetails>hr{
+    width: 85%;
+    border: 1px solid red;
+}
+
+
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.details>span:nth-of-type(1){
+    font-weight: bold;
+}
+
+.details>span:nth-of-type(2){
+    font-size: 15px;
+    margin-bottom: 0.5rem;
+    
+}
+
+.ProfileCard button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    height: 2rem;
+    padding: 0 20px;
+    margin: 0rem auto;
+    margin-bottom: 1.5rem;  
+}
+
+/* tourGuide Css */
+
+.guideDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.guideDetails>hr{
+    width: 85%;
+    border: 1px solid red;
+}
+
+.subDetails{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.subDetails span{
+    font-weight: bold;
+    justify-items: left;
+}
+
+/* .profileContainer{
     width: 100%;
     max-width: 1024px;
     margin: 0rem auto;
     background-color: transparent;
-    /* border: 1px solid lightgray; */
     padding: 1rem;
     position: relative;
     top: -4rem;
@@ -13,7 +164,6 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* height: max-content; */
 }
 
 .head{
@@ -39,7 +189,6 @@
     left: 14rem;
     display: flex;
     flex-direction: column;
-    /* top: -10px; */
 }
 
 .sub{
@@ -88,9 +237,6 @@
     position: relative;
     top: -5rem;
     left: 55rem;
-    /* position: absolute;
-    top: 31.5rem;
-    left: 20rem; */
 }
 
 .pencilIcon{
@@ -102,9 +248,8 @@
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    /* margin: 1rem; */
     position: relative;
     top: -10rem;
     left: -4rem;
     border: 8px solid white;
-}
+} */

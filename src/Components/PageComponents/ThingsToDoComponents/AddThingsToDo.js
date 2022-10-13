@@ -11,7 +11,11 @@ function AddThingsToDo() {
 
   const addThings = ()=>{
       const addDetails =  collection(db, 'ThingsToDo')
-        addDoc(addDetails,{activityType:type, imageURL: url, description:description})
+        addDoc(addDetails,{activityType:type, imageURL: url, description:description}).then(()=>{
+          setType('')
+          setUrl('')
+          setDescription('')
+        })
   }
 
   return (

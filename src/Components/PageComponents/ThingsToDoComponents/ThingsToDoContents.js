@@ -1,7 +1,29 @@
 import AddThingsToDo from './AddThingsToDo'
 import classes from './ThingsToDoContents.module.css'
+import {useState, useEffect} from 'react'
+import {db} from '../../../Firebase'
+import {collection, onSnapshot} from 'firebase/firestore'
 
 function ThingsToDoContents() {
+
+    const [thingsToDo,setThingsToDo] = useState([])
+
+    useEffect(()=>{
+        const displayData = onSnapshot(collection(db,'ThingsToDo'),(snapshot)=>{
+            let list = []
+            snapshot.docs.forEach((doc)=>{
+                list.push({
+                    id:doc.id,
+                    ...doc.data()
+                })
+            })
+            setThingsToDo(list)
+        })
+        return ()=>{
+            displayData()
+        }
+    },[])
+
   return (
     <div className = {classes.thingsToDoContainer}>
         <div className = {classes.topContainer}>
@@ -29,17 +51,18 @@ function ThingsToDoContents() {
             </div>
         </div>
 
+        {thingsToDo.map((things)=>(
         <div className = {classes.toDoActivitiesContainer}>
-            <div className = {classes.activityHeader}>Surfing</div>
+            
+            <div className = {classes.activityHeader}>{things.activityType}</div>
             <div className = {classes.activityImage}>
-                <img src = 'https://goodstorysurf.com/app/img/step_6.jpg' alt = '' />
+                <img src = {things.imageURL} alt = '' />
             </div>
-            <div className = {classes.activityParagraph}>uifhsdkcnsdiuc weiedf jwe weoiefdd jweef w 
-            efjm nwe ef  j fkojwjf er9f fcer m eriorfk er  dmme  e9fkerfer erfer9 f   reg efgfjerjg
-            df diov dfvh df vndffvh eerjerfg jre oerih ev e vfervnef v heverv erf ejfsfjhfefjh er  
-             ifjr  ivjdvfdv dfvfd v dfvfd v</div>
+            <div className = {classes.activityParagraph}>{things.description}</div>
 
         </div>
+        ))}
+        
 
     </div>
   )
