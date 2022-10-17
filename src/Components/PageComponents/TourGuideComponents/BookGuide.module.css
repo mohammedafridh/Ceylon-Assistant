@@ -1,8 +1,16 @@
-.bookingContainer{
-    border: 1px solid lightgray;
-    border-radius: 16px 0px;
-    position: relative;
-    text-align: center;
+/* .bookingContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.bookingContainer div{
+    display: flex;
+    gap: 1rem;
+    height: 2rem;
+    width: 90%;
 }
 
 .title{
@@ -104,4 +112,75 @@
 .buttonContainer>Button:hover{
     background-color: rgb(11, 95, 11) !important;
     border: none !important;
+} */
+
+.bookGuide{
+    box-shadow: 3px 3px 5px 6px #ccc;
+    padding: 30px;
+    border-radius: 1rem;
+    background-color: var(--cardColor);
 }
+
+.bookingForm{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    /* box-shadow: 3px 3px 5px 6px #ccc; */
+}
+
+.bookingForm>div{
+    display: flex;
+    gap: 1rem;
+    height: 2rem;
+    width: 90%;
+}
+
+.bookingInput{
+    border: none;
+    outline: none;
+    background-color: var(--inputColor);
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+}
+
+/* .info-button{
+    width: 6rem;
+    height: 2rem;
+    align-self: flex-end;
+} */
+
+/* .bookForm{
+    background-color: var(--cardColor);
+    border-radius: 1rem;
+    padding: 1rem;
+    
+}
+
+.bookForm>div{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+} */
+
+.bookBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 20px;
+  }
+  
+  .bookBtn:hover{
+    cursor: pointer;
+    color: black;
+    background: transparent;
+    border: 2px solid var(--orange);
+    width: 8rem;
+  }

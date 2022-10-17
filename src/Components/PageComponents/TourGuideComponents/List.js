@@ -20,8 +20,12 @@ function List() {
 
   return (
     <div className = 'guideBackground'>
+        <div className = 'headingImgContainer'>
+                 <span>Our Guides</span>
+            </div>
         <div className='listContainer'>
             <div className='listWrapper'>
+            
                 <div className = 'listSearch'>
                     <h1 className='searchTitle'>Search</h1>
                     <div className = 'searchItem'>

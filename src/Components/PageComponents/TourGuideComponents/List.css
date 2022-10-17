@@ -12,10 +12,28 @@
     padding-top: 3rem;
 }
 
+.headingImgContainer{
+    width: 100%;
+    background-image: url('https://www.sltda.gov.lk/images/s2.jpg');
+    background-size: 100% 20rem;
+    background-repeat: no-repeat;
+    height: 20rem;
+    object-fit: cover;
+}
+
+.headingImgContainer span{
+    position: absolute;
+    left: 13rem;
+    top: 13rem;
+    color: white;
+    font-size: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .listContainer{
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
 .listWrapper{
@@ -31,7 +49,7 @@
     padding: 10px 20px;
     border-radius: 6px;
     position: sticky;
-    top: 130px;
+    top: 150px;
     height: max-content;
     margin-right: 3rem;
 }

@@ -39,6 +39,7 @@ function AllGuides() {
   },[]);
 
   return (<div>
+   
     {guides.map((guide)=>(
       <div className={classes.searchItem} key = {guide.id}>
       <img src = {guide.image} 

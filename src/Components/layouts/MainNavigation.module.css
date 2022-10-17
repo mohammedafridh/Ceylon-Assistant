@@ -73,6 +73,7 @@
     background-color: #FF5733;
     color: white;
     border: none;
+    
 }
 
 /* .icon{
@@ -89,6 +90,7 @@
 
 .dropDown{
     display: none;
+    
 }
 
 .header ul li:hover .dropDown{
@@ -98,12 +100,14 @@
     top: 100%;
     background-color: white;
     width: 105px;
+    
 }
 
 .header ul li:hover .dropDown ul{
     display: block;
     margin: 10px;
     position: relative;
+    
 }
 
 .header ul li:hover .dropDown ul li{
@@ -112,6 +116,7 @@
    position: relative;
    left: -60px;
    color: black;
+   z-index: 2;
 }
 
 /* .dropContainer{

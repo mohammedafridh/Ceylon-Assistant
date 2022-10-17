@@ -61,7 +61,7 @@ if(tourist){
                                     <span className = {classes.rate}>Rs.{location.state.rate}</span>
                                     <span className = {classes.day}>per day</span>
                                 </div>
-                                <span className = {classes.perRate}> ( Rs.{location.state.per_Km_Rate} Per Travelling KM )</span>
+                                <span className = {classes.perRate}> ( Rs.{location.state.per_Km_Rate} Per Travelling KM for vehicle)</span>
                             </div>
                             <span className = {classes.cancel}>* Cancellation Free</span>    
                             <span className = {classes.intro}>Book to get the best services. Hurry up!</span>
@@ -112,11 +112,11 @@ if(tourist){
     return (
         <Layout>
             <div className = {classes.guideContainer}>
-                <div className={classes.guideWrappers}>
+                <div className={classes.guideWrapper}>
                     <div className = {classes.guideDetails}>
-                    <div className = {classes.mainDetail}>
+                    <div className = {classes.mainDetails}>
                         <img src = {location.state.image}
-                        alt = {location.state.name} className = {classes.guideImages}/>
+                        alt = {location.state.name} className = {classes.guideImage}/>
                         <div className = {classes.guideDescription}>
                             <div className = {classes.main}>
                                 <h3 className = {classes.guideName}>{location.state.name}</h3>
@@ -140,7 +140,7 @@ if(tourist){
                             <span className = {classes.intro}>Book to get the best services. Hurry up!</span>
                         </div>
                         </div>
-                        <div className = {classes.guideAbouts}>
+                        <div className = {classes.guideAbout}>
                                 <h2 className = {classes.about}>About</h2><hr></hr>
                                 <div className = {classes.moreDetails}>
                                     <span><b>Email : </b>{location.state.email}</span>

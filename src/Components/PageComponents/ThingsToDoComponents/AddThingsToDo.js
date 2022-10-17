@@ -25,16 +25,16 @@ function AddThingsToDo() {
           <div className = {classes.addThings}>
 
             <div className = {classes.add}>
-                <label>Activity Type</label>
-                <input type = 'text' value = {type} onChange= {(e)=>setType(e.target.value)} required/>
+                <input type = 'text' value = {type} placeholder = 'Activity Type' 
+                onChange= {(e)=>setType(e.target.value)} required/>
             </div>
             <div className = {classes.add}>
-                <label>Image URL</label>
-                <input type = 'text' value = {url} onChange= {(e)=> setUrl(e.target.value)}/>
+                <input type = 'text' value = {url} placeholder = 'Image Url'
+                 onChange= {(e)=> setUrl(e.target.value)}/>
             </div>
             <div className = {classes.add}>
-                <label>Description</label>
-                <textarea value = {description} onChange= {(e)=> setDescription(e.target.value)}></textarea>
+                <textarea value = {description} placeholder = 'Description'
+                 onChange= {(e)=> setDescription(e.target.value)}></textarea>
             </div>
 
             <div className = {classes.actionsContainer}>

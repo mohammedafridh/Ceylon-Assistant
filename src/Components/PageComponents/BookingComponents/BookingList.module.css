@@ -6,11 +6,12 @@
 }
 
 .bookingComponents{
-    width: 100%;
+    width: 70%;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
- 
+    margin: 2rem auto;
+    background-color: var(--cardColor);
 }
 
 .bookingImage{
@@ -26,14 +27,8 @@
     margin-bottom: 2.5rem;
     flex: 2.3;
     height: max-content;
+    
 }
-
-/* .bookingWrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 1px solid;
-} */
 
 .bookingList{
     display: flex;
@@ -42,18 +37,19 @@
     border: 1px solid rgb(0,0,0,0.40);
     margin-bottom: 25px;
     box-shadow:3px 3px 4px 1px #ccc;
+    border-radius: 1rem;
 }
 
 .bookingList>img{
-    width: 200px;
-    height: 210px;
+    width: 230px;
+    height: 250px;
     margin-right: 3rem;
 }
 
 .bookingDetails{
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 5px;
     margin-bottom: 1rem;
 }
 
@@ -65,62 +61,46 @@
 
 .buttonContainer{
     display: flex;
-    gap: 20px;
-    margin-left: 27rem;
+    gap: 10px;
 }
 
-.actionContainer button{
-    margin-right: 1rem!important;
-}
-
-.updateBookingsContainer{
-    border: 1px solid lightgray;
-    height: max-content;
-    flex: 1;
+.mainBtn {
+    margin-right: 1rem;
     display: flex;
-    flex-direction: column;
-    padding: 30px;
-    position: sticky;
-    top: 110px;
-    margin-right: 5px;
-    font-family: 'RALEWAY';
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px 2px rgb(230, 233, 235);
-    /* background-image: url('https://www.touropia.com/gfx/d/best-places-to-visit-in-sri-lanka/bentota.jpg'); */
-    background-image: url('https://www.steuartholidays.com/blog/wp-content/uploads/sites/9/2019/06/cycling-at-dusk-f.jpg');
+    align-items: center;
+    justify-content: center;
     color: white;
-    background-size: cover;
-}
-
-.updateBookingsContainer input{
-    margin: 10px 5px;
-    padding: 3px 10px;
-    border-radius: 10px;
-    border: 1px solid black;
-    box-shadow: 3px 3px 20px 1px #ccc;
-    /* opacity: 20%; */
-    background:transparent;
-    color: rgb(164, 255, 17);
-    font-weight:600;
-}
-
-.updateButtonContainer{
-    text-align: right;
-    margin: 2rem 0 0.5rem;
-}
-
-.updateButtonContainer button{
-    padding: 4px 30px;
-    border-radius: 8px;
     border: none;
-    opacity: 85%;
-    background-color: rgb(37, 192, 140);
-    color: white;
-    font-weight: 600;
-    border: 1px solid black;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
 }
 
-.updateButtonContainer button:hover{
-    color: black;
-    background-color: orangered;
+.mainBtn:hover{
+    cursor: pointer;
+    color: var(--orange);
+    background: transparent;
+    border: 2px solid var(--orange);
 }
+
+.cancelBtn {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: red;
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+}
+
+.cancelBtn:hover{
+    cursor: pointer;
+    color: var(--orange);
+    background: transparent;
+    border: 2px solid var(--orange);
+}
+

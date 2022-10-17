@@ -1,13 +1,15 @@
 .addThingsToDoContainer{
-    width: 70%;
+    width: 60%;
     padding: 0 20px;
     margin: 2rem auto;
 }
 
 .addThingsToDo{
-    border: 1px solid gray;
-    padding: 10px 40px;
+    /* border: 1px solid gray; */
+    padding: 20px 40px;
     border-radius: 8px;
+    box-shadow: 3px 3px 5px 6px #ccc;
+    
 }
 .addThingsToDo h3{
     text-align: center;
@@ -20,17 +22,35 @@
     gap: 10px;
 }
 
-.add input{
-    margin: 10px 0;
+.add>input{
+    /* margin: 10px 0;
     border-radius: 6px;
-    border: 1px solid gray;
+    border: 1px solid gray; */
+    margin: 0.8rem 0;
+    border: none;
+    outline: none;
+    background-color: var(--inputColor);
+    border-radius: 8px;
+    padding: 7px;
+    flex: 1;
+    box-shadow: 3px 3px 5px 6px #ccc;
 }
 
 .add textarea{
+    /* columns: 40;
+    height: 10rem;
+    font-size: 14px;
+    border-radius: 8px; */
+    border: none;
+    outline: none;
+    background-color: var(--inputColor);
+    border-radius: 8px;
+    padding: 7px;
     columns: 40;
     height: 10rem;
     font-size: 14px;
-    border-radius: 8px;
+    margin: 0.8rem 0;
+    box-shadow: 3px 3px 5px 6px #ccc;
 }
 
 .actionsContainer{
@@ -39,18 +59,23 @@
 }
 
 .actionsContainer button{
-    padding: 5px 10px;
-    width: 8rem;
-    border-radius: 3px;
-    border: none;
-    background-color: rgb(13, 13, 78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
-    font-family: 'Raleway';
-    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 8px;
+    width: 7rem;
+    position: relative;
+    left: 35rem;
 }
 
 .actionsContainer button:hover{
-    background-color: rgb(45, 205, 226);
-    color: black;
-    transition: all 0.38s ease;
+    cursor: pointer;
+    color: var(--orange);
+    background: transparent;
+    border: 2px solid var(--orange);
 }

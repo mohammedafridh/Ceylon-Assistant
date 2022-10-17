@@ -8,12 +8,14 @@ import {db, auth } from '../../../Firebase'
 import {getDoc, doc, where, query} from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import AddGallery from './AddGallery'
+import ProfileUpdateModal from '../../Modals/ProfileUpdateModal'
 
 function ProfileDetails() {
   const {user} = useUserAuth()
   const [touristDetails, setTouristDetails] = useState('')
   const [tourGuideDetails,setTourGuideDetails] = useState('')
   const [loading, setLoading] = useState(false)
+  const [modalOpened,setModalOpened] = useState(false)
   // const {uid} = auth.currentUser.uid
 
   useEffect(()=>{
@@ -68,7 +70,11 @@ if(touristDetails){
                 </div>
                 <hr />
             </div>
-            <button>Update</button>
+            <button onClick = {()=>setModalOpened(true)}>Update</button>
+            <ProfileUpdateModal 
+            modalOpened = {modalOpened} 
+            setModalOpened = {setModalOpened}
+            />
         </div>
 
         <div className = {classes.profileGallery}>
@@ -142,7 +148,11 @@ if(touristDetails){
                 </div>
                 <hr />
             </div>
-            <button>Update</button>
+            <button onClick = {()=>setModalOpened(true)}>Update</button>
+              <ProfileUpdateModal 
+              modalOpened = {modalOpened} 
+              setModalOpened = {setModalOpened}
+              />
         </div>
 
         <div className = {classes.profileGallery}>

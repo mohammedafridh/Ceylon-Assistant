@@ -1,8 +1,12 @@
 import Layout from "../../../Components/layouts/Layout";
+import ContactContents from "../../../Components/PageComponents/Contact/ContactContents";
 
 function Contact() {
   return (
-    <Layout />
+    <Layout>
+      <ContactContents />
+    </Layout>
+    
   )
 }
 

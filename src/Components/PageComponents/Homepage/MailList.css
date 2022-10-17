@@ -1,7 +1,7 @@
 .mailContainer{
     width: 100%;
     background:orange linear-gradient(orange,#ff8c00);
-    margin-top: 50px;
+    /* margin-top: 50px; */
     color: white;
     display: flex;
     flex-direction: column;

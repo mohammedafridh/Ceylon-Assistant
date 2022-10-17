@@ -3,6 +3,7 @@ import classes from './ThingsToDoContents.module.css'
 import {useState, useEffect} from 'react'
 import {db} from '../../../Firebase'
 import {collection, onSnapshot} from 'firebase/firestore'
+import {UilSearch} from '@iconscout/react-unicons' 
 
 function ThingsToDoContents() {
 
@@ -47,7 +48,7 @@ function ThingsToDoContents() {
 
         <div className = {classes.mapouter}>
             <div className={classes.gmap_canvas}>
-                <iframe width="1009" height="435" id="gmap_canvas" src="https://maps.google.com/maps?q=sri%20lanka&t=k&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <iframe width="1000" height="435" id="gmap_canvas" src="https://maps.google.com/maps?q=sri%20lanka&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </div>
         </div>
 

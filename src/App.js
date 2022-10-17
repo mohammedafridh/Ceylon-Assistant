@@ -31,7 +31,7 @@ function App() {
 //   }
 // );
 
-    return(<div>
+    return(<div className = 'app'>
         <Routes>
             <Route path = '/login' element = {<Login />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>

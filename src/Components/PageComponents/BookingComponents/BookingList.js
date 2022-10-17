@@ -6,6 +6,7 @@ import { collection, getDoc, onSnapshot,doc,getDocs,deleteDoc } from 'firebase/f
 import {db,auth} from '../../../Firebase'
 import {useUserAuth} from '../../../Context/Context'
 import { onAuthStateChanged } from 'firebase/auth'
+import BookingUpdateModal from '../../Modals/BookingUpdateModal'
 
 function BookingList() {
 
@@ -16,6 +17,7 @@ const [tourGuideDetails, setTourGuideDetails] = useState('')
 const [touristDetails,setTouristDetails] = useState('')
 const [tourist,setTourist] = useState('')
 const [tourGuide,setTourGuide] = useState('')
+const [modalOpened,setModalOpened] = useState(false)
 const {user} = useUserAuth()
 
 async function getData() {
@@ -90,29 +92,17 @@ if(tourist){
                         <span><b>Tour Date Range : </b></span>
                         <span><b>Pick-up Time : </b>{booking.time}</span>
                     </div>
-                    <div className = {classes.actionContainer}>
-                        <Button onClick = {()=>cancelBooking(booking)}>Cancel</Button>
-                        <Button>Update</Button>
+                    <div className = {classes.buttonContainer}>
+                        <button className = {classes.cancelBtn} onClick = {()=>cancelBooking(booking)}>Cancel</button>
+                        <button className = {classes.mainBtn} onClick = {()=>setModalOpened(true)}>Update</button>
+                        <BookingUpdateModal 
+                            modalOpened = {modalOpened} 
+                            setModalOpened = {setModalOpened}
+                        />
                     </div>
                 </div>
             </div>
             ))}
-          </div>
-
-          <div className = {classes.updateBookingsContainer}>
-              <center><h3>Update Booking</h3></center>
-              <label>Tour Location</label>
-              <input type = 'text'></input>
-              <label>Pickup Destination</label>
-              <input type = 'text'></input>
-              <label>Tour Date Range</label>
-              <input type = 'date'></input>
-              <label>Pick-up Time</label>
-              <input type = 'time'></input>
-              <div className = {classes.updateButtonContainer}>
-                  <button>Update</button>
-              </div>
-              
           </div>
             
         </div>
@@ -141,7 +131,7 @@ if(tourGuide){
                         <span><b>Pick-up Time : </b>{booking.time}</span>
                     </div>
                     <div className = {classes.buttonContainer}>
-                        <Button>More Details</Button>
+                        <button className = {classes.mainBtn}>More Details</button>
                     </div>
                 </div>
             </div>
