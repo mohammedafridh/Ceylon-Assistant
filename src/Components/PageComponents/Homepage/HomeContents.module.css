@@ -24,7 +24,13 @@
 }
 
 .introContainer{
-    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 40rem auto;
+    background-color: rgb(255, 251, 251);
+    color: rgb(0, 0, 0);
+    padding: 2rem;
+    width: 95%;
+    margin: 1rem auto;
 }
 
 .introduction{
@@ -34,12 +40,35 @@
     padding: 0 8rem;
     font-family: 'Raleway';
     font-weight: 500;
-    color: rgb(0,0,0,0.75);
+    text-align: left;
 }
 
 .introTitle{
     color: rgb(22, 128, 124);
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.introduction>span{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.introductionLogo{
+    padding-top: 35px;
+}
+
+.introductionLogo img{
+    width: 250px;
+    height: 250px;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid black;
+    padding: 10px;
+    border-radius: 1rem;
+    box-shadow: 3px 3px 4px 4px black;
 }
 
 .optionsContainer{
@@ -49,7 +78,7 @@
     justify-content: center;
     gap: 2.3rem;
     margin: 5rem auto;
-    box-shadow:-3px 3px 150px 80px #ccc;
+    /* box-shadow:-3px 3px 150px 80px #ccc; */
     width: 65%;
     border-radius: 10px;
 }
@@ -64,11 +93,11 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    gap: 1.4rem;
+    gap: 1rem;
     border-radius: 10px;
     height: 80px;
     background: rgb(0, 0, 0, 0.30);
-    box-shadow:-3px 3px 15px 23px #ccc;
+    box-shadow:3px 3px 3px 3px rgb(54, 53, 53);
     transition: all .38s ease;
     grid-template-rows: 80px;
     grid-template-columns: 90px 150px;
@@ -90,4 +119,45 @@
     text-decoration: none;
 }
 
+.countryDescription{
+    display: grid;
+    grid-template-columns: 40rem 40rem;
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+    background-color:white;
+    width: 100%;
+    height: max-content;
+    padding: 1rem 4rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.description{
+    text-align: left;
+    padding: 1rem 1rem 1rem 5rem;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.description>h3{
+    font-weight: 900;
+}
+
+.description>span{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(87, 86, 86);
+}
+
+.countryImage img{
+    width: 31rem;
+    height: 31rem;
+    padding: 1rem;
+}
 

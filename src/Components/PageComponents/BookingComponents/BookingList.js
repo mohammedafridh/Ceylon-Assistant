@@ -7,6 +7,8 @@ import {db,auth} from '../../../Firebase'
 import {useUserAuth} from '../../../Context/Context'
 import { onAuthStateChanged } from 'firebase/auth'
 import BookingUpdateModal from '../../Modals/BookingUpdateModal'
+import ViewBookingDetailsModal from '../../Modals/ViewBookingDetailsModal'
+import Table from 'react-bootstrap/Table';
 
 function BookingList() {
 
@@ -72,75 +74,107 @@ function cancelBooking(booking){
     deleteDoc(doc(db,'booking',booking.id))
 }
 
-if(tourist){
     return(
       <div className = {classes.bookings}>
         <img src  ='https://www.srilankan.com/Images/pages/myb-header-image.jpg' 
         alt = 'abc' className={classes.bookingImage}/>
         <div className = {classes.bookingComponents}>
+
+          <div className  ={classes.tours}>
+            <h1>{tourist?'Confirmed Booking' : 'Tours'}</h1>
+            <Table striped bordered hover variant="dark">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Tour Destination</th>
+                    <th>Pick-up Destination</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Tour Time</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Markvressdfervregg@gmail.com</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Thornton</td>
+                    <td>Thornton</td>
+                    <td>Thornton</td>
+                    <td>Thornton</td>
+                    <td>
+                      <div className = {classes.btnContainer}>
+                        <button className = {classes.tourDelete}>Delete</button>
+                        <button className = {classes.tourFinish}>Finish</button>
+                      </div>
+                      
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
+          </div>
+
           <div className = {classes.bookingContainer}>
+            <h1>{tourist? 'Pending Bookings' : 'Pending Requests'}</h1>
           {bookings.map((booking)=>(
                 <div className = {classes.bookingList} key = {booking.id}>
-                <img src = {tourist.image} 
+                <img src = {tourist? tourist.image: tourGuide.image} 
                 alt = '' />
                 <div className = {classes.detailsContainer}>
                     <div className = {classes.bookingDetails}>
-                        <span><b>Email : </b>{tourist.email}</span>
-                        <span><b>Name : </b>{tourist.name}</span>
-                        <span><b>Tour Location : </b>{booking.travel_location} </span>
-                        <span><b>Pick-up Destination : </b>{booking.pickup_location}</span>
-                        <span><b>Tour Date Range : </b></span>
-                        <span><b>Pick-up Time : </b>{booking.time}</span>
+
+                      <div className = {classes.details}>
+                        <span>Email : </span>
+                        <span>{tourist? tourist.email: tourGuide.email}</span>
+                      </div>
+
+                      <div className = {classes.details}>
+                        <span>Tour Destination : </span>
+                        <span>{booking.travel_location}</span>
+                      </div>
+
+                      <div className = {classes.details}>
+                        <span>Pick-up Destination : </span>
+                        <span>{booking.pickup_location}</span>
+                      </div>
+
+                      <div className = {classes.details}>
+                        <span>Tour Date Range : </span>
+                        <span>{booking.startDate} - {booking.endDate}</span>
+                      </div>
+
+                      <div className = {classes.details}>
+                        <span>Tour Time : </span>
+                        <span>{booking.time}</span>
+                      </div>
                     </div>
+
                     <div className = {classes.buttonContainer}>
                         <button className = {classes.cancelBtn} onClick = {()=>cancelBooking(booking)}>Cancel</button>
-                        <button className = {classes.mainBtn} onClick = {()=>setModalOpened(true)}>Update</button>
-                        <BookingUpdateModal 
-                            modalOpened = {modalOpened} 
-                            setModalOpened = {setModalOpened}
-                        />
+                        <button className = {classes.mainBtn} onClick = {()=>setModalOpened(true)}>
+                          {tourist?'Update' : 'View More Details'}</button>
+                        {tourist?
+                          <BookingUpdateModal 
+                              modalOpened = {modalOpened} 
+                              setModalOpened = {setModalOpened}
+                          />:
+                        <ViewBookingDetailsModal 
+                          modalOpened = {modalOpened} 
+                          setModalOpened = {setModalOpened}
+                        />}
                     </div>
                 </div>
             </div>
             ))}
-          </div>
-            
+          </div>           
         </div>
       </div>
         
       )
-}
-
-if(tourGuide){
-    return (
-      <div className = {classes.bookings}>
-        <img src  ='https://www.srilankan.com/Images/pages/myb-header-image.jpg' 
-        alt = 'abc' className={classes.bookingImage}/>
-        <div className = {classes.bookingContainer}>
-            {bookings.map((booking)=>(
-                <div className = {classes.bookingList} key = {booking.id}>
-                <img src = {tourGuide.image} 
-                alt = '' />
-                <div className = {classes.detailsContainer}>
-                    <div className = {classes.bookingDetails}>
-                        <span><b>Email : </b>{tourGuide.email}</span>
-                        <span><b>Name : </b>{tourGuide.name}</span>
-                        <span><b>Tour Location : </b>{booking.travel_location} </span>
-                        <span><b>Pick-up Destination : </b>{booking.pickup_location}</span>
-                        <span><b>Tour Date Range : </b></span>
-                        <span><b>Pick-up Time : </b>{booking.time}</span>
-                    </div>
-                    <div className = {classes.buttonContainer}>
-                        <button className = {classes.mainBtn}>More Details</button>
-                    </div>
-                </div>
-            </div>
-            ))}
-        </div>
-        </div>
-      )
-}
-
 }
 
 export default BookingList;

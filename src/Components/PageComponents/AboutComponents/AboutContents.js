@@ -53,13 +53,9 @@ function AboutContents() {
         <hr/>
 
         <div className = {classes.bottomContainer}>
-            <div className = {classes.faq}>
-            <h3>FAQ</h3>
-                <div>
-                    <Faq />
-                </div>
-                
-            </div>
+            
+            <Faq />
+            
 
             <div className = {classes.forTravelling}>
                 <h3>For Travelling</h3>

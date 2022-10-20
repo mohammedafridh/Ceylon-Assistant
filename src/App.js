@@ -17,6 +17,7 @@ import ThingsToDo from './pages/CommonPages/ThingsToDo/ThingsToDo';
 import About from './pages/CommonPages/About/About';
 import ToursGallery from './pages/CommonPages/ToursGallery/ToursGallery';
 import AddThingsToDo from './Components/PageComponents/ThingsToDoComponents/AddThingsToDo';
+import AdminInterface from './pages/AdminPages/AdminInterface';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
 
     return(<div className = 'app'>
         <Routes>
+            <Route path = '/admin' element = {<AdminInterface />} />
             <Route path = '/login' element = {<Login />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
             <Route path = '/touristReg' element = {<TouristReg />}/>

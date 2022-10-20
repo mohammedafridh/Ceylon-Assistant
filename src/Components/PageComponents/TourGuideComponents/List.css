@@ -31,74 +31,57 @@
 }
 
 .listContainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: 25rem auto;
+    grid-gap: 2rem;
     justify-content: center;
     margin-top: 40px;
 }
 
-.listWrapper{
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    gap: 20px;
-}
-
-.listSearch{
-    flex: 1;
-    background-color: #fdda16;
-    padding: 10px 20px;
-    border-radius: 6px;
+.searchGuide{
+    background-color: var(--cardColor);
+    box-shadow: 4px 4px 5px 6px rgb(218, 213, 213);
     position: sticky;
-    top: 150px;
+    top: 8rem;
     height: max-content;
-    margin-right: 3rem;
-}
-
-.searchTitle{
-    font-size: 30px;
-    color: #555;
-    margin-bottom: 10px;
+    padding: 0.7rem;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-}
-
-.searchItem{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    margin-bottom: 10px;
+    gap: 1rem;
+    border-radius: 1rem;
+    width: 80%;
 }
 
-.selectDistrict{
-    width: 100%;
-}
-
-.searchItem>label {
-    font-size: 18px!important;
-}
-
-.searchItem>input{
-    height: 30px!important;
-    border: none!important;
-    padding:5px 10px!important;
-    width: 100%!important;
-}
-
-.searchItem>span{
-    height: 35px;
-    border: none!important;
-    background-color: white;
-    padding:5px 10px;
-    align-items: center;
-    cursor: pointer;
-    width: 100%!important;
-}
-
-.listResult{
-    flex: 3;
+.input{
+    width: 17rem;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--inputColor);
 }
 
 .srchBtn{
-    width: 100%;
-    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
 }
+
+.srchBtn:hover{
+    cursor: pointer;
+    color: var(--orange);
+    background: transparent;
+    border: 2px solid var(--orange);
+}
+
+
+

@@ -1,0 +1,5 @@
+.AdminInterface{
+    display: grid;
+    grid-template-columns: 15rem auto;
+    gap: 2rem;
+}

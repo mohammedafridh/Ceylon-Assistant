@@ -1,8 +1,13 @@
 import React from 'react'
+import ToursGalleryContents from '../../../Components/PageComponents/Tours gallery/ToursGalleryContents'
+import Layout from '../../../Components/layouts/Layout'
 
 function ToursGallery() {
   return (
-    <div>ToursGallery</div>
+    <Layout>
+      <ToursGalleryContents />
+    </Layout>
+    
   )
 }
 

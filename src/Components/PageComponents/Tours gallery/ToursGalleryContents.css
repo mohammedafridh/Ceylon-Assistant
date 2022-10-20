@@ -1,0 +1,108 @@
+.topContainer{
+    width: 100%;
+    background-image: url('http://www.srilanka-travel-tours.com/images/sri-lanka.jpg');
+    background-size: 100% 17rem;
+    background-repeat: no-repeat;
+    height: 17rem;
+    object-fit: cover;
+}
+
+.topContainer span{
+    position: absolute;
+    left: 28rem;
+    top: 13rem;   
+    color: white;
+    font-size: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.galleryComponents{
+    text-align: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.categories{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mainCategories{
+    margin: 2rem;
+}
+
+.categoryBtn{
+    background: darkorange;
+    color: black;
+    padding: 8px 20px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+
+.categoryBtn:hover{
+    background: black;
+    color: white;
+    transition: all .70s ease;
+    transform: translateX(6px);
+}
+
+.imageGallery{
+    display: grid;
+    place-items: flex-start;
+    margin: 6rem 2rem 2rem 2rem;
+}
+
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.images{
+    padding: 0px 20px 40px 20px;
+    position: relative;
+}
+
+.images img{
+    box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    width: 250px;
+    height: 250px;
+}
+
+.imageDetails{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 2px;
+    background-color: black;
+    color: white;
+}
+
+.imageDetails>span{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;  
+}
+
+.imageDetails>span:nth-of-type(1){
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.imageDetails>span:nth-of-type(2){
+    font-size: 17px;
+    font-weight: bold;
+    color: orange;
+}
+.imageDetails>span:nth-of-type(3){
+    font-size: 15px;
+    font-weight: bold;
+    color: olivedrab;
+    margin-bottom: 5px;
+}

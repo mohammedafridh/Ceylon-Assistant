@@ -93,8 +93,8 @@
 
 .bottomContainer{
     display: grid;
-    grid-template-columns: 45% 45%;
-    gap: 5rem;
+    grid-template-columns: auto 45%;
+    grid-gap: 5rem;
     margin: 2rem auto;
     width: 75%;
     height: max-content;

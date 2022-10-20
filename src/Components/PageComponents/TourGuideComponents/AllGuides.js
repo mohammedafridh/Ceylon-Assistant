@@ -4,6 +4,7 @@ import {collection, onSnapshot} from 'firebase/firestore'
 import classes from './AllGuides.module.css'
 import {Button} from 'react-bootstrap'
 import {Link, useNavigate} from 'react-router-dom'
+import BookingModal from '../../Modals/BookingModal'
 
 function AllGuides() {
 
@@ -11,6 +12,7 @@ function AllGuides() {
   const [selectedGuide, setSelectedGuide] = useState('')
   const [loading, setLoading] = useState(false)
   const [error,setError] = useState()
+  const [modalOpened,setModalOpened] = useState(false)
   const navigate = useNavigate()
 
   function moreDetailsHandler(guide){
@@ -42,28 +44,76 @@ function AllGuides() {
    
     {guides.map((guide)=>(
       <div className={classes.searchItem} key = {guide.id}>
-      <img src = {guide.image} 
-        alt = 'abc' className={classes.guideImg}/>
-      <div className={classes.guideDetails}>
-        <h3 className={classes.guideName}>{guide.name}</h3>
-        <span className={classes.guideVehicle}>Vehicle Included</span>
-        <span className={classes.subTitle}>Ready to give you the best experience</span>
-        <span className={classes.guideCancel}>Cancellation free</span>
-        <span className={classes.guideCancelText}>Book to get the best services. Hurry Up!</span>
-      </div>
-      <div className = {classes.otherDetails}>
-        <div className={classes.ratingBar}>
-          <span className = {classes.ratings}>Rating</span>
-          <span className = {classes.ratingNumber}>5.0</span>
+
+        <img src = {guide.image} alt = 'abc' className={classes.guideImg}/>
+
+        <div className={classes.guideDetails}>
+          <div className = {classes.topDetails}>
+              <span>{guide.name}</span>
+              <span>{guide.email}</span>
+          </div>
+
+            <div className = {classes.details}>
+                <span>Contact : </span>
+                <span>{guide.contact_Number}</span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>NIC No: </span>
+                <span></span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>District: </span>
+                <span>{guide.district}</span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>Guide Type : </span>
+                <span></span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>Guide Rate : </span>
+                <span>{guide.rate} per day</span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>Vehicle : </span>
+                <span></span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>Max Passengers : </span>
+                <span>{guide.No_of_passengers}</span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>Vehicle KM Rate : </span>
+                <span>Rs. {guide.per_Km_Rate}/=</span>
+            </div>
+            
         </div>
-        <div className = {classes.otherText}>
-          <span className = {classes.district}>{guide.district}</span>
-          <span className = {classes.rate}>Rs.{guide.rate}</span>
-          <span className = {classes.rateText}>Other charges applicable based on the tour</span>
-          <Button className = {classes.moreBtn} 
-          onClick =  {()=>moreDetailsHandler(guide)}>See More Details</Button>
+
+        <div className = {classes.otherDetails}>
+          <div className={classes.ratingBar}>
+            <span>Rating</span>
+            <span>5.0</span>
+          </div>
+
+          <div className = {classes.subDetails}>
+            <button className = {classes.bookingBtn}
+             onClick = {()=>setModalOpened(true)}>
+                Book Guide
+            </button>
+            <BookingModal 
+              modalOpened = {modalOpened} 
+              setModalOpened = {setModalOpened}
+            />
+          </div>
+
+
         </div>
-      </div>
     </div> 
     ))}
       

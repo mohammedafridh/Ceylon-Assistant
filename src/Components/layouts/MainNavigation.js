@@ -39,6 +39,7 @@ function MainNavigation(){
                 </li>
                 <li><Link to = '/contact'>Contact</Link></li>
                 <li><Link to = '/profile'>Profile</Link></li>  
+                <li><Link to = '/admin'>Admin</Link></li>
             </ul>
 
             <div>
@@ -46,8 +47,10 @@ function MainNavigation(){
                     <li><Link to = ''>Options <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
                         <div className = {classes.dropDown}>
                             <ul>
-                                <li><Link to = '/login'>Login</Link></li>
-                                <li><Link to = '/login'>SignOut</Link></li>
+                                <li><Link to = '/login'>Register Guide</Link></li>
+                                <li><Link to = '/login'>Register Tourist</Link></li>
+                                <li><Link to = '/login'>Log In</Link></li>
+                                <li><Link to = '/login'>Log Out</Link></li>
                             </ul>
                         </div>
                     </li>
@@ -58,3 +61,5 @@ function MainNavigation(){
 }
 
 export default MainNavigation;
+
+
