@@ -7,11 +7,6 @@ const ToursGalleryContents = () => {
 
     const [modalOpened,setModalOpened] = useState(false)
 
-    // function galleryHandler(gallery){
-    //     setModalOpened(true)
-        
-    // }
-
   return (
     <div className = 'toursGalleryContents'>
         <div className = 'topContainer'>

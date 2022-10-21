@@ -1,0 +1,13 @@
+.carousel{
+    width: 100%!important;
+    height: max-content!important;
+}
+
+.carouselItem{
+    height: fit-content!important;
+}
+
+.carouselItem>img{
+    height: 30rem!important;
+    width: 50rem!important;
+}

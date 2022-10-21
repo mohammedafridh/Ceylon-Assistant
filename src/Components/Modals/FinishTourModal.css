@@ -1,0 +1,71 @@
+.reviewForm{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.ratingDetails{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+}
+
+.ratingDetails>label{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.ratingDetails>textarea{
+    outline: none;
+    background-color: var(--inputColor);
+    border-radius: 4px;
+    padding: 7px;
+    columns: 40;
+    height: 10rem;
+    font-size: 14px;
+    margin: 0.8rem 0;
+}
+
+.star-rating{
+    display: flex;
+    gap: 1rem;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.on {
+    color: orange;
+}
+
+.off {
+    color: rgb(189, 187, 187);
+}
+
+.reviewBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+}
+
+.reviewBtn:hover{
+    cursor: pointer;
+    color: var(--orange);
+    background: transparent;
+    border: 2px solid var(--orange);
+}

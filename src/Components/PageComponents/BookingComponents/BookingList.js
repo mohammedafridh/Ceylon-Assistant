@@ -9,6 +9,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import BookingUpdateModal from '../../Modals/BookingUpdateModal'
 import ViewBookingDetailsModal from '../../Modals/ViewBookingDetailsModal'
 import Table from 'react-bootstrap/Table';
+import FinishTourModal from '../../Modals/FinishTourModal'
 
 function BookingList() {
 
@@ -20,6 +21,7 @@ const [touristDetails,setTouristDetails] = useState('')
 const [tourist,setTourist] = useState('')
 const [tourGuide,setTourGuide] = useState('')
 const [modalOpened,setModalOpened] = useState(false)
+const[finishTourModal, setFinishTourModal] = useState(false)
 const {user} = useUserAuth()
 
 async function getData() {
@@ -109,7 +111,16 @@ function cancelBooking(booking){
                     <td>
                       <div className = {classes.btnContainer}>
                         <button className = {classes.tourDelete}>Delete</button>
-                        <button className = {classes.tourFinish}>Finish</button>
+                        <button className = {classes.tourFinish} onClick = {()=>setFinishTourModal(true)}>Finish</button>
+                        {tourist?
+                          <FinishTourModal 
+                            finishTourModal = {finishTourModal} 
+                            setFinishTourModal = {setFinishTourModal}
+                          />:
+                        <ViewBookingDetailsModal 
+                          modalOpened = {modalOpened} 
+                          setModalOpened = {setModalOpened}
+                        />}
                       </div>
                       
                     </td>

@@ -9,3 +9,7 @@ body{
   font-family: 'Raleway';
   background-color: #f3f3f3;
 }
+
+::-webkit-scrollbar{
+  display: none;
+}
