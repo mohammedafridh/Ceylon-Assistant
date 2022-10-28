@@ -7,6 +7,11 @@
     height: fit-content;
 } */
 
+.contactContents{
+    margin-top: 5rem;
+    position: relative;
+}
+
 .topContainer{
     width: 100%;
     background-image: url('https://sandinmysuitcase.com/wp-content/uploads/2021/04/Kandy-Sri-Lanka.jpg.webp');
@@ -33,7 +38,6 @@
     margin: 4rem auto;
     border: 1px solid grey;
     padding: 18px;
-    
 }
 
 .gmap_canvas{
@@ -44,65 +48,73 @@
     z-index: 1;
 }
 
-.callHotline{
-    position: relative;
+.mainContact{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0rem;
-    text-align: center;
     background-color: white;
-    padding: 1rem;
-    text-align: left;
-    top: -23rem;
-    left: 2rem;
-    width: 28%;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    top: -26rem;
+    left: 43rem;
+    width: 17rem;
+    padding-top: 1rem;
+}
+
+.callHotline{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    text-align: center;
+    margin: 0rem auto;
 }
 
 .callIcon{
     display: flex;
-    align-items: center;
-    text-align: center;
     gap: 1rem;
-    color:#0072bc
+    text-align: center;
+    color: teal;
+    align-items: center;
+    margin: 0rem auto;
+    align-items: center;
+}
+
+.callHotline>span{
+    position: relative;
+    top: -0.7rem;
 }
 
 .mapCall{
-    position: relative;
     display: flex;
     flex-direction: column;
-    background-color: white;
-    padding: 1rem;
-    text-align: left;
-    top: -23rem;
-    left: 2rem;
-    width: 28%;
     gap: 1rem;
-    /* z-index: 2;
-    top: -25rem;
-    width: 15rem; */
+    background-color: white;
+    color: black;
+    width: 17rem;
+    padding: 1rem;
 }
 
 .mapCall>h3{
-    font-size: 18px;
-    color:#0072bc
-}
-
-.mapContact>span:nth-of-type(1){
-    font-size: 13px;
+    font-size: 17px;
     font-weight: bold;
+    color: teal;
 }
 
-.mapContact>span:nth-of-type(2){
-    font-size: 13px;
-}
-
-.mapContact{
+.mapContacts{
     display: flex;
     flex-direction: column;
-    gap: 0rem;
+    text-align: left;
 }
 
+.mapContacts>span:nth-of-type(1){
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.mapContacts>span:nth-of-type(2){
+    font-size: 14px;
+}
 
 .contactDetails{
     display: grid;

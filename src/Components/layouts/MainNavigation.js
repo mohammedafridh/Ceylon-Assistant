@@ -27,7 +27,16 @@ function MainNavigation(){
             </h1>
             <ul>
                 <li><Link to = '/'>Home</Link></li>
-                <li><Link to = '/thingsToDo'>Things To Do</Link></li>                  
+                <li><Link to = ''>Tourings
+                <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
+                    <div className = {classes.dropDown}>
+                        <ul>
+                            <li><Link to = '/tourGuides'>All Guides</Link></li>
+                            <li><Link to = '/bookings'>Bookings</Link></li>
+                        </ul>
+                    </div>
+                </li> 
+                <li><Link to = '/thingsToDo'>Things To Do</Link></li>                 
                 <li><Link to = ''>About Us
                 <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
                     <div className = {classes.dropDown}>
@@ -37,7 +46,6 @@ function MainNavigation(){
                         </ul>
                     </div>
                 </li>
-                <li><Link to = '/contact'>Contact</Link></li>
                 <li><Link to = '/profile'>Profile</Link></li>  
                 <li><Link to = '/admin'>Admin</Link></li>
             </ul>

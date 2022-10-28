@@ -50,7 +50,7 @@
 }
 
 .introduction>span{
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -71,14 +71,13 @@
     box-shadow: 3px 3px 4px 4px black;
 }
 
-.optionsContainer{
+/* .optionsContainer{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, auto));
     align-items: center;
     justify-content: center;
     gap: 2.3rem;
     margin: 5rem auto;
-    /* box-shadow:-3px 3px 150px 80px #ccc; */
     width: 65%;
     border-radius: 10px;
 }
@@ -117,7 +116,7 @@
 
 .optionsContainer a{
     text-decoration: none;
-}
+} */
 
 .countryDescription{
     display: grid;

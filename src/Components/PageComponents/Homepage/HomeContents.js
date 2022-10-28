@@ -1,10 +1,10 @@
 import classes from './HomeContents.module.css'
 import TopGuides from './TopGuides'
 import {Link} from 'react-router-dom'
+import HomeDiscover from './HomeDiscover'
  
 function HomeContents() {
   return (
-    <div>
       <div className = {classes.contentsContainer}>
         <div className = {classes.homepageImageContainer}></div>
           <div className = {classes.introContainer}>
@@ -15,15 +15,15 @@ function HomeContents() {
                 we gurantee you an unforgettable holiday for a reasonable price.</span> 
 
                 <span>We are currently a growing tour guide company with a worldwide happy client base. 
-                  All of our guides are ready to provide the best experiences. Plan your trip and contact us 
-                  today to enjoy your tour with our <b>Tour Guides</b> </span>
+                  All of our guides are ready to provide the best experiences. Plan your trip and book our 
+                  guides to make your tour a success.<b> Hurry Up!</b> </span>
             </div>
 
             <div className = {classes.introductionLogo}>
               <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FwhiteLogo.jpeg?alt=media&token=a8063bdd-0566-45f8-9523-08b8016b235a' alt = '' />
             </div>
           </div>
-          <div className = {classes.optionsContainer}>
+          {/* <div className = {classes.optionsContainer}>
             <Link to = '/tourGuides'>
               <div className = {classes.tiles}>
                 <div className={classes.imageContainer}>
@@ -56,7 +56,7 @@ function HomeContents() {
                 </div>
               </div>
             </Link>  
-          </div>
+          </div> */}
           <TopGuides />
 
           <div className = {classes.countryDescription}>
@@ -86,8 +86,8 @@ function HomeContents() {
                 
               </div>
           </div>
+          <HomeDiscover />
       </div>
-    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import classes from './AboutContents.module.css'
 import AboutSlideshow from '../../Slideshow/AboutSlideshow';
 import Faq from '../../FAQ/Faq'
+import ContactContents from '../Contact/ContactContents';
 
 function AboutContents() {
 
@@ -52,16 +53,18 @@ function AboutContents() {
         </div>
         <hr/>
 
-        <div className = {classes.bottomContainer}>
-            
+        <div className = {classes.bottomContainer}>   
             <Faq />
-            
 
             <div className = {classes.forTravelling}>
                 <h3>For Travelling</h3>
                 <AboutSlideshow />
             </div>
+
         </div>
+        <hr/>
+
+        <ContactContents />
     </div>
   )
 }
