@@ -1,9 +1,48 @@
 import { Modal, useMantineTheme} from '@mantine/core';
 import './ProfileUpdateModal.css'
 import { useState } from 'react';
+import {useUserAuth} from '../../Context/Context' 
+import {collection, addDoc} from 'firebase/firestore'
+import {db} from '../../Firebase'
 
-function BookingModal({modalOpened,setModalOpened}) {
+function BookingModal({modalOpened,setModalOpened, guide}) {
   const theme = useMantineTheme();
+  const {user} = useUserAuth();
+  const [tourGuide,setTourGuide] = useState(guide.id)
+    const[tourist,setTourist] = useState(user.uid)
+    const[tourLocation,setTourLocation] = useState('')
+    const[destination,setDestination] = useState('')
+    const[startData,setStartDate] = useState('')
+    const[endDate,setEndDate] = useState('')
+    const[time,setTime] = useState('')
+    const [status,setStatus] = useState('Active')
+    const current = new Date();
+    const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    
+    const bookingHandler = async (e)=>{
+        e.preventDefault()
+        try{
+            const addDetails = collection(db, 'pending_booking')
+            try{
+            await addDoc(addDetails,{location:tourLocation, destination:destination, 
+                guide:tourGuide,tourist:tourist,startData:startData, endDate:endDate, time:time,
+            date:addDate, status:status})
+            .then(()=>{
+              setTourLocation('')
+              setDestination('')
+              setStartDate('')
+              setEndDate('')
+              setTime('')
+            })
+      
+            }catch(err){
+              err.message('Cant add FAQ')
+            }
+          }catch(err){
+            err.message('Cant Connect. Please Try Again!')
+          }
+    }
+
 
   return (
     <Modal
@@ -22,8 +61,9 @@ function BookingModal({modalOpened,setModalOpened}) {
                 <input 
                     type="text" 
                     className='infoInput' 
-                    onChange = '' 
+                    onChange = {(e)=>setTourLocation(e.target.value)} 
                     placeholder='Tour Location'
+                    required
                 />
             </div>
 
@@ -31,7 +71,7 @@ function BookingModal({modalOpened,setModalOpened}) {
                 <input 
                     type="text" 
                     className='infoInput' 
-                    onChange = '' 
+                    onChange = {(e)=>setDestination(e.target.value)} 
                     placeholder='Pickup Destination'
                 />
             </div>
@@ -41,7 +81,7 @@ function BookingModal({modalOpened,setModalOpened}) {
                 <input
                     type = 'date'
                     className='infoInput' 
-                    onChange = ''
+                    onChange = {(e)=>setStartDate(e.target.value)}
                     placeholder="Date From"
                 />
             </div>
@@ -51,7 +91,7 @@ function BookingModal({modalOpened,setModalOpened}) {
                 <input 
                     type="date" 
                     className='infoInput' 
-                    onChange = ''
+                    onChange = {(e)=>setEndDate(e.target.value)}
                     placeholder='Date To'
                 />
             </div>
@@ -62,11 +102,12 @@ function BookingModal({modalOpened,setModalOpened}) {
                 
                     type="time" 
                     className='infoInput' 
-                    onChange = ''
+                    onChange = {(e)=>setTime(e.target.value)}
                     placeholder='Select Time'
                 />
             </div>
-            <button className="button infoButton">Confirm</button>
+            <button className="button infoButton"
+            onClick = {bookingHandler}>Confirm</button>
         </form>
     </Modal>
   );

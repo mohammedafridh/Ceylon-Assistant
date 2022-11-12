@@ -1,28 +1,42 @@
 import {useState, useEffect} from 'react'
-import {db} from '../../../Firebase'
+import {db,auth} from '../../../Firebase'
 import {collection, onSnapshot} from 'firebase/firestore'
 import classes from './AllGuides.module.css'
 import {Button} from 'react-bootstrap'
-import {Link, useNavigate} from 'react-router-dom'
 import BookingModal from '../../Modals/BookingModal'
+import {getDoc, doc, where, query} from 'firebase/firestore'
+import { onAuthStateChanged } from 'firebase/auth'
 
 function AllGuides() {
 
   const [guides,setGuides] = useState([])
-  const [selectedGuide, setSelectedGuide] = useState('')
+  const [touristDetails, setTouristDetails] = useState('')
+  const [tourGuideDetails,setTourGuideDetails] = useState('')
   const [loading, setLoading] = useState(false)
   const [error,setError] = useState()
   const [modalOpened,setModalOpened] = useState(false)
-  const navigate = useNavigate()
 
-  function moreDetailsHandler(guide){
-    setSelectedGuide(guide)
-    navigate('/selectedGuide', {state:guide})
-  }
+  useEffect(()=>{
+    onAuthStateChanged(auth, async (user)=>{
+      if(user){
+        const tourist = await getDoc(doc(db,'Tourist',user.uid))
+        const touristData = tourist.data()
+        const tourGuide = await getDoc(doc(db,'Guides',user.uid))
+        const tourGuideData = tourGuide.data()
+
+        if(touristData===undefined){
+          setTourGuideDetails(tourGuideData)
+        }else if(tourGuideData===undefined){
+          setTouristDetails(touristData)
+        }
+      }
+    })
+  },[])
+
 
   useEffect(()=>{
     setLoading(true)
-    const allData = onSnapshot(collection(db,'Tour_Guides'),(snapshot)=>{
+    const allData = onSnapshot(collection(db,'Guides'),(snapshot)=>{
       let list = []
       snapshot.docs.forEach((doc)=>{
         list.push({
@@ -49,18 +63,18 @@ function AllGuides() {
 
         <div className={classes.guideDetails}>
           <div className = {classes.topDetails}>
-              <span>{guide.name}</span>
+              <span>{guide.firstName} {guide.lastName}</span>
               <span>{guide.email}</span>
           </div>
 
             <div className = {classes.details}>
                 <span>Contact : </span>
-                <span>{guide.contact_Number}</span>
+                <span>{guide.contactNumber}</span>
             </div>
 
             <div className = {classes.details}>
                 <span>NIC No: </span>
-                <span></span>
+                <span>{guide.nicNumber}</span>
             </div>
 
             <div className = {classes.details}>
@@ -70,27 +84,32 @@ function AllGuides() {
 
             <div className = {classes.details}>
                 <span>Guide Type : </span>
-                <span></span>
+                <span>{guide.guideType}</span>
+            </div>
+
+            <div className = {classes.details}>
+                <span>Languages : </span>
+                <span>{guide.languages}</span>
             </div>
 
             <div className = {classes.details}>
                 <span>Guide Rate : </span>
-                <span>{guide.rate} per day</span>
+                <span>{guide.guideRate} per day</span>
             </div>
 
             <div className = {classes.details}>
                 <span>Vehicle : </span>
-                <span></span>
+                <span>{guide.model}</span>
             </div>
 
             <div className = {classes.details}>
                 <span>Max Passengers : </span>
-                <span>{guide.No_of_passengers}</span>
+                <span>{guide.maxPassengers}</span>
             </div>
 
             <div className = {classes.details}>
                 <span>Vehicle KM Rate : </span>
-                <span>Rs. {guide.per_Km_Rate}/=</span>
+                <span>Rs. {guide.perKmRate}/=</span>
             </div>
             
         </div>
@@ -101,7 +120,9 @@ function AllGuides() {
             <span>5.0</span>
           </div>
 
+{touristDetails &&
           <div className = {classes.subDetails}>
+          
             <button className = {classes.bookingBtn}
              onClick = {()=>setModalOpened(true)}>
                 Book Guide
@@ -109,8 +130,10 @@ function AllGuides() {
             <BookingModal 
               modalOpened = {modalOpened} 
               setModalOpened = {setModalOpened}
+              guide  = {guide}
             />
           </div>
+}
 
 
         </div>

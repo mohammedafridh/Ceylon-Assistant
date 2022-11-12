@@ -10,7 +10,7 @@ function ThingsToDoContents() {
     const [thingsToDo,setThingsToDo] = useState([])
 
     useEffect(()=>{
-        const displayData = onSnapshot(collection(db,'ThingsToDo'),(snapshot)=>{
+        const displayData = onSnapshot(collection(db,'ThingsToDoSrilanka'),(snapshot)=>{
             let list = []
             snapshot.docs.forEach((doc)=>{
                 list.push({
@@ -44,7 +44,6 @@ function ThingsToDoContents() {
             </div>
         </div>
 
-        <AddThingsToDo />
 
         <div className = {classes.mapouter}>
             <div className={classes.gmap_canvas}>
@@ -55,9 +54,9 @@ function ThingsToDoContents() {
         {thingsToDo.map((things)=>(
         <div className = {classes.toDoActivitiesContainer}>
             
-            <div className = {classes.activityHeader}>{things.activityType}</div>
+            <div className = {classes.activityHeader}>{things.Activity}</div>
             <div className = {classes.activityImage}>
-                <img src = {things.imageURL} alt = '' />
+                <img src = {things.image} alt = '' />
             </div>
             <div className = {classes.activityParagraph}>{things.description}</div>
 

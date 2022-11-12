@@ -1,11 +1,13 @@
 import Layout from "../../../Components/layouts/Layout";
 import SubNavigation from "../../../Components/layouts/SubNavigation";
-import BookingList from "../../../Components/PageComponents/BookingComponents/BookingList";
+import ConfirmedBookingList from "../../../Components/PageComponents/BookingComponents/ConfirmedBookingList";
+import PendingBookingList from "../../../Components/PageComponents/BookingComponents/PendingBookingList";
 
 function Bookings(){
     return <Layout>
         <SubNavigation />
-        <BookingList />
+        <ConfirmedBookingList />
+        <PendingBookingList />    
     </Layout>
     
 }

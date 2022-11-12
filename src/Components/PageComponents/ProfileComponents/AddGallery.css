@@ -1,0 +1,83 @@
+.addGallery{
+    margin: 3rem auto;
+    width: 83%;
+}
+
+.addToGalleryForm{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem;
+    margin: 1rem auto;
+    width: 95%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 6px 5px #ccc;
+    border-radius: 10px;
+    flex: 1;
+}
+
+.addToGalleryForm>h3{
+    font-weight: bold;
+}
+
+.detaleContainer{
+    display: flex;
+    gap: 1rem;
+    height: 2rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.addDetailInput{
+    border: none;
+    outline: none;
+    background-color: var(--inputColor);
+    border-radius: 8px;
+    padding: 22px;
+    flex: 1;
+    width: 18rem;
+}
+
+.splitImageContainer{
+    display: flex;
+    gap: 1rem;
+}
+
+.imageProfile {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    background-color: var(--inputColor);
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.mantine-1ajyf09{
+    background-color: var(--inputColor)!important;
+    border: none!important;
+    height: 1rem!important;
+    border-radius: 8px!important;
+    height: 44px!important;
+}
+
+.allImageContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    width: 100%;
+}
+
+.addGalleryBtn{
+    background-color: orange;
+    padding: 10px;
+    border-radius: 8px;
+    color: black;
+    font-weight: bold;
+}
+
+

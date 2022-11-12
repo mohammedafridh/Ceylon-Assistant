@@ -1,0 +1,81 @@
+.profileView{
+    width: 70%;
+    margin: 0rem auto;
+}
+
+.touristProfileView{
+    width: 50%;
+    margin: 0rem auto;
+}
+
+.profileWrapper{
+    margin: 8rem 0rem 1rem 0rem;
+    display: grid;
+    grid-template-columns: 21rem auto;
+    border: 1px solid gray;
+    padding: 1rem;
+}
+
+.touristWrapper{
+    margin: 8rem 0rem 1rem 0rem;
+    display: grid;
+    grid-template-columns: 15rem auto;
+    border: 1px solid gray;
+    padding: 1rem;
+}
+
+.image{
+    width: 20rem;
+    height: 22rem;
+}
+
+.touristImg{
+    width: 12rem;
+    height: 12rem;
+}
+
+.detailsContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.titleContainer{
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.titleContainer>h3{
+    color: teal;
+    font-weight: bold;
+}
+
+.titleContainer>h6{
+    color: gray;
+    font-weight: 400;
+}
+
+.titleContainer>p{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(41, 133, 219);
+}
+
+.details{
+    display: grid;
+    grid-template-columns: 13rem auto;
+    align-items: center;
+}
+
+.details>label{
+    font-weight: bold;
+}
+
+.updateBtn{
+    background-color: orange;
+    padding: 7px;
+    border-radius: 8px;
+    border: none;
+    width: 12rem;
+    margin: 1.2rem auto;
+}

@@ -70,12 +70,25 @@
     text-align: left;
 }
 
-.imageDetails>h4{
-    margin-bottom:1rem ;
+.imageHeader{
+    display: flex;
+    flex-direction: column;
+}
+
+.imageHeader>h4{
+    margin-bottom:0.3rem ;
     text-align: center;
     font-weight: bold;
     font-family: 'Raleway';
     color: teal;
+}
+.imageHeader>h6{
+    margin-bottom:1rem ;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Raleway';
+    color: gray;
+    font-size: 14px;
 }
 
 .readHide{

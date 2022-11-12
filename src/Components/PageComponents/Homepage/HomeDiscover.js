@@ -1,8 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import classes from './HomeDiscover.module.css'
 import {Gallery} from '../Tours gallery/Gallery'
+import {db} from '../../../Firebase'
+import {collection, onSnapshot} from 'firebase/firestore'
 
 const HomeDiscover = () => {
+
+  const[discovery,setDiscovery] = useState([])
+  const[loading,setLoading] = useState('')
+  const[error,setError] = useState('')
 
     const ReadMore = ({ children }) => {
         const text = children;
@@ -10,6 +16,7 @@ const HomeDiscover = () => {
         const toggleReadMore = () => {
           setIsReadMore(!isReadMore);
         };
+
         return (
           <p className={classes.text}>
             {isReadMore ? text.slice(0, 150) : text}
@@ -20,6 +27,26 @@ const HomeDiscover = () => {
         );
       };
 
+      useEffect(()=>{
+        setLoading(true)
+        const allData = onSnapshot(collection(db,'Discover_Srilanka'),(snapshot)=>{
+          let list = []
+          snapshot.docs.forEach((doc)=>{
+            list.push({
+              id:doc.id,
+              ...doc.data()
+            })
+          })
+          setDiscovery(list)
+          setLoading(false)
+        },(error)=>{
+          setError(error.message)
+        });
+        return ()=>{
+          allData()
+        };
+      },[]);
+
   return (
     <div className = {classes.homeDiscover}>
         <div className={classes.title}>
@@ -29,20 +56,17 @@ const HomeDiscover = () => {
 
         <div className={classes.imageGallery}>
             <div className={classes.gallery}>
-                {Gallery.map((gallery, id)=>(
-                    <div className={classes.images} key = {id}>
-                        <img src = {gallery.mainImage} alt = '' />
+                {discovery.map((discover)=>(
+                    <div className={classes.images} key = {discover.id}>
+                        <img src = {discover.image} alt = '' />
                         <div className={classes.imageDetails}>
-                            <h4>Sigiriya</h4>
+                          <div className={classes.imageHeader}>
+                            <h4>{discover.destination}</h4>
+                            <h6>{discover.nickname}</h6>
+                          </div>
+                            
                             <ReadMore className = {classes.readMore}>
-                                GeeksforGeeks: A Computer Science portal for geeks. 
-                                It contains well written, well thought and well explained
-                                computer science, programming articles and quizzes. 
-                                It provides a variety of services for you to learn, so thrive
-                                and also have fun! Free Tutorials, Millions of Articles, Live, 
-                                Online and Classroom Courses ,Frequent Coding Competitions,
-                                Webinars by Industry Experts, Internship opportunities, and Job
-                                Opportunities. Knowledge is power!
+                                {discover.description}
                             </ReadMore>
                         </div>    
                     </div>

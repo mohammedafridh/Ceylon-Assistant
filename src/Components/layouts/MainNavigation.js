@@ -1,3 +1,4 @@
+import {useState,useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context'
 import classes from './MainNavigation.module.css'
@@ -5,12 +6,14 @@ import * as Icons from 'react-icons/fa'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { faIdCard } from '@fortawesome/free-solid-svg-icons'
-import {Dropdown} from 'react-bootstrap'
+import TouristRegisterModal from '../Modals/AuthenticationModals/TouristRegisterModel'
+import GuideRegisterModal from '../Modals/AuthenticationModals/GuideRegisterModal'
 
 function MainNavigation(){
 
     const {logOut} = useUserAuth();
+    const [touristModal,setTouristModal] = useState(false)
+    const [guideModal,setGuideModal] = useState(false)
 
     const handleLogOut = async ()=>{
         try{
@@ -46,8 +49,6 @@ function MainNavigation(){
                         </ul>
                     </div>
                 </li>
-                <li><Link to = '/profile'>Profile</Link></li>  
-                <li><Link to = '/admin'>Admin</Link></li>
             </ul>
 
             <div>
@@ -55,8 +56,19 @@ function MainNavigation(){
                     <li><Link to = ''>Options <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
                         <div className = {classes.dropDown}>
                             <ul>
-                                <li><Link to = '/login'>Register Guide</Link></li>
-                                <li><Link to = '/login'>Register Tourist</Link></li>
+                                <li><Link to = '/profile'>Profile</Link></li>
+                                <li><Link to = '' onClick={()=>setGuideModal(true)}>Register Guide</Link></li>
+                                    <GuideRegisterModal 
+                                        guideModal = {guideModal} 
+                                        setGuideModal = {setGuideModal}
+                                    />
+
+                                <li><Link to = '' onClick={()=>setTouristModal(true)}>Register Tourist</Link></li>
+                                    <TouristRegisterModal 
+                                        touristModal = {touristModal} 
+                                        setTouristModal = {setTouristModal}
+                                    />
+
                                 <li><Link to = '/login'>Log In</Link></li>
                                 <li><Link to = '/login'>Log Out</Link></li>
                             </ul>

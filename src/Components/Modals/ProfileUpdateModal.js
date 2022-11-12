@@ -10,7 +10,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
     { value: 'English', label: 'English' },
     { value: 'Hindi', label: 'Hindi' },
     { value: 'Malayalam', label: 'Malayalam' },
-    { value: 'Urdu', label: 'Urdu' },
+    { value: 'Urdu', label: 'Urdu' },   
     { value: 'French', label: 'French' },
     { value: 'Arabic', label: 'Arabic' },
     { value: 'Spanish', label: 'Spanish' },
@@ -39,14 +39,30 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     type="text" 
                     className='infoInput' 
                     name = 'Name' 
-                    placeholder='Name'
+                    placeholder='First Name'
                 />
 
                 <input 
                     type="text" 
                     className='infoInput' 
                     onChange = '' 
+                    placeholder='Last Name'
+                />
+            </div>
+
+        
+            <div>
+                <input 
+                    type="number" 
+                    className='infoInput' 
+                    name = 'Name' 
                     placeholder='Contact Number'
+                />
+                <input 
+                    type="text" 
+                    className='infoInput' 
+                    onChange = '' 
+                    placeholder='NIC number'
                 />
             </div>
 
@@ -128,10 +144,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     { value: 'Van', label: 'Van' },
                     { value: 'Mini-Jeep', label: 'Mini Jeep' },
                   ]}
-                />
-
-                    
-                
+                />        
 
                 <input 
                     type="text" 
@@ -178,6 +191,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     name = 'coverImg' 
                 />
             </div>
+            
             <button className="button infoButton">Update</button>
         </form>
     </Modal>
