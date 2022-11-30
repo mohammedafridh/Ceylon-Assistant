@@ -1,7 +1,8 @@
 import classes from './AboutContents.module.css'
 import AboutSlideshow from '../../Slideshow/AboutSlideshow';
 import Faq from '../../FAQ/Faq'
-import ContactContents from '../Contact/ContactContents';
+import ContactContents from './Contact/ContactContents';
+
 
 function AboutContents() {
 

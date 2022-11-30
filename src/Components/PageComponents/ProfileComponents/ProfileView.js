@@ -44,8 +44,7 @@ function ProfileView() {
         <div className={classes.detailsContainer}>
 
             <div className={classes.titleContainer}>
-              <h3>{touristDetails?touristDetails.firstName:tourGuideDetails.firstName} 
-                  {touristDetails?touristDetails.lastName:tourGuideDetails.lastName}
+              <h3>{touristDetails?touristDetails.firstName:tourGuideDetails.firstName} {touristDetails?touristDetails.lastName:tourGuideDetails.lastName}
               </h3>
 
               <h6>{touristDetails?touristDetails.email:tourGuideDetails.email}</h6>

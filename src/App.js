@@ -12,7 +12,6 @@ import TouristReg from './pages/AuthenticationPages/TouristReg';
 import List from './Components/PageComponents/TourGuideComponents/List';
 import SelectedGuide from './Components/PageComponents/TourGuideComponents/SelectedGuide';
 import SelectedBooker from './Components/PageComponents/BookingComponents/SelectedBooker'
-import Contact from './pages/CommonPages/Contact/Contact';
 import ThingsToDo from './pages/CommonPages/ThingsToDo/ThingsToDo';
 import About from './pages/CommonPages/About/About';
 import ToursGallery from './pages/CommonPages/ToursGallery/ToursGallery';
@@ -43,7 +42,6 @@ function App() {
             <Route path = '/tours' element = {<Tours />} />
             <Route path = '/bookings' element = {<Bookings /> }/>
             <Route path = '/profile' element = {<Profile />} />
-            <Route path = '/contact' element = {<Contact />} />
             <Route path = '/thingsToDo' element = {<ThingsToDo />} />
             <Route path = '/about' element = {<About />} />
             <Route path = '/toursGallery' element = {<ToursGallery />} />

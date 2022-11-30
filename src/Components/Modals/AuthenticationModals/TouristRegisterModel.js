@@ -125,7 +125,7 @@ const touristHandler = async (e) => {
 
     <div className = 'addUserForm'>
                 
-        <h3>Add Tourist</h3>
+        <h3>Register Tourist</h3>
     
         <div>
                 <input 

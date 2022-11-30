@@ -237,7 +237,7 @@ const guideHandler = async (e) => {
 
 <div className = 'addUserForm'>
                 
-                <h3>Add Guide</h3>
+                <h3>Register Guide</h3>
     
                 <div>
                         <input 

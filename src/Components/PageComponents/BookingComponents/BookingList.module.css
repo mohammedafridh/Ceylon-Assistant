@@ -1,4 +1,6 @@
-
+.confirmedBookingTable{
+    width: 90%!important;
+}
 
 .tours>h1{
     text-align: center;

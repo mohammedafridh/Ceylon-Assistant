@@ -2,7 +2,11 @@
     box-sizing: border-box;
 }
 
+.layout{
+    
+}
+
 .main{
     margin:4rem 0rem 0rem 0rem;
-    min-height: 100%;
+    min-height: 72vh;
 }

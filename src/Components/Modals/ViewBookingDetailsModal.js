@@ -1,8 +1,13 @@
 import { Modal, useMantineTheme, Select, MultiSelect  } from '@mantine/core';
 import classes from './ViewBookingDetailsModal.module.css'
 
-function ViewBookingDetailsModal({modalOpened,setModalOpened}) {
+function ViewBookingDetailsModal({modalOpened,setModalOpened,tourist}) {
   const theme = useMantineTheme();
+
+
+  const AcceptBookingHandler = ()=>{
+
+  }
 
   return (
     <Modal
@@ -18,11 +23,11 @@ function ViewBookingDetailsModal({modalOpened,setModalOpened}) {
             <h3>View Booking</h3>
 
           <div className = {classes.bookerWrapper}>
-            <img src = "https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/Tour_Guide_Images%2Fff2ab708-d1ef-4400-9c02-1adabd3a2a27.jpg428f69cd-af41-4d8b-b7dc-fa46fdcb994c?alt=media&token=aabcbf7d-4f43-47da-9cef-674db5357da5" alt = '' />
+            <img src = '' alt = '' />
             <div className = {classes.bookerDetails}>
               <div className = {classes.details}>
                 <label>Name : </label>
-                <span>Abc</span>
+                <span>abc</span>
               </div>
               <div className = {classes.details}>
                 <label>Gender : </label>
@@ -39,7 +44,7 @@ function ViewBookingDetailsModal({modalOpened,setModalOpened}) {
 
               <div className = {classes.actions}>
                 <button className = {classes.rjct}>Reject</button>
-                <button className = {classes.acpt}>Accept</button>
+                <button className = {classes.acpt} onClick = {AcceptBookingHandler}>Accept</button>
               </div>      
             </div> 
           </div>

@@ -21,21 +21,21 @@ function ViewGalleryModal({modalOpened,setModalOpened,galleryData}) {
                 <Carousel.Item className = 'carouselItem'>
                   <img
                     className="d-block w-90"
-                    src={galleryData.img1}
+                    src={galleryData.image1}
                     alt="First slide"
                   />
                 </Carousel.Item>
                 <Carousel.Item className = 'carouselItem'>
                   <img
                     className="d-block w-90"
-                    src={galleryData.img2}
+                    src={galleryData.image2}
                     alt="Second slide"
                   />
                 </Carousel.Item>
                 <Carousel.Item className = 'carouselItem'>
                   <img
                     className="d-block w-90"
-                    src={galleryData.img3}
+                    src={galleryData.image3}
                     alt="Third slide"
                   />
                 </Carousel.Item>
@@ -43,7 +43,7 @@ function ViewGalleryModal({modalOpened,setModalOpened,galleryData}) {
                 <Carousel.Item className = 'carouselItem'>
                   <img
                     className="d-block w-90"
-                    src={galleryData.img4}
+                    src={galleryData.image4}
                     alt="Third slide"
                   />
                 </Carousel.Item>

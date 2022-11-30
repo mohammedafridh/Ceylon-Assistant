@@ -11,12 +11,13 @@ function ControlledCarousel() {
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} className = 'carousel'>
-      <Carousel.Item className = 'carouselItem'>
+      <Carousel.Item>
         <img
           className="d-block w-100 vehicleImg"
-          src="https://integrityexports.com/wp-content/uploads/2013/07/honda-fit.jpg"
-          alt="First slide"
+          src="https://www.itplusjapan.co.jp/vehicle_image/5309_163482342461716d00610aa.png"
+          alt="Second slide"
         />
+
         <Carousel.Caption className = 'caption'>
           <h3 className = 'typeIntro'>Cars</h3>
         </Carousel.Caption>

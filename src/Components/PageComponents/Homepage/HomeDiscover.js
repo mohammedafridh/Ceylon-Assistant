@@ -27,9 +27,10 @@ const HomeDiscover = () => {
         );
       };
 
-      useEffect(()=>{
-        setLoading(true)
+      const getDiscoveries = async () => {
+        setLoading(true);
         const allData = onSnapshot(collection(db,'Discover_Srilanka'),(snapshot)=>{
+          console.log({allData});
           let list = []
           snapshot.docs.forEach((doc)=>{
             list.push({
@@ -37,7 +38,7 @@ const HomeDiscover = () => {
               ...doc.data()
             })
           })
-          setDiscovery(list)
+          setDiscovery(list.filter(item => item.status === 'active'))
           setLoading(false)
         },(error)=>{
           setError(error.message)
@@ -45,6 +46,10 @@ const HomeDiscover = () => {
         return ()=>{
           allData()
         };
+      }
+
+      useEffect(()=>{
+       getDiscoveries();
       },[]);
 
   return (

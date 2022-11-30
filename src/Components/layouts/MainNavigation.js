@@ -8,12 +8,14 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import TouristRegisterModal from '../Modals/AuthenticationModals/TouristRegisterModel'
 import GuideRegisterModal from '../Modals/AuthenticationModals/GuideRegisterModal'
+import LoginModal from '../Modals/AuthenticationModals/LoginModal'
 
 function MainNavigation(){
 
     const {logOut} = useUserAuth();
     const [touristModal,setTouristModal] = useState(false)
     const [guideModal,setGuideModal] = useState(false)
+    const[loginModel,setLoginModel] = useState(false)
 
     const handleLogOut = async ()=>{
         try{
@@ -69,7 +71,12 @@ function MainNavigation(){
                                         setTouristModal = {setTouristModal}
                                     />
 
-                                <li><Link to = '/login'>Log In</Link></li>
+                                <li><Link to = '' onClick={()=>setLoginModel(true)}>Log In</Link></li>
+                                    <LoginModal 
+                                        loginModel = {loginModel} 
+                                        setLoginModel = {setLoginModel}
+                                    />
+
                                 <li><Link to = '/login'>Log Out</Link></li>
                             </ul>
                         </div>

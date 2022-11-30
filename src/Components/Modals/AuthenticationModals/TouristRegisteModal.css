@@ -52,17 +52,6 @@
     color: gray!important;
 }
 
-
-/* .selectDrop{
-    width: 15rem!important;
-    height: 2.3rem!important;
-    
-    padding: 5px 10px!important;
-    background-color: var(--inputColor)!important;
-    color: gray!important;
-    border-radius: 8px!important;
-} */
-
 .infoSelect{
     background-color: var(--inputColor)!important;
 }
@@ -70,7 +59,7 @@
 .addUserForm>button{
     width: 8rem;
     height: 2.5rem;
-    align-self: flex-end;
+    align-self: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,6 +68,7 @@
     border-radius: 0.5rem;
     background: var(--buttonBg);
     transition: all 100ms ease-out;
+    margin-top: 1rem;
 }
 
 .perKm{

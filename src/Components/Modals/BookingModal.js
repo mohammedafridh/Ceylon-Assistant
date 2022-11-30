@@ -24,6 +24,10 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
         try{
             const addDetails = collection(db, 'pending_booking')
             try{
+            if (!tourLocation || !destination ) {
+              alert('Please fill required fields');
+              return;
+            }
             await addDoc(addDetails,{location:tourLocation, destination:destination, 
                 guide:tourGuide,tourist:tourist,startData:startData, endDate:endDate, time:time,
             date:addDate, status:status})

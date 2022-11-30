@@ -1,11 +1,42 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import './ToursGalleryContents.css'
 import {Gallery} from './Gallery'
 import ViewGalleryModal from '../../Modals/ViewGalleryModal'
+import {db} from '../../../Firebase'
+import {collection, onSnapshot} from 'firebase/firestore'
 
 const ToursGalleryContents = () => {
 
     const [modalOpened,setModalOpened] = useState(false)
+    const[loading,setLoading] = useState(false);
+    const[error,setError] = useState('')
+    const[gallery,setGallery] = useState([])
+
+    const getGallery = async () => {
+        setLoading(true);
+        const allData = onSnapshot(collection(db,'toursGallery'),(snapshot)=>{
+          console.log({allData});
+          let list = []
+          snapshot.docs.forEach((doc)=>{
+            list.push({
+              id:doc.id,
+              ...doc.data()
+            })
+          })
+          setGallery(list.filter(item => item.status === 'active'))
+          setLoading(false)
+        },(error)=>{
+          setError(error.message)
+        });
+        return ()=>{
+          allData()
+        };
+      }
+    
+      useEffect(()=>{
+        getGallery();
+      },[]);
+    
 
   return (
     <div className = 'toursGalleryContents'>
@@ -35,18 +66,18 @@ const ToursGalleryContents = () => {
 
         <div className='imageGallery'>
             <div className='gallery'>
-                {Gallery.map((gallery, id)=>(
+                {gallery.map((galleryItem, id)=>(
                     <div className='images' key = {id} onClick = {()=>setModalOpened(true)}>
-                        <img src = {gallery.mainImage} alt = '' />
+                        <img src = {galleryItem.mainImage} alt = '' />
                         <div className='imageDetails'>
-                            <span>{gallery.destination}</span>
-                            <span>{gallery.province} Province</span>
-                            <span>Guide : {gallery.guideName}</span>
+                            <span>{galleryItem.destination}</span>
+                            <span>{galleryItem.district} Province</span>
+                            <span>Guide : {galleryItem.guideId}</span>
                         </div> 
                     <ViewGalleryModal 
                     modalOpened = {modalOpened} 
                     setModalOpened = {setModalOpened}
-                    galleryData = {gallery}
+                    galleryData = {galleryItem}
                     />     
                     </div>
                     

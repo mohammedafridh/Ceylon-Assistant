@@ -36,9 +36,9 @@ const ConfirmedBookingList = () => {
         <img src  ='https://www.srilankan.com/Images/pages/myb-header-image.jpg' 
         alt = 'abc' className={classes.bookingImage}/>
 
-            {/* <h1>{tourist?'Confirmed Booking' : 'Tours'}</h1> */}
+            <h1>{touristDetails?'Confirmed Booking' : 'Tours'}</h1>
             
-            <Table striped bordered hover variant="dark">
+            <Table striped bordered hover variant="dark" className={classes.confirmedBookingTable}>
                 <thead>
                   <tr>
                     <th>#</th>

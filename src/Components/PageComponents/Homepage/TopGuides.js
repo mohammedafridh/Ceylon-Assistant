@@ -8,7 +8,7 @@ function TopGuides() {
     </div>
     <div className = 'feature'>
         <div className = 'featuredItems'>
-            <img src = "https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/Tour_Guide_Images%2Fff2ab708-d1ef-4400-9c02-1adabd3a2a27.jpg428f69cd-af41-4d8b-b7dc-fa46fdcb994c?alt=media&token=aabcbf7d-4f43-47da-9cef-674db5357da5" 
+            <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzHQv_th9wq3ivQ1CVk7UZRxhbPq64oQrg5Q&usqp=CAU" 
             alt = 'abc' className = 'featuredImg'/>   
             <div className = 'featuredTitles'>
                 <h2>Suresh</h2>
@@ -16,7 +16,7 @@ function TopGuides() {
             </div>
         </div>
         <div className = 'featuredItems'>
-            <img src = "https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/Tour_Guide_Images%2F1.jpgfc743bca-1ffd-4244-8f17-0680537b40f0?alt=media&token=5110128a-e6f0-45db-a051-1708950a6484"
+            <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRROt7YUKa7excpJt4CR59ZwHzhWDfV1mr0eQ&usqp=CAU"
             alt = 'abc' className = 'featuredImg'/>   
             <div className = 'featuredTitles'>
                 <h2>Razni</h2>
@@ -24,7 +24,7 @@ function TopGuides() {
             </div>
         </div>
         <div className = 'featuredItems'>
-            <img src = "https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/Tour_Guide_Images%2F2.jpg4d910a23-cf73-41da-b1c2-55a78b894f33?alt=media&token=ed321e9c-9af3-4931-b2eb-547783722cb6"
+            <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU4g8xUnnDU4kVOp8_-3f3aPDusw_D2AlyXw&usqp=CAU"
             alt = 'abc' className = 'featuredImg'/>   
             <div className = 'featuredTitles'>
                 <h2>Afridh</h2>

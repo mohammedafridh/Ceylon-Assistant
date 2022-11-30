@@ -32,8 +32,10 @@
 }
 
 .featuredImg{
-    width: 20rem;
-    height: 30rem;
+    background-repeat: no-repeat;
+    height: 28rem;
+    width: 28rem;
+    display: block;
     object-fit: cover;
 }
 

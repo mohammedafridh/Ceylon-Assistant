@@ -22,7 +22,7 @@
 
 .question>h4{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     cursor: pointer;
 }
 
@@ -39,6 +39,7 @@
     transition: all 0.5s cubic-bezier(0,1,0,1);
 
 }
+
 
 .icons>span{
     font-size: 30px;
