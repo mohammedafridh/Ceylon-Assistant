@@ -1,6 +1,23 @@
 .confirmedBookingTable{
-    width: 90%!important;
+    overflow-x: auto;
+    overflow-y: auto;
+    width: 78rem;
+    max-height: 15rem;
+    margin: 1rem auto;
 }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    width: auto;
+  }
 
 .tours>h1{
     text-align: center;
@@ -61,7 +78,7 @@
 
 .bookingImage{
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .bookingContainer{

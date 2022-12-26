@@ -6,7 +6,31 @@ import HomeDiscover from './HomeDiscover'
 function HomeContents() {
   return (
       <div className = {classes.contentsContainer}>
-        <div className = {classes.homepageImageContainer}></div>
+        <div className = {classes.homepageImageContainer}>
+          <div className={classes.tileContainer}>
+          <div className = {classes.tiles}>
+            <div className={classes.infoTile}>
+              <span>123</span>
+              <span>All Tourists</span>
+            </div>
+            
+            <div className={classes.infoTile}>
+              <span>123</span>
+              <span>All Tour Guides</span>
+            </div>
+
+            <div className={classes.infoTile}>
+              <span>123</span>
+              <span>All Bookings</span>
+            </div>
+
+            <div className={classes.infoTile1}>
+              <span>123</span>
+              <span>All Tours</span>
+            </div>
+          </div>
+        </div>
+        </div>
           <div className = {classes.introContainer}>
             <div className = {classes.introduction}>
               <h4 className = {classes.introTitle}>Who we Are ?</h4>

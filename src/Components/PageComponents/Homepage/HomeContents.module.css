@@ -14,14 +14,57 @@
     position: relative;
 }
 
-.homepageImageContainer span{
+.tileContainer{
+    background-color: white;
+    padding: 5px;
+    width: 60%;
+    position: absolute;
+    bottom: 6rem;
+    left: 17rem;
+}
+
+.tiles{
+    display: flex;
+    background-color: white;
+    border: 1px solid black;
+    justify-content: space-between;
+    /* width: 60%; */
+    align-items: center;
+    text-align: center;
+    padding: 15px 40px;
+
+}
+
+.infoTile{
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid gray;
+    padding-right: 50px;
+}
+
+.infoTile1{
+    display: flex;
+    flex-direction: column;
+}
+
+.infoTile>span:nth-of-type(2){
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.infoTile1>span:nth-of-type(2){
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* .homepageImageContainer span{
     font-weight: 900;
     font-size: 45px;
     color: white;
     position: absolute;
     bottom: 9rem;
     left: 15rem;
-}
+} */
 
 .introContainer{
     display: grid;

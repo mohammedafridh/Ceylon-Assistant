@@ -6,11 +6,11 @@ import { db } from '../../Firebase'
 
 function BookingUpdateModal({modalOpened,setModalOpened,data}) {
   const theme = useMantineTheme();
-  const [tourLocation,setTourLocation] = useState('')
-  const [destination,setDestination] = useState('')
-  const [startDate,setStartDate] = useState('')
-  const [endDate,setEndDate] = useState('')
-  const [time,setTime] = useState('')
+  const [tourLocation,setTourLocation] = useState(data.location)
+  const [destination,setDestination] = useState(data.destination)
+  const [startDate,setStartDate] = useState(data.startData)
+  const [endDate,setEndDate] = useState(data.endDate)
+  const [time,setTime] = useState(data.time)
 
   const updateBooking = async(data)=>{
     console.log(data.id)
@@ -21,6 +21,9 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
       startData:startDate,
       endDate:endDate,
       time:time
+     }).then(async ()=>{
+        setModalOpened(false)
+        alert('Booking Updated Successfully!')
      });
   }
 
@@ -43,7 +46,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
                     className='infoInput' 
                     onChange = {(e)=> setTourLocation(e.target.value)}
                     placeholder='Tour Location'
-                    value = {data.location}
+                    value = {tourLocation}
                 />
 
                 <input 
@@ -51,7 +54,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
                     className='infoInput' 
                     onChange = {(e)=> setDestination(e.target.value)}
                     placeholder='Pickup Destination'
-                    value = {data.destination}
+                    value = {destination}
                 />
             </div>
 
@@ -62,7 +65,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
                     className='infoInput' 
                     onChange = {(e)=> setStartDate(e.target.value)}
                     placeholder="Date From"
-                    value = {data.startData}
+                    value = {startDate}
                 />
 
                 <label>Date To : </label>
@@ -71,7 +74,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
                     className='infoInput' 
                     onChange = {(e)=> setEndDate(e.target.value)}
                     placeholder='Date To'
-                    value = {data.endDate}
+                    value = {endDate}
                 />
             </div>
             <div style = {{width:"20rem"}}>
@@ -82,7 +85,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
                     className='infoInput' 
                     onChange = {(e)=> setTime(e.target.value)}
                     placeholder='Select Time'
-                    value = {data.time}
+                    value = {time}
                 />
             </div>
             <button onClick = {()=>updateBooking(data)} className="button infoButton">Update</button>

@@ -119,22 +119,23 @@ function AllGuides() {
             <span>Rating</span>
             <span>5.0</span>
           </div>
+          <div className={classes.availability}>
+            <span>Available</span>
+          </div>
 
 {touristDetails &&
           <div className = {classes.subDetails}>
-          
             <button className = {classes.bookingBtn}
              onClick = {()=>setModalOpened(true)}>
                 Book Guide
             </button>
-            <BookingModal 
-              modalOpened = {modalOpened} 
-              setModalOpened = {setModalOpened}
-              guide  = {guide}
-            />
           </div>
 }
-
+    <BookingModal 
+      modalOpened = {modalOpened} 
+      setModalOpened = {setModalOpened}
+      guide  = {guide}
+    />
 
         </div>
     </div> 

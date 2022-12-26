@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme} from '@mantine/core';
 import './ProfileUpdateModal.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {useUserAuth} from '../../Context/Context' 
 import {collection, addDoc} from 'firebase/firestore'
 import {db} from '../../Firebase'
@@ -8,7 +8,7 @@ import {db} from '../../Firebase'
 function BookingModal({modalOpened,setModalOpened, guide}) {
   const theme = useMantineTheme();
   const {user} = useUserAuth();
-  const [tourGuide,setTourGuide] = useState(guide.id)
+  const [tourGuide,setTourGuide] = useState()
     const[tourist,setTourist] = useState(user.uid)
     const[tourLocation,setTourLocation] = useState('')
     const[destination,setDestination] = useState('')
@@ -18,55 +18,49 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
     const [status,setStatus] = useState('Active')
     const current = new Date();
     const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-    
-    const bookingHandler = async (e)=>{
-        e.preventDefault()
-        try{
-            const addDetails = collection(db, 'pending_booking')
-            try{
-            if (!tourLocation || !destination ) {
-              alert('Please fill required fields');
-              return;
-            }
-            await addDoc(addDetails,{location:tourLocation, destination:destination, 
-                guide:tourGuide,tourist:tourist,startData:startData, endDate:endDate, time:time,
-            date:addDate, status:status})
-            .then(()=>{
-              setTourLocation('')
-              setDestination('')
-              setStartDate('')
-              setEndDate('')
-              setTime('')
-            })
+
+    useEffect(()=>{
+      setTourGuide(guide.id)
+      console.log(guide.id)
+    },[guide])
+
+    const bookingHandler = async()=>{
+      try{
+        const addDetails = collection(db, 'pending_bookings')
+        await addDoc(addDetails,{guide:guide.id, tourist: user.uid, location:tourLocation, destination: destination, startData: startData, 
+        endDate:endDate, time: time, status:status})
+        .then(()=>{
+          setModalOpened(false)
+        })
+
+      }catch(err){
+        err.message('Error!')
+      }
       
-            }catch(err){
-              err.message('Cant add FAQ')
-            }
-          }catch(err){
-            err.message('Cant Connect. Please Try Again!')
-          }
     }
 
 
   return (
     <Modal
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-      overlayOpacity={0.25}
+      overlayOpacity={0.10}
       overlayBlur={0.5}
       size = '25%'
       opened = {modalOpened}
-      onClose = {()=>setModalOpened(false)}
+      onClose = {()=>{setModalOpened(false); setTourLocation(''); setDestination('')
+      ; setStartDate(''); setEndDate(''); setTime('')}}
     >
 
-        <form className = 'infoForm'>
+        <form className = 'infoForm' onSubmit = {()=>bookingHandler()}>
             <h3>Book Guide</h3>
 
             <div>
                 <input 
                     type="text" 
                     className='infoInput' 
-                    onChange = {(e)=>setTourLocation(e.target.value)} 
+                    // onChange = {(e)=>setTourLocation(e.target.value)} 
                     placeholder='Tour Location'
+                    value = {tourGuide}
                     required
                 />
             </div>
@@ -110,8 +104,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
                     placeholder='Select Time'
                 />
             </div>
-            <button className="button infoButton"
-            onClick = {bookingHandler}>Confirm</button>
+            <button type = 'submit' className="button infoButton">Confirm</button>
         </form>
     </Modal>
   );

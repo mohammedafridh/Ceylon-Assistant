@@ -22,7 +22,6 @@ function PendingBookingList() {
   const [tourGuide, setTourGuide] = useState('')
   const [modalOpened, setModalOpened] = useState(false)
   const { user } = useUserAuth()
-  const[newStatus,setNewStatus] = useState('inactive')
 
 
   useEffect(()=>{
@@ -45,7 +44,7 @@ function PendingBookingList() {
         });
       });
 
-      setBookings(list.filter(item => item.status === 'active'))
+      setBookings(list.filter(item => item.status === 'Active'))
       setLoading(false)
     },(error)=>{
       setError(error.message)
@@ -75,16 +74,19 @@ function PendingBookingList() {
     console.log(booking.id)
     const bookingCancel = query(doc(db,'pending_booking',booking.id));
      await updateDoc(bookingCancel, {
-      status: newStatus
+      status: 'inactive'
      });
   }
+
+  const bookingHandler = async()=>{}
+
 
   return (
     <div className={classes.bookings}>
 
       <div className={classes.bookingComponents}>
         <div className={classes.bookingContainer}>
-          <h1>{tourist ? 'Pending Requests' : 'Pending Bookings'}</h1>
+          <h1>Bookings</h1>
           {bookings.map((booking,index) => (
             <div className={classes.bookingList} key={index}>
               <img src={tourist ? tourist.image : tourGuide.image}
@@ -95,6 +97,11 @@ function PendingBookingList() {
                   <div className={classes.details}>
                     <span>Email : </span>
                     <span>{tourist ? tourist.email : tourGuide.email}</span>
+                  </div>
+
+                  <div className={classes.details}>
+                    <span>Contact Number : </span>
+                    <span>{tourist ? tourist.contactNumber : tourGuide.contactNumber}</span>
                   </div>
 
                   <div className={classes.details}>
@@ -120,8 +127,8 @@ function PendingBookingList() {
 
                 <div className={classes.buttonContainer}>
                   <button className={classes.cancelBtn} onClick={()=>cancelBooking(booking)}>Cancel</button>
-                  <button className={classes.mainBtn} onClick={() => setModalOpened(true)}>
-                    {tourist ? 'Update' : 'More Details'}</button>
+                  <button className={classes.mainBtn} onClick={tourist? () => setModalOpened(true): ()=>bookingHandler(booking)}>
+                    {tourist ? 'Update' : 'Accept'}</button>
                   {tourist ?
                     <BookingUpdateModal
                       modalOpened={modalOpened}
@@ -131,7 +138,7 @@ function PendingBookingList() {
                     <ViewBookingDetailsModal
                       modalOpened={modalOpened}
                       setModalOpened={setModalOpened}
-                      tourist={tourist}
+                      tourist={touristDetails}
                     />}
                 </div>
               </div>
