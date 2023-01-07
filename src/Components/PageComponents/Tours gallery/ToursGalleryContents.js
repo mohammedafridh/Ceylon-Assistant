@@ -3,7 +3,7 @@ import './ToursGalleryContents.css'
 import {Gallery} from './Gallery'
 import ViewGalleryModal from '../../Modals/ViewGalleryModal'
 import {db} from '../../../Firebase'
-import {collection, onSnapshot} from 'firebase/firestore'
+import {collection, onSnapshot,query,doc,updateDoc} from 'firebase/firestore'
 
 const ToursGalleryContents = () => {
 
@@ -11,6 +11,21 @@ const ToursGalleryContents = () => {
     const[loading,setLoading] = useState(false);
     const[error,setError] = useState('')
     const[gallery,setGallery] = useState([])
+    // const[galleryOpen,setGalleryOpen] = useState('')
+    const[currentItem,setCurrentItem] = useState({})
+
+    const dltHandler = async(itemId)=>{
+      console.log('hello')
+      const cancelGallery = query(doc(db,'toursGallery',itemId));
+       await updateDoc(cancelGallery, {
+        status: 'inactive'
+       });
+    }
+
+    const galleryOpen = async (galleryItem)=>{
+        setCurrentItem(galleryItem)
+        setModalOpened(true)
+    }
 
     const getGallery = async () => {
         setLoading(true);
@@ -23,7 +38,7 @@ const ToursGalleryContents = () => {
               ...doc.data()
             })
           })
-          setGallery(list.filter(item => item.status === 'active'))
+          setGallery(list.filter(item => item.status === 'Active'))
           setLoading(false)
         },(error)=>{
           setError(error.message)
@@ -49,7 +64,7 @@ const ToursGalleryContents = () => {
             <hr/>
         </div>
 
-        <div className = 'mainCategories'>
+        {/* <div className = 'mainCategories'>
             <div className = 'categories'>
                 <button className= 'categoryBtn'>All</button>
                 <button className= 'categoryBtn'>Southern</button>
@@ -62,22 +77,26 @@ const ToursGalleryContents = () => {
                 <button className= 'categoryBtn'>North Western</button>
                 <button className= 'categoryBtn'>Northern</button>
             </div>
-        </div>
+        </div>  */}
 
         <div className='imageGallery'>
             <div className='gallery'>
-                {gallery.map((galleryItem, id)=>(
-                    <div className='images' key = {id} onClick = {()=>setModalOpened(true)}>
+                {gallery.map((galleryItem)=>(
+                    <div className='images' key = {galleryItem.id}>
+                      <div onClick = {()=>galleryOpen(galleryItem)} className = 'view'>
                         <img src = {galleryItem.mainImage} alt = '' />
+                      </div>  
                         <div className='imageDetails'>
                             <span>{galleryItem.destination}</span>
                             <span>{galleryItem.district} Province</span>
                             <span>Guide : {galleryItem.guideId}</span>
+                            <button onClick = {()=>dltHandler(galleryItem.id)} className='tourDltBtn'>Delete</button>
                         </div> 
+                        
                     <ViewGalleryModal 
                     modalOpened = {modalOpened} 
                     setModalOpened = {setModalOpened}
-                    galleryData = {galleryItem}
+                    galleryData = {currentItem}
                     />     
                     </div>
                     

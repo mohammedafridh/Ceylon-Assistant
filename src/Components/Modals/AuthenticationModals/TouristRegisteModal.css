@@ -28,6 +28,17 @@
     font-weight: bold;
 }
 
+.loginImage{
+    height: 180px;
+    width: 200px;
+    margin: 0rem auto;
+}
+
+.loginImage>img{
+    height: 180px;
+    width: 200px;
+}
+
 .addUserForm>div{
     display: flex;
     gap: 1rem;
@@ -70,6 +81,7 @@
     transition: all 100ms ease-out;
     margin-top: 1rem;
 }
+
 
 .perKm{
     display: flex;

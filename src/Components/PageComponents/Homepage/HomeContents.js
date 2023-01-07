@@ -1,36 +1,133 @@
+import {useState, useEffect} from 'react'
 import classes from './HomeContents.module.css'
 import TopGuides from './TopGuides'
 import {Link} from 'react-router-dom'
 import HomeDiscover from './HomeDiscover'
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../../Firebase";
  
 function HomeContents() {
+
+  const [bookings, setBookings] = useState([]);
+  const [tourists, setTourists] = useState([]);
+  const [tourGuides, setTourGuides] = useState([])
+  const [tours, setTours] = useState([]);
+  const [error,setError] = useState('')
+
+// compare the two bookings
+const comparedBookings = bookings.length
+const comparedTours = tours.length
+const comparedTourists = tourists.length
+const comparedTourGuides = tourGuides.length
+
+  //get Bookings from db
+  useEffect(() => {
+    const bookingData = onSnapshot(collection(db, "pending_booking"), (snapshot) => {
+      let list = [];
+      snapshot.docs.forEach((doc) => {
+        list.push({
+          docId: doc.id,
+          ...doc.data(),
+        });
+      });
+      setBookings(list);
+    },
+    (error) => {
+        setError(error.message);
+      })
+    return () => {
+      bookingData();
+    };
+  }, []);
+
+    //get Tours from db
+    useEffect(() => {
+      const tourData = onSnapshot(collection(db, "tours"), (snapshot) => {
+        let list = [];
+        snapshot.docs.forEach((doc) => {
+          list.push({
+            docId: doc.id,
+            ...doc.data(),
+          });
+        });
+        setTours(list);
+      },
+      (error) => {
+          console.log(error.message);
+        })
+      return () => {
+        tourData();
+      };
+    }, []);
+
+     //get Tourists from db
+  useEffect(() => {
+    const touristData = onSnapshot(collection(db, "Tourist"), (snapshot) => {
+      let list = [];
+      snapshot.docs.forEach((doc) => {
+        list.push({
+          docId: doc.id,
+          ...doc.data(),
+        });
+      });
+      setTourists(list);
+    },
+    (error) => {
+        console.log(error.message);
+      })
+    return () => {
+        touristData();
+    };
+  }, []);
+
+    //get Tours from db
+    useEffect(() => {
+      const tourGuideData = onSnapshot(collection(db, "Guides"), (snapshot) => {
+        let list = [];
+        snapshot.docs.forEach((doc) => {
+          list.push({
+            docId: doc.id,
+            ...doc.data(),
+          });
+        });
+        setTourGuides(list);
+      },
+      (error) => {
+          console.log(error.message);
+        })
+      return () => {
+          tourGuideData();
+      };
+    }, []);
+
   return (
       <div className = {classes.contentsContainer}>
         <div className = {classes.homepageImageContainer}>
           <div className={classes.tileContainer}>
           <div className = {classes.tiles}>
             <div className={classes.infoTile}>
-              <span>123</span>
+              <span>{comparedTourists}</span>
               <span>All Tourists</span>
             </div>
             
             <div className={classes.infoTile}>
-              <span>123</span>
+              <span>{comparedTourGuides}</span>
               <span>All Tour Guides</span>
             </div>
 
             <div className={classes.infoTile}>
-              <span>123</span>
+              <span>{comparedBookings}</span>
               <span>All Bookings</span>
             </div>
 
             <div className={classes.infoTile1}>
-              <span>123</span>
+              <span>{comparedTours}</span>
               <span>All Tours</span>
             </div>
           </div>
         </div>
         </div>
+
           <div className = {classes.introContainer}>
             <div className = {classes.introduction}>
               <h4 className = {classes.introTitle}>Who we Are ?</h4>
@@ -44,7 +141,7 @@ function HomeContents() {
             </div>
 
             <div className = {classes.introductionLogo}>
-              <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FwhiteLogo.jpeg?alt=media&token=a8063bdd-0566-45f8-9523-08b8016b235a' alt = '' />
+              <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-12-28%20at%2010.52.01%20AM.jpeg?alt=media&token=6809fdab-7ee5-4906-9b12-f69d21f8f732' alt = '' />
             </div>
           </div>
           {/* <div className = {classes.optionsContainer}>

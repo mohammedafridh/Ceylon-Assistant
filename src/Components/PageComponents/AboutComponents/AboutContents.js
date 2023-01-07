@@ -15,21 +15,20 @@ function AboutContents() {
         <div className = {classes.aboutMeContainer}>        
             <div className = {classes.activityHeader}>About Ceylon Assistant</div>
             <div className = {classes.activityImage}>
-                <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/Tour_Guide_Images%2F1.jpgfc743bca-1ffd-4244-8f17-0680537b40f0?alt=media&token=5110128a-e6f0-45db-a051-1708950a6484' alt = '' />
+                <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202023-01-03%20at%2010.36.49%20AM.jpeg?alt=media&token=78057366-2352-4268-ae44-13ff588d97d4' alt = '' />
             </div>
             <div className = {classes.activityParagraph}>
                 <div>
-                    I am Mohomed Afridh, owner of <b>Ceylon Assistant</b> web application. 
-                    I have been investigating on the issues that tourists face during their visit in Sri-Lanka and the main problem i found was 
-                    that tourists are unable to find tour guides from any closest location they are. So, I thought to develop a website 
-                    by getting tourists from all over the country which will make the tourists easy to find tour guides as per the needed 
-                    district.
+                     I am Mohomed Nuzran, owner of <b>Ceylon Assistant</b> website.
+                    <b>CeylonAssistant</b> started since 2015 and we are a travel agency that specializes in offering Tailor-made vacations to 
+                    Tourists who visit Sri Lanka. We have a welcoming team of experts.
                 </div>
-                <div className = {classes.paragraph2}>
-                    <b>Ceylon Assistant</b> is a travel agency that specializes in offering Tailor-made vacations to 
-                    Sri Lanka. We have a welcoming team of experts. In addition to that, we concentrate our efforts 
+
+                <div className={classes.additionPara}>
+                     In addition to that, we concentrate our efforts 
                     on delivering the highest level of customer satisfaction to our visitors and ensuring their 
-                    safety throughout their trip to Sri Lanka.
+                    safety throughout their trip to Sri Lanka. The main purpose of this webiste is to provide services to 
+                    visiting Tourists by making them easier to hire Tour Guides from the closest district they are with a vehicle.  
                 </div>
             </div>
         </div>

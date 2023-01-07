@@ -40,11 +40,13 @@
     flex-direction: column;
     border-right: 1px solid gray;
     padding-right: 50px;
+    font-family: 'Roboto';
 }
 
 .infoTile1{
     display: flex;
     flex-direction: column;
+    font-family: 'Roboto';
 }
 
 .infoTile>span:nth-of-type(2){
@@ -52,9 +54,21 @@
     font-size: 20px;
 }
 
+.infoTile>span:nth-of-type(1){
+    font-size: 17px;
+    color: #1A5276;
+    font-weight: bold;
+}
+
 .infoTile1>span:nth-of-type(2){
     font-weight: bold;
     font-size: 20px;
+}
+
+.infoTile1>span:nth-of-type(1){
+    color: #1A5276;
+    font-weight: bold;
+    font-size: 17px;
 }
 
 /* .homepageImageContainer span{
@@ -104,12 +118,11 @@
 }
 
 .introductionLogo img{
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     align-items: center;
     justify-content: center;
-    border: 3px solid black;
-    padding: 10px;
+    border: 1px solid black;
     border-radius: 1rem;
     box-shadow: 3px 3px 4px 4px black;
 }

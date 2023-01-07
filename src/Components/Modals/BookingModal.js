@@ -21,20 +21,23 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
 
     useEffect(()=>{
       setTourGuide(guide.id)
-      console.log(guide.id)
     },[guide])
 
-    const bookingHandler = async()=>{
+    const bookingHandler = async(e)=>{
+      e.preventDefault();
       try{
-        const addDetails = collection(db, 'pending_bookings')
-        await addDoc(addDetails,{guide:guide.id, tourist: user.uid, location:tourLocation, destination: destination, startData: startData, 
+        const addDetails = collection(db, 'pending_booking')
+        await addDoc(addDetails,{guide:guide.id, tourist: user.uid, location:tourLocation,
+           destination: destination, startData: startData, 
         endDate:endDate, time: time, status:status})
         .then(()=>{
           setModalOpened(false)
+          alert('Booking Successful!')
         })
 
       }catch(err){
         err.message('Error!')
+        alert('Booking Unsuccessful! Please Try Again.')
       }
       
     }
@@ -51,16 +54,15 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
       ; setStartDate(''); setEndDate(''); setTime('')}}
     >
 
-        <form className = 'infoForm' onSubmit = {()=>bookingHandler()}>
+        <div className = 'infoForm'>
             <h3>Book Guide</h3>
 
             <div>
                 <input 
                     type="text" 
                     className='infoInput' 
-                    // onChange = {(e)=>setTourLocation(e.target.value)} 
+                    onChange = {(e)=>setTourLocation(e.target.value)} 
                     placeholder='Tour Location'
-                    value = {tourGuide}
                     required
                 />
             </div>
@@ -71,6 +73,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
                     className='infoInput' 
                     onChange = {(e)=>setDestination(e.target.value)} 
                     placeholder='Pickup Destination'
+                    required
                 />
             </div>
 
@@ -81,6 +84,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
                     className='infoInput' 
                     onChange = {(e)=>setStartDate(e.target.value)}
                     placeholder="Date From"
+                    required
                 />
             </div>
 
@@ -91,6 +95,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
                     className='infoInput' 
                     onChange = {(e)=>setEndDate(e.target.value)}
                     placeholder='Date To'
+                    required
                 />
             </div>
 
@@ -102,10 +107,11 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
                     className='infoInput' 
                     onChange = {(e)=>setTime(e.target.value)}
                     placeholder='Select Time'
+                    required
                 />
             </div>
-            <button type = 'submit' className="button infoButton">Confirm</button>
-        </form>
+            <button  onClick={bookingHandler} className="button infoButton">Confirm</button>
+        </div>
     </Modal>
   );
 }

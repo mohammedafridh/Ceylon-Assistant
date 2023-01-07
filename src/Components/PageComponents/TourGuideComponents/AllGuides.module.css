@@ -63,12 +63,23 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-weight: bold;
 } 
 
 .ratingBar{
     display: grid;
     grid-template-columns: 5rem auto;
     gap: 20px;
+}
+
+.ratingBar>span:nth-of-type(2){
+    background-color: #000080;
+    color: white;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 .subDetails{

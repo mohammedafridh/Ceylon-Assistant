@@ -9,7 +9,8 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import {format} from 'date-fns'
 // import { useLocation } from 'react-router-dom'
 import AllGuides from './AllGuides'
-import {Select, MultiSelect} from '@mantine/core';
+import Select from 'react-select'
+// import {Select, MultiSelect} from '@mantine/core';
 
 function List() {
 
@@ -18,10 +19,64 @@ function List() {
     const [date, setDate] = useState('')
     const [openDate,setOpenDate] = useState(false)
 
+    const districtData=[
+        { value: 'Hambanthota', label: 'Hambanthota' },
+        { value: 'Matara', label: 'Matara' },
+        { value: 'Galle', label: 'Galle' },
+        { value: 'Badulla', label: 'Badulla' },
+        { value: 'Monaragala', label: 'Monaragala' },
+        { value: 'Trincomalee', label: 'Trincomalee' },
+        { value: 'Batticaloa', label: 'Batticaloa' },
+        { value: 'Ampara', label: 'Ampara' },
+        { value: 'Kegalle', label: 'Kegalle' },
+        { value: 'Rathnapura', label: 'Rathnapura' },
+        { value: 'Matale', label: 'Matale' },
+        { value: 'Kandy', label: 'Kandy' },
+        { value: 'Nuwara-Eliya', label: 'Nuwara Eliya' },
+        { value: 'Anuradhapura', label: 'Anuradhapura' },
+        { value: 'Polonnaruwa', label: 'Polonnaruwa' },
+        { value: 'Gampaha', label: 'Gampaha' },
+        { value: 'Colombo', label: 'Colombo' },
+        { value: 'Kalutara', label: 'Kalutara' },
+        { value: 'Puttalam', label: 'Puttalam' },
+        { value: 'Kurunegala', label: 'Kurunegala' },
+        { value: 'Jaffna', label: 'Jaffna' },
+        { value: 'Kilinochchi', label: 'Kilinochchi' },
+        { value: 'Mannar', label: 'Mannar' },
+        { value: 'Mullativu', label: 'Mullativu' },
+        { value: 'Vavuniya', label: 'Vavuniya' },
+    ]
+
+    const[district,setDistrict] = useState(districtData.label)
+      const districtHandler = (e)=>{
+        setDistrict(e.label)
+      }
+
   return (
     <div className = 'guideBackground'>
         <div className = 'headingImgContainer'>
                  <span>Our Guides</span>
+        </div>
+
+        <div className='guideCaption'>
+            <p>Tour guides provide many services, and their responsibilities 
+                depend on the type of tour guide they are. While group size, 
+                transportation method, age and trip length may differ, tour guides
+                 are typically responsible for entertaining guests, answering 
+                 questions and sharing relevant information to the groups or 
+                 individuals they are guiding. We have two groups of Tour 
+                 Guides such as <b>National</b> & <b>Site</b> & all of our Tour Guides 
+                 are available with a vehicle</p>
+            
+            <div className='rates'>
+                <span>All tours are rated as follows:</span>
+
+                <span>Guide Rate (per day) + (Number of KMs Travelled * Vehicle KM Rate)</span>
+            </div>
+        </div>
+
+        <div>
+            <p></p>
         </div>
 
         <div className='listContainer'>
@@ -40,28 +95,15 @@ function List() {
                 <div>
                 <Select 
                     style = {{width:"17rem", outline:"none", border:'none'}} 
-                    onChange = '' 
-                    placeholder='Select Language'
-
-                    data={[
-                        { value: 'Sinhala', label: 'Sinhala' },
-                        { value: 'English', label: 'English' },
-                        { value: 'Hindi', label: 'Hindi' },
-                        { value: 'Malayalam', label: 'Malayalam' },
-                        { value: 'Urdu', label: 'Urdu' },
-                        { value: 'French', label: 'French' },
-                        { value: 'Arabic', label: 'Arabic' },
-                        { value: 'Spanish', label: 'Spanish' },
-                        { value: 'Russian', label: 'Russian' },
-                        { value: 'Chinese', label: 'Chinese' },
-                        { value: 'Japanese', label: 'Japanese' },
-                        { value: 'Italian', label: 'Italian' },
-                        { value: 'Korean', label: 'Korean' },
-                    ]}
+                    options = {districtData} 
+                    placeholder = 'Select District' 
+                    onChange={districtHandler}
+                    className = 'typeDrop'
+                    required
                 />
                 </div>
 
-                <div>
+                {/* <div>
                 <Select 
                     style = {{width:"17rem", outline:"none", border:'none'}} 
                     onChange = '' 
@@ -95,7 +137,7 @@ function List() {
                         { value: 'Vavuniya', label: 'Vavuniya' },
                     ]}
                 />      
-                </div>
+                </div> */}
 
                 <div>
                     <button className = 'srchBtn'>Search</button>

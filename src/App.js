@@ -16,6 +16,8 @@ import ThingsToDo from './pages/CommonPages/ThingsToDo/ThingsToDo';
 import About from './pages/CommonPages/About/About';
 import ToursGallery from './pages/CommonPages/ToursGallery/ToursGallery';
 import AddThingsToDo from './Components/PageComponents/ThingsToDoComponents/AddThingsToDo';
+import AdminLogin from './pages/AuthenticationPages/AdminLogin';
+import { UserProvider } from './Context/UserContext';
 
 function App() {
 
@@ -31,6 +33,7 @@ function App() {
 // );
 
     return(<div className = 'app'>
+        <UserProvider>
         <Routes>
             <Route path = '/login' element = {<Login />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
@@ -46,7 +49,9 @@ function App() {
             <Route path = '/about' element = {<About />} />
             <Route path = '/toursGallery' element = {<ToursGallery />} />
             <Route path = '/addThingsToDo' element = {<AddThingsToDo />} />
+            <Route path = '/admin' element = {<AdminLogin />} />
         </Routes>    
+        </UserProvider>
     </div>  
     )
 }

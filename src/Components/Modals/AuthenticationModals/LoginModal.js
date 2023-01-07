@@ -3,6 +3,7 @@ import './TouristRegisteModal.css'
 import { Modal, useMantineTheme} from '@mantine/core';
 import {useUserAuth} from '../../../Context/Context' 
 import {useNavigate} from 'react-router-dom'
+import { ClassNames } from '@emotion/react';
 
 function LoginModal({loginModel,setLoginModel}) {
   const theme = useMantineTheme();
@@ -37,9 +38,14 @@ return (
       onClose = {()=>setLoginModel(false)}
     >
 
-    <form onSubmit={loginHandler} className = 'addUserForm'>
+    <form onSubmit={loginHandler}>
                 
-        <h3>Login</h3>
+        <div className = 'loginImage'>
+            <img src ='https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-12-28%20at%2010.52.01%20AM.jpeg?alt=media&token=6809fdab-7ee5-4906-9b12-f69d21f8f732' alt = ''/>
+        </div>
+
+    <div className='addUserForm'>
+
 
         <div>
             <input 
@@ -47,7 +53,6 @@ return (
                 className='userInput' 
                 onChange = {(e)=> setEmail(e.target.value)}
                 placeholder='Email Address'
-                value = {email}
                 required
             />    
         </div>
@@ -58,12 +63,12 @@ return (
                 className='userInput' 
                 onChange = {(e)=> setPassword(e.target.value)}
                 placeholder='Password'
-                value = {password}
                 required
             />
         </div>
 
-        <button type = 'submit' className="button">Login </button>
+        <button type = 'submit' className="buttonLogin">Login </button>
+        </div>
     </form>
     </Modal>
   );

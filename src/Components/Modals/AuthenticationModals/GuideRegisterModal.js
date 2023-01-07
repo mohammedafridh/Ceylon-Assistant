@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import './TouristRegisteModal.css'
 import { useUserAuth } from '../../../Context/Context';
 import {db,storage} from '../../../Firebase'
-import {doc, setDoc } from "firebase/firestore";
+import {doc, addDoc, collection } from "firebase/firestore";
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import Select from 'react-select'
@@ -27,7 +27,6 @@ const [fName, setFName] = useState('')
     const [password2, setPassword2] = useState('')
     const [profileImage, setProfileImage] = useState('')
     const [nicImage, setNicImage] = useState('')
-    const [passportImage, setPassportImage] = useState('')
     const [status, setStatus] = useState('Active')
     const [error, setError] = useState('')
     const[url,setUrl] = useState(null)
@@ -38,19 +37,19 @@ const [fName, setFName] = useState('')
 
     //language dropdown data
     const language = [
-        { value: 'Sinhala  ', label: 'Sinhala' },
-        { value: 'English  ', label: 'English' },
-        { value: 'Hindi  ', label: 'Hindi' },
-        { value: 'Malayalam  ', label: 'Malayalam' },
-        { value: 'Urdu  ', label: 'Urdu' },
-        { value: 'French  ', label: 'French' },
-        { value: 'Arabic  ', label: 'Arabic' },
-        { value: 'Spanish  ', label: 'Spanish' },
-        { value: 'Russian  ', label: 'Russian' },
-        { value: 'Chinese  ', label: 'Chinese' },
-        { value: 'Japanese  ', label: 'Japanese' },
-        { value: 'Italian  ', label: 'Italian' },
-        { value: 'Korean  ', label: 'Korean' },
+        { value: 'Sinhala', label: 'Sinhala' },
+        { value: 'English', label: 'English' },
+        { value: 'Hindi', label: 'Hindi' },
+        { value: 'Malayalam', label: 'Malayalam' },
+        { value: 'Urdu', label: 'Urdu' },
+        { value: 'French', label: 'French' },
+        { value: 'Arabic', label: 'Arabic' },
+        { value: 'Spanish', label: 'Spanish' },
+        { value: 'Russian', label: 'Russian' },
+        { value: 'Chinese', label: 'Chinese' },
+        { value: 'Japanese', label: 'Japanese' },
+        { value: 'Italian', label: 'Italian' },
+        { value: 'Korean', label: 'Korean' },
       ];
 
     const[languages,setLanguages] = useState()
@@ -168,74 +167,51 @@ useEffect(() => {
 
 //adding data to firebase
 
-const guideHandler = async (e) => {
-    e.preventDefault()
-    try {
-        signUp(email, password)
-          .then((data) => {
-            const addDetails = doc(db, "Guides", data.user.uid);
-            
-            const details = {
-                firstName:fName,
-                lastName:lName,
-                contactNumber: contactNumber,
-                nicNumber: nicNumber,
-                address: address,
-                district: district,
-                guideType : type,
-                languages: languages,
-                guideRate:guideRate,
-                vehicleType:vehicleType,
-                model: model,
-                maxPassengers:maxPassengers,
-                perKmRate: perKm,
-                image: url,
-                nicImage: nicUrl,
-                email: email,
-                password:password,
-                publishedDate:addDate,
-                status:status
-            };
-            setDoc(addDetails, details);
-            setFName('')
-            setLName('')
-            setContactNumber('')
-            setNicNumber('')
-            setAddress('')
-            setDistrict('')
-            setType('')
-            setLanguages('')
-            setGuideRate('')
-            setVehicleType('')
-            setModel('')
-            setMaxPassengers('')
-            setPerKm('')
-            setUrl('')
-            setNicUrl('')
-            setEmail('')
-            setPassword('')
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } catch (err) {
-        setError(err.message);
-        console.log(err);
-      }
+const guideHandler = async(e)=>{
+  e.preventDefault()
+  try{
+    const addDetails = collection(db, 'guideRequests')
+    await addDoc(addDetails,{
+      firstName:fName,
+      lastName:lName,
+      contactNumber:contactNumber,
+      nicNumber:nicNumber,
+      address: address,
+      district: district,
+      guideType :type,
+      languages: languages,
+      guideRate: guideRate,
+      vehicleType:vehicleType,
+      model:model,
+      maxPassengers:maxPassengers,
+      perKmRate: perKm,
+      image: url,
+      nicImage: nicUrl,
+      email: email,
+      registeredDate:addDate,
+      status: 'Active'
+    })
+    .then(()=>{
+      alert('Your Register Request is been noted. We kindly hope your Patience!')
+      setGuideModal(false)
+    })
 
-}
+    }catch(err){
+      err.message('Cant add Your Request')
+    }
+  }
 
   return (
     <Modal
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
       overlayOpacity={0.25}
       overlayBlur={0.5}
-      size = '67%'
+      size = '70%'
       opened = {guideModal}
       onClose = {()=>setGuideModal(false)}
     >
 
-<div className = 'addUserForm'>
+<form className = 'addUserForm' onSubmit = {guideHandler}>
                 
                 <h3>Register Guide</h3>
     
@@ -400,14 +376,8 @@ const guideHandler = async (e) => {
                     </div>
     
                 </div>
-                <button className="button infoButton" 
-                    onClick={guideHandler}>
-                    Add Guide
-                </button>
-            </div>
-
-
-
+                <button type = 'submit' className="button infoButton">Add Guide</button>
+            </form>
     </Modal>
   );
 }

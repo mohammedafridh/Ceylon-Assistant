@@ -9,6 +9,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import BookingUpdateModal from '../../Modals/BookingUpdateModal'
 import ViewBookingDetailsModal from '../../Modals/ViewBookingDetailsModal'
 import FinishTourModal from '../../Modals/FinishTourModal'
+import { useUser } from '../../../Context/UserContext'
 
 function PendingBookingList() {
 
@@ -21,10 +22,11 @@ function PendingBookingList() {
   const [tourist, setTourist] = useState('')
   const [tourGuide, setTourGuide] = useState('')
   const [modalOpened, setModalOpened] = useState(false)
-  const { user } = useUserAuth()
-
+  const {guides} = useUser()
 
   useEffect(()=>{
+    console.log({guides})
+
     setLoading(true)
     const allData = onSnapshot(collection(db,'pending_booking'),(snapshot)=>{
       let list = []
@@ -55,20 +57,20 @@ function PendingBookingList() {
   },[]);
 
   //checking logged in user type
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const tourists = await getDoc(doc(db, 'Tourist', user.uid))
-      const touristData = tourists.data()
-      const tourGuides = await getDoc(doc(db, 'Guides', user.uid))
-      const tourGuideData = tourGuides.data()
+  // onAuthStateChanged(auth, async (user) => {
+  //   if (user) {
+  //     const tourists = await getDoc(doc(db, 'Tourist', user.uid))
+  //     const touristData = tourists.data()
+  //     const tourGuides = await getDoc(doc(db, 'Guides', user.uid))
+  //     const tourGuideData = tourGuides.data()
 
-      if (touristData === undefined) {
-        setTourGuide(touristDetails)
-      } else if (tourGuideData === undefined) {
-        setTourist(tourGuideDetails)
-      }
-    }
-  })
+  //     if (touristData === undefined) {
+  //       setTourGuide(touristDetails)
+  //     } else if (tourGuideData === undefined) {
+  //       setTourist(tourGuideDetails)
+  //     }
+  //   }
+  // })
 
   const cancelBooking = async(booking)=>{
     console.log(booking.id)

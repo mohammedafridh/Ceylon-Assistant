@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import { useUserAuth } from '../../Context/Context'
 import classes from './MainNavigation.module.css'
 import * as Icons from 'react-icons/fa'
@@ -31,53 +31,59 @@ function MainNavigation(){
                 Ceylon<span className = {classes.titleSub}>Assistant</span>
             </h1>
             <ul>
-                <li><Link to = '/'>Home</Link></li>
-                <li><Link to = ''>Tourings
-                <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
+                <li>
+                    <NavLink to = '/' className={({ isActive }) =>
+                        isActive ? "navigationItem active" : "navigationItem"} end>
+                        Home
+                    </NavLink>
+                </li>
+                <li><NavLink to = ''>Tourings
+                <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></NavLink>
                     <div className = {classes.dropDown}>
                         <ul>
-                            <li><Link to = '/tourGuides'>All Guides</Link></li>
-                            <li><Link to = '/bookings'>Bookings</Link></li>
+                            <li><NavLink to = '/tourGuides'>All Guides</NavLink></li>
+                            <li><NavLink to = '/bookings'>Bookings</NavLink></li>
                         </ul>
                     </div>
                 </li> 
-                <li><Link to = '/thingsToDo'>Things To Do</Link></li>                 
-                <li><Link to = ''>About Us
-                <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
+                <li><NavLink to = '/thingsToDo'>Things To Do</NavLink></li>                 
+                <li><NavLink to = ''>About Us
+                <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></NavLink>
                     <div className = {classes.dropDown}>
                         <ul>
-                            <li><Link to = '/about'> About</Link></li>
-                            <li><Link to = '/toursGallery'>Tours Gallery</Link></li>
+                            <li><NavLink to = '/about'> About</NavLink></li>
+                            <li><NavLink to = '/toursGallery'>Tours Gallery</NavLink></li>
                         </ul>
                     </div>
                 </li>
+                {/* <li><NavLink to = '/admin'>Admin Login</NavLink></li>  */}
             </ul>
 
             <div>
                 <ul>
-                    <li><Link to = ''>Options <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></Link>
+                    <li><NavLink to = ''>Options <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></NavLink>
                         <div className = {classes.dropDown}>
                             <ul>
-                                <li><Link to = '/profile'>Profile</Link></li>
-                                <li><Link to = '' onClick={()=>setGuideModal(true)}>Register Guide</Link></li>
+                                <li><NavLink to = '/profile'>Profile</NavLink></li>
+                                <li><NavLink to = '' onClick={()=>setGuideModal(true)}>Register Guide</NavLink></li>
                                     <GuideRegisterModal 
                                         guideModal = {guideModal} 
                                         setGuideModal = {setGuideModal}
                                     />
 
-                                <li><Link to = '' onClick={()=>setTouristModal(true)}>Register Tourist</Link></li>
+                                <li><NavLink to = '' onClick={()=>setTouristModal(true)}>Register Tourist</NavLink></li>
                                     <TouristRegisterModal 
                                         touristModal = {touristModal} 
                                         setTouristModal = {setTouristModal}
                                     />
 
-                                <li><Link to = '' onClick={()=>setLoginModel(true)}>Log In</Link></li>
+                                <li><NavLink to = '' onClick={()=>setLoginModel(true)}>Log In</NavLink></li>
                                     <LoginModal 
                                         loginModel = {loginModel} 
                                         setLoginModel = {setLoginModel}
                                     />
 
-                                <li><Link to = '/login'>Log Out</Link></li>
+                                <li><NavLink to = '/login'>Log Out</NavLink></li>
                             </ul>
                         </div>
                     </li>

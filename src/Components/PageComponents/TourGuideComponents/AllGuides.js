@@ -15,6 +15,12 @@ function AllGuides() {
   const [loading, setLoading] = useState(false)
   const [error,setError] = useState()
   const [modalOpened,setModalOpened] = useState(false)
+  const [selectedGuide, setSelectedGuide] = useState({})
+
+  const setModal = (guide)=>{
+    setSelectedGuide(guide)
+    setModalOpened(true)
+  }
 
   useEffect(()=>{
     onAuthStateChanged(auth, async (user)=>{
@@ -44,7 +50,7 @@ function AllGuides() {
           ...doc.data()
         })
       })
-      setGuides(list)
+      setGuides(list.filter(item=>item.status=='inactive'))
       setLoading(false)
     },(error)=>{
       setError(error.message)
@@ -94,7 +100,7 @@ function AllGuides() {
 
             <div className = {classes.details}>
                 <span>Guide Rate : </span>
-                <span>{guide.guideRate} per day</span>
+                <span>{guide.guideRate}/= per day</span>
             </div>
 
             <div className = {classes.details}>
@@ -126,20 +132,22 @@ function AllGuides() {
 {touristDetails &&
           <div className = {classes.subDetails}>
             <button className = {classes.bookingBtn}
-             onClick = {()=>setModalOpened(true)}>
+             onClick = {()=>setModal(guide)}>
                 Book Guide
             </button>
           </div>
 }
-    <BookingModal 
-      modalOpened = {modalOpened} 
-      setModalOpened = {setModalOpened}
-      guide  = {guide}
-    />
+    
 
         </div>
     </div> 
     ))}
+
+    <BookingModal 
+      modalOpened = {modalOpened} 
+      setModalOpened = {setModalOpened}
+      guide  = {selectedGuide}
+    />
       
   </div>
     
@@ -147,5 +155,3 @@ function AllGuides() {
 }
 
 export default AllGuides;
-
-// onClick = {() => moreDetailsHandler(guide)}

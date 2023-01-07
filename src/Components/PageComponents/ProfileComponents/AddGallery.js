@@ -26,13 +26,6 @@ const AddGallery = () => {
         <div className = 'addToGalleryForm'>      
             <h3>Add Tours</h3>
             <div className='detaleContainer'>
-              <input 
-                    type="text" 
-                    className='addDetailInput' 
-                    onChange = {(e)=> setGuide(e.target.value)}
-                    placeholder='Guide Name'
-                    value = {guide}
-                />
 
               <input 
                   type="text" 
@@ -46,7 +39,6 @@ const AddGallery = () => {
                 style = {{width:"20rem", outline:"none"}} 
                 onChange = {(e)=> setDistrict(e.target.value)} 
                 placeholder='District'
-                value = {district}
 
                 data={[
                   { value: 'Hambanthota', label: 'Hambanthota' },
@@ -85,7 +77,7 @@ const AddGallery = () => {
                         type="file" 
                         name = 'coverImg' 
                         onChange = {(e)=>setMainImage(e.target.files[0])}
-                        value = {mainImage}
+    
                     />
                 </div>
 
@@ -96,7 +88,6 @@ const AddGallery = () => {
                           type="file" 
                           name = 'coverImg' 
                           onChange = {(e)=>setImage1(e.target.files[0])}
-                          value = {image1}
                       />
                 </div>
 
@@ -106,7 +97,6 @@ const AddGallery = () => {
                           type="file" 
                           name = 'coverImg' 
                           onChange = {(e)=>setImage2(e.target.files[0])}
-                          value = {image2}
                       />
                 </div>
             </div>
@@ -118,7 +108,6 @@ const AddGallery = () => {
                           type="file" 
                           name = 'coverImg' 
                           onChange = {(e)=>setImage3(e.target.files[0])}
-                          value = {image3}
                       />
                 </div>
 
@@ -128,7 +117,6 @@ const AddGallery = () => {
                           type="file" 
                           name = 'coverImg' 
                           onChange = {(e)=>setImage4(e.target.files[0])}
-                          value = {image4}
                       />
                 </div>
             </div>

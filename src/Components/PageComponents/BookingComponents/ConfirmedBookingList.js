@@ -18,6 +18,12 @@ const ConfirmedBookingList = () => {
     const [tourist, setTourist] = useState('')
   const [tourGuideDetails,setTourGuideDetails] = useState('')
   const [tours,setTours] = useState([])
+  const [selectedGuide,setSelectedGuide] = useState({})
+
+  const finishTour = (tour)=>{
+    setSelectedGuide(tour)
+    setFinishTourModal(true)
+  }
 
   const finishHandler = ()=>{}
 
@@ -87,11 +93,12 @@ const ConfirmedBookingList = () => {
            <td>{tour.to}</td>
            <td>{tour.time}</td>
            <td><button 
-           style = {{backgroundColor:'blue', paddingRight:8, paddingLeft: 8, color:'white', borderRadius:5}}
-           onClick = {tourist? ()=>setFinishTourModal(true) : ()=>finishHandler(tour)}>Finish</button></td>
+           style = {{backgroundColor:'#3498DB', padding:5, color:'white', borderRadius:5, width: 100}}
+           onClick = {tourist? ()=>finishTour(tour) : ()=>finishHandler(tour)}>Finish</button></td>
            <FinishTourModal
               finishTourModal={finishTourModal}
               setFinishTourModal={setFinishTourModal}
+              details = {selectedGuide}
             /> 
          </tr>
              ))}

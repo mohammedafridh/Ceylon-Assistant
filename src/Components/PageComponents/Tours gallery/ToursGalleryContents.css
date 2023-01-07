@@ -75,6 +75,10 @@
     height: 250px;
 }
 
+.view{
+    cursor: pointer;
+}
+
 .imageDetails{
     align-items: center;
     text-align: center;
@@ -105,4 +109,14 @@
     font-weight: bold;
     color: olivedrab;
     margin-bottom: 5px;
+}
+
+.tourDltBtn{
+    background-color: red;
+    color: white;
+    padding: 5px 5px;
+    margin: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 6rem;
 }

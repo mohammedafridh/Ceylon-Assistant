@@ -6,7 +6,7 @@ import SubNavigation from '../../../Components/layouts/SubNavigation';
 function NewTourGuide() {
   return (
     <Layout>
-      <SubNavigation />
+      {/* <SubNavigation /> */}
       <List />
     </Layout>
   )

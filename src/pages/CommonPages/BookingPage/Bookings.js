@@ -5,7 +5,7 @@ import PendingBookingList from "../../../Components/PageComponents/BookingCompon
 
 function Bookings(){
     return <Layout>
-        <SubNavigation />
+        {/* <SubNavigation /> */}
         <ConfirmedBookingList />
         <PendingBookingList />    
     </Layout>

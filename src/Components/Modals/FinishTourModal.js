@@ -1,13 +1,30 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { Modal, useMantineTheme, Select, MultiSelect  } from '@mantine/core';
+import {doc, setDoc, collection} from 'firebase/firestore'
+import {db} from '../../Firebase'
 import './FinishTourModal.css'
 
-
-function FinishTourModal({finishTourModal,setFinishTourModal}) {
+function FinishTourModal({finishTourModal,setFinishTourModal,details}) {
 
     const theme = useMantineTheme();
     const [rating, setRating] = useState(0);
+    const [review, setReview] = useState('')
+    const[guide,setGuide] = useState(details.email)
     const [hover, setHover] = useState(0);
+
+    useEffect(()=>{
+        setGuide(details.email)
+    },[details])
+
+    const tourHandler = async (e)=>{
+        e.preventDefault()
+        const ratings = doc(db,'ratings',details.email)
+        await setDoc(ratings,{guide:guide, review:review, rating:rating})
+        .then(()=>{
+          setFinishTourModal(false)
+          alert('Tour Finished Successfully! Thanks for your response')
+        })
+    }
 
   return (
     <Modal
@@ -19,13 +36,13 @@ function FinishTourModal({finishTourModal,setFinishTourModal}) {
       onClose = {()=>setFinishTourModal(false)}
     >
 
-        <form className = 'reviewForm'>
+        <form className = 'reviewForm' onSubmit = {tourHandler}>
             <h3>Lets Have a Friendly Review On Our Guide</h3>
 
             <div className = 'ratingDetails'>
                 <label>Reviews</label>
                 <textarea 
-                    onChange= "">
+                    onChange= {(e)=>setReview(e.target.value)}>
                 </textarea>
             </div>
 
@@ -51,7 +68,7 @@ function FinishTourModal({finishTourModal,setFinishTourModal}) {
             </div>
 
             
-            <button className='reviewBtn'>Submit</button>
+            <button type = 'submit' className='reviewBtn'>Submit</button>
         </form>
     </Modal>
   );
