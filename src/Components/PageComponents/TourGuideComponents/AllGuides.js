@@ -7,7 +7,7 @@ import BookingModal from '../../Modals/BookingModal'
 import {getDoc, doc, where, query} from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 
-function AllGuides() {
+function AllGuides(guide, district) {
 
   const [guides,setGuides] = useState([])
   const [touristDetails, setTouristDetails] = useState('')
@@ -41,6 +41,8 @@ function AllGuides() {
 
 
   useEffect(()=>{
+    console.log({district})
+    console.log(guide)
     setLoading(true)
     const allData = onSnapshot(collection(db,'Guides'),(snapshot)=>{
       let list = []

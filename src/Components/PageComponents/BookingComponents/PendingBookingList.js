@@ -18,14 +18,23 @@ function PendingBookingList() {
   const [error, setError] = useState()
   const [tourGuideDetails, setTourGuideDetails] = useState('')
   const [touristDetails, setTouristDetails] = useState('')
-  const[loading,setLoading] = useState(false)
+  const [loading,setLoading] = useState(false)
   const [tourist, setTourist] = useState('')
   const [tourGuide, setTourGuide] = useState('')
   const [modalOpened, setModalOpened] = useState(false)
-  const {guides} = useUser()
+  const {guides,tourists} = useUser()
 
   useEffect(()=>{
     console.log({guides})
+    console.log({tourists})
+  },[guides,tourists])
+
+  const findGuideEmail = (id) => {
+    const guide = guides.find(guide => guide.id === id)
+    return guide ? guide.email : null   
+  }
+
+  useEffect(()=>{
 
     setLoading(true)
     const allData = onSnapshot(collection(db,'pending_booking'),(snapshot)=>{
@@ -57,20 +66,20 @@ function PendingBookingList() {
   },[]);
 
   //checking logged in user type
-  // onAuthStateChanged(auth, async (user) => {
-  //   if (user) {
-  //     const tourists = await getDoc(doc(db, 'Tourist', user.uid))
-  //     const touristData = tourists.data()
-  //     const tourGuides = await getDoc(doc(db, 'Guides', user.uid))
-  //     const tourGuideData = tourGuides.data()
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const tourists = await getDoc(doc(db, 'Tourist', user.uid))
+      const touristData = tourists.data()
+      const tourGuides = await getDoc(doc(db, 'Guides', user.uid))
+      const tourGuideData = tourGuides.data()
 
-  //     if (touristData === undefined) {
-  //       setTourGuide(touristDetails)
-  //     } else if (tourGuideData === undefined) {
-  //       setTourist(tourGuideDetails)
-  //     }
-  //   }
-  // })
+      if (touristData === undefined) {
+        setTourGuide(touristDetails)
+      } else if (tourGuideData === undefined) {
+        setTourist(tourGuideDetails)
+      }
+    }
+  })
 
   const cancelBooking = async(booking)=>{
     console.log(booking.id)
@@ -98,7 +107,7 @@ function PendingBookingList() {
 
                   <div className={classes.details}>
                     <span>Email : </span>
-                    <span>{tourist ? tourist.email : tourGuide.email}</span>
+                    <span>{tourist? ()=>findGuideEmail(booking.guide):"abc"}</span>
                   </div>
 
                   <div className={classes.details}>

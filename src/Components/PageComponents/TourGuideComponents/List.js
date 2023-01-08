@@ -15,7 +15,7 @@ import Select from 'react-select'
 function List() {
 
     // const location = useLocation();
-    const [searchDistrict, setSearchDistrict] = useState('')
+    const [searchGuide, setSearchGuide] = useState('')
     const [date, setDate] = useState('')
     const [openDate,setOpenDate] = useState(false)
 
@@ -47,9 +47,9 @@ function List() {
         { value: 'Vavuniya', label: 'Vavuniya' },
     ]
 
-    const[district,setDistrict] = useState(districtData.label)
+    const[searchDistrict,setSearchDistrict] = useState(districtData.label)
       const districtHandler = (e)=>{
-        setDistrict(e.label)
+        setSearchDistrict(e.label)
       }
 
   return (
@@ -88,7 +88,7 @@ function List() {
                         type="text" 
                         className='input' 
                         placeholder='Guide Name'
-                        onChange = ''
+                        onChange = {(e)=>setSearchGuide(e.target.value)} 
                     />
                 </div>
 
@@ -103,49 +103,13 @@ function List() {
                 />
                 </div>
 
-                {/* <div>
-                <Select 
-                    style = {{width:"17rem", outline:"none", border:'none'}} 
-                    onChange = '' 
-                    placeholder='District'
-
-                    data={[
-                        { value: 'Hambanthota', label: 'Hambanthota' },
-                        { value: 'Matara', label: 'Matara' },
-                        { value: 'Galle', label: 'Galle' },
-                        { value: 'Badulla', label: 'Badulla' },
-                        { value: 'Monaragala', label: 'Monaragala' },
-                        { value: 'Trincomalee', label: 'Trincomalee' },
-                        { value: 'Batticaloa', label: 'Batticaloa' },
-                        { value: 'Ampara', label: 'Ampara' },
-                        { value: 'Kegalle', label: 'Kegalle' },
-                        { value: 'Rathnapura', label: 'Rathnapura' },
-                        { value: 'Matale', label: 'Matale' },
-                        { value: 'Kandy', label: 'Kandy' },
-                        { value: 'Nuwara-Eliya', label: 'Nuwara Eliya' },
-                        { value: 'Anuradhapura', label: 'Anuradhapura' },
-                        { value: 'Polonnaruwa', label: 'Polonnaruwa' },
-                        { value: 'Gampaha', label: 'Gampaha' },
-                        { value: 'Colombo', label: 'Colombo' },
-                        { value: 'Kalutara', label: 'Kalutara' },
-                        { value: 'Puttalam', label: 'Puttalam' },
-                        { value: 'Kurunegala', label: 'Kurunegala' },
-                        { value: 'Jaffna', label: 'Jaffna' },
-                        { value: 'Kilinochchi', label: 'Kilinochchi' },
-                        { value: 'Mannar', label: 'Mannar' },
-                        { value: 'Mullativu', label: 'Mullativu' },
-                        { value: 'Vavuniya', label: 'Vavuniya' },
-                    ]}
-                />      
-                </div> */}
-
                 <div>
-                    <button className = 'srchBtn'>Search</button>
+                    <button onClick='' className = 'srchBtn'>Search</button>
                 </div>
             </div> 
 
             <div className='listResult'>
-                    <AllGuides />
+                    <AllGuides guide = {searchGuide} district = {searchDistrict}/>
             </div>
         </div>
     </div>
