@@ -9,8 +9,6 @@ import Login from './pages/AuthenticationPages/Login'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import TourGuideReg from './pages/AuthenticationPages/TourGuideReg';
 import TouristReg from './pages/AuthenticationPages/TouristReg';
-import List from './Components/PageComponents/TourGuideComponents/List';
-import SelectedGuide from './Components/PageComponents/TourGuideComponents/SelectedGuide';
 import SelectedBooker from './Components/PageComponents/BookingComponents/SelectedBooker'
 import ThingsToDo from './pages/CommonPages/ThingsToDo/ThingsToDo';
 import About from './pages/CommonPages/About/About';
@@ -39,7 +37,6 @@ function App() {
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
             <Route path = '/touristReg' element = {<TouristReg />}/>
             <Route path = '/' element = {<Homepage />} />
-            <Route path = '/selectedGuide' element = {<SelectedGuide />} />
             <Route path = '/selectedBooker' element = {<SelectedBooker />}/>
             <Route path = '/tourGuides' element = {<TourGuides />} />
             <Route path = '/tours' element = {<Tours />} />

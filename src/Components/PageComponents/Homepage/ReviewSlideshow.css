@@ -1,0 +1,28 @@
+.reviewSlideshow{
+    /* border: 1px solid black; */
+    margin: 1rem;
+}
+
+.reviewSlideshow>h1{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.reviewContainer{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 65%;
+    min-height: 13rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+h5>span{
+    color: #124181  ;
+}
+

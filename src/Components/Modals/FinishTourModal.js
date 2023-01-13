@@ -3,6 +3,7 @@ import { Modal, useMantineTheme, Select, MultiSelect  } from '@mantine/core';
 import {doc, setDoc, collection} from 'firebase/firestore'
 import {db} from '../../Firebase'
 import './FinishTourModal.css'
+import { useUserAuth } from '../../Context/Context';
 
 function FinishTourModal({finishTourModal,setFinishTourModal,details}) {
 
@@ -11,15 +12,18 @@ function FinishTourModal({finishTourModal,setFinishTourModal,details}) {
     const [review, setReview] = useState('')
     const[guide,setGuide] = useState(details.email)
     const [hover, setHover] = useState(0);
+    const {user} = useUserAuth()
 
     useEffect(()=>{
         setGuide(details.email)
-    },[details])
+        setRating(rating)
+        setReview(review)
+    },[details, rating, details.email,review])
 
     const tourHandler = async (e)=>{
         e.preventDefault()
         const ratings = doc(db,'ratings',details.email)
-        await setDoc(ratings,{guide:guide, review:review, rating:rating})
+        await setDoc(ratings,{guide:guide, tourist:user.uid, review:review, rating:rating})
         .then(()=>{
           setFinishTourModal(false)
           alert('Tour Finished Successfully! Thanks for your response')
@@ -75,7 +79,6 @@ function FinishTourModal({finishTourModal,setFinishTourModal,details}) {
 }
 
 export default FinishTourModal
-
 
 
 

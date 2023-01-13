@@ -35,7 +35,6 @@ function PendingBookingList() {
   }
 
   useEffect(()=>{
-
     setLoading(true)
     const allData = onSnapshot(collection(db,'pending_booking'),(snapshot)=>{
       let list = []
@@ -55,7 +54,7 @@ function PendingBookingList() {
         });
       });
 
-      setBookings(list.filter(item => item.status === 'Active'))
+      setBookings(list.filter(item => item.status ==='Active'))
       setLoading(false)
     },(error)=>{
       setError(error.message)
@@ -107,7 +106,7 @@ function PendingBookingList() {
 
                   <div className={classes.details}>
                     <span>Email : </span>
-                    <span>{tourist? ()=>findGuideEmail(booking.guide):"abc"}</span>
+                    <span>{tourist? findGuideEmail(booking.guide):"abc"}</span>
                   </div>
 
                   <div className={classes.details}>

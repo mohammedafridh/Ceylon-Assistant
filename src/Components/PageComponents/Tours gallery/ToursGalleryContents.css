@@ -71,8 +71,8 @@
 
 .images img{
     box-shadow: 0 2px 20px rgba(0,0,0,0.5);
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
 }
 
 .view{
@@ -109,6 +109,19 @@
     font-weight: bold;
     color: olivedrab;
     margin-bottom: 5px;
+}
+
+.gdId{
+    display: flex;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.gdId>span:nth-of-type(2){
+    color: orange;
 }
 
 .tourDltBtn{

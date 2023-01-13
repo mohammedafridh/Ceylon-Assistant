@@ -4,6 +4,7 @@ import {Gallery} from './Gallery'
 import ViewGalleryModal from '../../Modals/ViewGalleryModal'
 import {db} from '../../../Firebase'
 import {collection, onSnapshot,query,doc,updateDoc} from 'firebase/firestore'
+import {useUser} from '../../../Context/UserContext'
 
 const ToursGalleryContents = () => {
 
@@ -13,6 +14,7 @@ const ToursGalleryContents = () => {
     const[gallery,setGallery] = useState([])
     // const[galleryOpen,setGalleryOpen] = useState('')
     const[currentItem,setCurrentItem] = useState({})
+    const {guides} = useUser()
 
     const dltHandler = async(itemId)=>{
       console.log('hello')
@@ -51,6 +53,16 @@ const ToursGalleryContents = () => {
       useEffect(()=>{
         getGallery();
       },[]);
+
+      const findGuideName = (id) => {
+        const guide = guides.find(guide => guide.id === id)
+        return guide ? guide.firstName : null   
+      }
+
+      const findGuideId = (id) => {
+        const guide = guides.find(guide => guide.id === id)
+        return guide ? guide.guideId : null   
+      }
     
 
   return (
@@ -88,8 +100,11 @@ const ToursGalleryContents = () => {
                       </div>  
                         <div className='imageDetails'>
                             <span>{galleryItem.destination}</span>
-                            <span>{galleryItem.district} Province</span>
-                            <span>Guide : {galleryItem.guideId}</span>
+                            <span>{galleryItem.district} District</span>
+                            <span>Guide : {findGuideName(galleryItem.guideId)}</span>
+                            <div className='gdId'>
+                              <span>Guide ID : </span><span>{galleryItem.guideId}</span>
+                            </div>
                             <button onClick = {()=>dltHandler(galleryItem.id)} className='tourDltBtn'>Delete</button>
                         </div> 
                         
