@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { db, auth } from '../../../Firebase'
 import BookingModal from '../../Modals/BookingModal'
 import { getDoc, doc } from 'firebase/firestore'
@@ -9,18 +9,21 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import Select from 'react-select'
 import { collection, onSnapshot } from 'firebase/firestore'
+import { useUser } from '../../../Context/UserContext'
+
 
 function AllGuides() {
-
   // const location = useLocation();
-  const [searchGuide, setSearchGuide] = useState('')
-  const [guides, setGuides] = useState([])
+  const [activeGuides, setActiveGuides] = useState([])
+  const [selectedDistrict, setSelectedDistrict] = useState('')
   const [touristDetails, setTouristDetails] = useState('')
   const [tourGuideDetails, setTourGuideDetails] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
   const [modalOpened, setModalOpened] = useState(false)
   const [selectedGuide, setSelectedGuide] = useState({})
+  const { guides } = useUser()
+  const { userType } = useUser()
 
   const setModal = (guide) => {
     setSelectedGuide(guide)
@@ -28,42 +31,11 @@ function AllGuides() {
   }
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const tourist = await getDoc(doc(db, 'Tourist', user.uid))
-        const touristData = tourist.data()
-        const tourGuide = await getDoc(doc(db, 'Guides', user.uid))
-        const tourGuideData = tourGuide.data()
-
-        if (touristData === undefined) {
-          setTourGuideDetails(tourGuideData)
-        } else if (tourGuideData === undefined) {
-          setTouristDetails(touristData)
-        }
-      }
-    })
-  }, [])
+    setActiveGuides(guides.filter(guide => guide.status === 'Active'))
+    console.log({activeGuides})
+  }, [userType, guides])
 
 
-  useEffect(() => {
-    setLoading(true)
-    const allData = onSnapshot(collection(db, 'Guides'), (snapshot) => {
-      let list = []
-      snapshot.docs.forEach((doc) => {
-        list.push({
-          id: doc.id,
-          ...doc.data()
-        })
-      })
-      setGuides(list.filter(item => item.status == 'Active'))
-      setLoading(false)
-    }, (error) => {
-      setError(error.message)
-    });
-    return () => {
-      allData()
-    };
-  }, []);
 
   const districtData = [
     { value: 'Hambanthota', label: 'Hambanthota' },
@@ -93,11 +65,30 @@ function AllGuides() {
     { value: 'Vavuniya', label: 'Vavuniya' },
   ]
 
-  const [searchDistrict, setSearchDistrict] = useState(districtData.label)
   const districtHandler = (e) => {
-    setSearchDistrict(e.label)
+    setSelectedDistrict(e.label)
+    setActiveGuides(guides.filter(guide => guide.status === 'Active' && guide.district === e.label))
   }
 
+  const clearFilter = () => {
+    setActiveGuides(guides.filter(guide => guide.status === 'Active'))
+  }
+
+  const handleSearch = (e) => {
+    setActiveGuides(guides.filter(guide => guide.status === 'Active' && guide.firstName.toLowerCase().includes(e.toLowerCase())))
+  }
+
+  const sumOfRating = (ratings) => {
+    // no ratings return
+    if (!ratings) return 0;
+
+    let sum = 0
+    ratings.forEach(item => {
+      sum += item.rating
+    })
+    const value = sum/ratings.length
+    return value.toFixed(1);
+  }
   return (
     <div className='guideBackground'>
       <div className='headingImgContainer'>
@@ -127,14 +118,14 @@ function AllGuides() {
 
       <div className='listContainer'>
         <div className='searchGuide'>
-          <h3>Search</h3>
+          <h3>Filter</h3>
 
           <div>
             <input
               type="text"
               className='input'
               placeholder='Guide Name'
-              onChange={(e) => setSearchGuide(e.target.value)}
+              onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
 
@@ -150,13 +141,13 @@ function AllGuides() {
           </div>
 
           <div>
-            <button onClick='' className='srchBtn'>Search</button>
+            <button onClick={() => clearFilter()} className='srchBtn'>Clear Filter</button>
           </div>
         </div>
 
         <div className='listResult'>
           <div>
-            {guides.map((guide) => (
+            {activeGuides.map((guide) => (
               <div className={classes.searchItem} key={guide.id}>
 
                 <img src={guide.image} alt='abc' className={classes.guideImg} />
@@ -217,13 +208,13 @@ function AllGuides() {
                 <div className={classes.otherDetails}>
                   <div className={classes.ratingBar}>
                     <span>Rating</span>
-                    <span>5.0</span>
+                    <span>{sumOfRating(guide.ratings)}</span>
                   </div>
                   <div className={classes.availability}>
                     <span>Available</span>
                   </div>
 
-                  {touristDetails &&
+                  {userType === 'tourist' &&
                     <div className={classes.subDetails}>
                       <button className={classes.bookingBtn}
                         onClick={() => setModal(guide)}>

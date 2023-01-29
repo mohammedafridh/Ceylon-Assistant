@@ -4,8 +4,10 @@ import Table from 'react-bootstrap/Table';
 import ViewBookingDetailsModal from '../../Modals/ViewBookingDetailsModal'
 import FinishTourModal from '../../Modals/FinishTourModal'
 import {db, auth } from '../../../Firebase'
-import {getDoc, doc, collection, onSnapshot} from 'firebase/firestore'
+import {getDoc, doc, collection, onSnapshot, query,updateDoc} from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
+import { useUser } from '../../../Context/UserContext'
+import { toast } from 'react-hot-toast'
 
 const ConfirmedBookingList = () => {
 
@@ -18,14 +20,21 @@ const ConfirmedBookingList = () => {
     const [tourist, setTourist] = useState('')
   const [tourGuideDetails,setTourGuideDetails] = useState('')
   const [tours,setTours] = useState([])
+  const[bookings,setBookings] = useState([])
   const [selectedGuide,setSelectedGuide] = useState({})
+  const {guides,tourists, userType} = useUser()
 
   const finishTour = (tour)=>{
     setSelectedGuide(tour)
     setFinishTourModal(true)
   }
 
-  const finishHandler = ()=>{}
+  const finishHandler = (id)=>{
+    const cancelItem = query(doc(db,'tours',id));
+    updateDoc(cancelItem, {
+    status: 'inactive'
+});
+  }
 
   useEffect(()=>{
     setLoading(true)
@@ -47,20 +56,25 @@ const ConfirmedBookingList = () => {
     };
   },[]);
 
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const tourists = await getDoc(doc(db, 'Tourist', user.uid))
-      const touristData = tourists.data()
-      const tourGuides = await getDoc(doc(db, 'Guides', user.uid))
-      const tourGuideData = tourGuides.data()
+  const findGuideEmail = (id) => {
+    const guide = guides.find(guide => guide.id === id)
+    return guide ? guide.email : null   
+  }
 
-      if (touristData === undefined) {
-        setTourGuide(tourGuideData)
-      } else if (tourGuideData === undefined) {
-        setTourist(touristData)
-      }
-    }
-  })
+  const findTouristEmail = (id) => {
+    const tourist = tourists.find(tourist => tourist.id === id)
+    return tourist ? tourist.email : null   
+  }
+
+  const findGuideContactNumber = (id) => {
+    const guide = guides.find(guide => guide.id === id)
+    return guide ? guide.contactNumber : null   
+  }
+
+  const findTouristContactNumber = (id) => {
+    const tourist = tourists.find(tourist => tourist.id === id)
+    return tourist ? tourist.contactNumber : null   
+  }
     
   return (
     <div className  ={classes.tours}>
@@ -85,21 +99,21 @@ const ConfirmedBookingList = () => {
       {tours.map((tour)=>(
          <tr key = {tour.id}>
            <td>{tour.id}</td>
-           <td>{tour.email}</td>
-           <td>{tour.contactNumber}</td>
-           <td>{tour.pickupDestination}</td>
-           <td>{tour.tourDestination}</td>
-           <td>{tour.from}</td>
-           <td>{tour.to}</td>
+           <td>{userType ===  'tourist'? findGuideEmail(tour.guide):findTouristEmail(tour.tourist)}</td>
+           <td>{userType ===  'tourist'? findGuideContactNumber(tour.guide):findTouristContactNumber(tour.tourist)}</td>
+           <td>{tour.pickup}</td>
+           <td>{tour.destination}</td>
+           <td>{tour.startDate}</td>
+           <td>{tour.endDate}</td>
            <td>{tour.time}</td>
            <td><button 
            style = {{backgroundColor:'#3498DB', padding:5, color:'white', borderRadius:5, width: 100}}
-           onClick = {tourist? ()=>finishTour(tour) : ()=>finishHandler(tour)}>Finish</button></td>
-           <FinishTourModal
+           onClick = {userType === 'tourist'? ()=>finishTour(tour) : ()=>finishHandler(tour.id)}>Finish</button></td>
+           {finishTourModal && <FinishTourModal
               finishTourModal={finishTourModal}
               setFinishTourModal={setFinishTourModal}
               details = {selectedGuide}
-            /> 
+            /> }
          </tr>
              ))}
        </table>

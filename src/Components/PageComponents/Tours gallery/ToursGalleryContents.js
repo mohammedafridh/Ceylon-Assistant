@@ -3,8 +3,10 @@ import './ToursGalleryContents.css'
 import {Gallery} from './Gallery'
 import ViewGalleryModal from '../../Modals/ViewGalleryModal'
 import {db} from '../../../Firebase'
-import {collection, onSnapshot,query,doc,updateDoc} from 'firebase/firestore'
+import {collection, onSnapshot,query,doc,updateDoc, deleteDoc} from 'firebase/firestore'
 import {useUser} from '../../../Context/UserContext'
+import { toast } from 'react-hot-toast'
+import { useUserAuth } from '../../../Context/Context'
 
 const ToursGalleryContents = () => {
 
@@ -14,14 +16,13 @@ const ToursGalleryContents = () => {
     const[gallery,setGallery] = useState([])
     // const[galleryOpen,setGalleryOpen] = useState('')
     const[currentItem,setCurrentItem] = useState({})
-    const {guides} = useUser()
+    const {guides, userType} = useUser()
+    const [userTour,setUserTour] = useState([]) 
+    const{user} = useUserAuth()
 
     const dltHandler = async(itemId)=>{
-      console.log('hello')
-      const cancelGallery = query(doc(db,'toursGallery',itemId));
-       await updateDoc(cancelGallery, {
-        status: 'inactive'
-       });
+      const item = deleteDoc(doc(db, 'toursGallery', itemId));
+      toast.success('Tour Deleted from Gallery Successfully!')
     }
 
     const galleryOpen = async (galleryItem)=>{
@@ -53,6 +54,10 @@ const ToursGalleryContents = () => {
       useEffect(()=>{
         getGallery();
       },[]);
+
+      useEffect(() => {
+        setUserTour(userType === 'guide'? gallery.filter(gallery => gallery.guideId === user.uid):gallery)
+      }, [userType, guides])
 
       const findGuideName = (id) => {
         const guide = guides.find(guide => guide.id === id)
@@ -105,7 +110,10 @@ const ToursGalleryContents = () => {
                             <div className='gdId'>
                               <span>Guide ID : </span><span>{galleryItem.guideId}</span>
                             </div>
-                            <button onClick = {()=>dltHandler(galleryItem.id)} className='tourDltBtn'>Delete</button>
+                            
+                            {userType==='guide' &&
+                              <button onClick = {()=>dltHandler(galleryItem.id)} className='tourDltBtn'>Delete</button>
+                            }
                         </div> 
                         
                     <ViewGalleryModal 

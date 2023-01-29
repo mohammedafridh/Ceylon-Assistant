@@ -6,101 +6,95 @@ import {getDoc, doc, where, query} from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import ProfileUpdateModal from '../../Modals/ProfileUpdateModal'
 import TouristProfileUpdateModal from '../../Modals/TouristProfileUpdateModal'
+import { useUser } from '../../../Context/UserContext'
 
 function ProfileView() {
-
+  const {guides, tourists, userType} = useUser()
   const {user} = useUserAuth()
-  const [touristDetails, setTouristDetails] = useState('')
-  const [tourGuideDetails,setTourGuideDetails] = useState('')
   const [loading, setLoading] = useState(false)
   const [modalOpened,setModalOpened] = useState(false)
+  const [loggedInUser, setLoggedInUser] = useState('')
+
 
   useEffect(()=>{
-    onAuthStateChanged(auth, async (user)=>{
-      if(user){
-        const tourist = await getDoc(doc(db,'Tourist',user.uid))
-        const touristData = tourist.data()
-        const tourGuide = await getDoc(doc(db,'Guides',user.uid))
-        const tourGuideData = tourGuide.data()
-
-        if(touristData===undefined){
-          setTourGuideDetails(tourGuideData)
-        }else if(tourGuideData===undefined){
-          setTouristDetails(touristData)
-        }
-      }
-    })
-  },[])
+    console.log({user})
+    if(userType==='guide'){
+      const guide = guides.find(guide=>guide.id===user.uid)
+      setLoggedInUser(guide)
+    }else if(userType==='tourist'){
+      const tourist = tourists.find(tourist=>tourist.id===user.uid)
+      setLoggedInUser(tourist)
+    }
+    console.log({loggedInUser})
+  },[tourists, guides, userType, user, loggedInUser])
 
   return (
-    <div className = {tourGuideDetails? classes.profileView : classes.touristProfileView}>
-      <div className={tourGuideDetails? classes.profileWrapper : classes.touristWrapper}>
+    <div className = {userType === 'guide'? classes.profileView : classes.touristProfileView}>
+      <div className={userType === 'guide'? classes.profileWrapper : classes.touristWrapper}>
         <div className={classes.imageContainer}>
-          <img src = {touristDetails?touristDetails.image : tourGuideDetails.image} 
+          <img src = {loggedInUser.image} 
           alt = ''
-          className={tourGuideDetails? classes.image: classes.touristImg}/>
+          className={userType === 'guide'? classes.image: classes.touristImg}/>
         </div>
 
         <div className={classes.detailsContainer}>
 
             <div className={classes.titleContainer}>
-              <h3>{touristDetails?touristDetails.firstName:tourGuideDetails.firstName} {touristDetails?touristDetails.lastName:tourGuideDetails.lastName}
+              <h3>{loggedInUser.firstName} {loggedInUser.lastName}
               </h3>
 
-              <h6>{touristDetails?touristDetails.email:tourGuideDetails.email}</h6>
+              <h6>{loggedInUser.email}</h6>
 
-              {tourGuideDetails &&
-              <p>Rs. {tourGuideDetails.guideRate}/=</p>}
+              {userType === 'guide' &&
+              <p>Rs. {loggedInUser.guideRate}/=</p>}
             </div>
 
             <div className={classes.details}>
                 <label>Contact Number</label>
-                <span>{touristDetails?touristDetails.contactNumber:tourGuideDetails.contactNumber}</span>
+                <span>{loggedInUser.contactNumber}</span>
               </div>
 
-          {tourGuideDetails &&
+          {userType === 'guide' &&
             <div className = {classes.otherDetails}>
               <div className={classes.details}>
                 <label>Address</label>
-                <span>{tourGuideDetails.address}</span>
+                <span>{loggedInUser.address}</span>
               </div>
 
               <div className={classes.details}>
                 <label>Languages</label>
-                <span>{tourGuideDetails.languages}</span>
+                <span>{loggedInUser.languages}</span>
               </div>
 
               <div className={classes.details}>
                 <label>Vehicle Model</label>
-                <span>{tourGuideDetails.model}</span>
+                <span>{loggedInUser.model}</span>
               </div>
 
               <div className={classes.details}>
                 <label>Maximum Passengers</label>
-                <span>{tourGuideDetails.maxPassengers}</span>
+                <span>{loggedInUser.maxPassengers}</span>
               </div>
 
               <div className={classes.details}>
                 <label>Per Km Rate</label>
-                <span>{tourGuideDetails.perKmRate}</span>
+                <span>{loggedInUser.perKmRate}</span>
               </div>
             
             </div>
           }
             <button className = {classes.updateBtn} onClick = {()=>setModalOpened(true)}>Update</button>
-            {tourGuideDetails?
+            {userType==='guide'?
               <ProfileUpdateModal 
               modalOpened = {modalOpened} 
               setModalOpened = {setModalOpened}
-              guide = {tourGuideDetails} 
-              tourist = {touristDetails}
+              user = {loggedInUser} 
               /> :
               
               <TouristProfileUpdateModal
               modalOpened = {modalOpened} 
               setModalOpened = {setModalOpened}
-              guide = {tourGuideDetails} 
-              tourist = {touristDetails}
+              user = {loggedInUser}
               />
               }
 
@@ -108,6 +102,7 @@ function ProfileView() {
 
       </div>
     </div>
+
   )
 }
 

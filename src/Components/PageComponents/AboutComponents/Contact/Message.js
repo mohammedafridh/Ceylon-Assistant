@@ -4,6 +4,7 @@ import {collection, addDoc} from 'firebase/firestore'
 import {db} from '../../../../Firebase'
 import SuccessMessageModal from '../../../Modals/successMessageModal';
 import { useUserAuth } from '../../../../Context/Context';
+import { toast } from 'react-hot-toast';
 
 const Message = () => {
 
@@ -21,11 +22,13 @@ const Message = () => {
           const addDetails = collection(db, 'messages')
           await addDoc(addDetails,{id:user.uid, name:name, email: email, subject:subject, message:message, status:status})
           .then(()=>{
+            toast.success("Message Sent!")
             setName('')
             setEmail('')
             setSubject('')
             setMessage('')
-            setFormStatus('Success')
+            
+            // setFormStatus('Success')
           })
     
         }catch(err){

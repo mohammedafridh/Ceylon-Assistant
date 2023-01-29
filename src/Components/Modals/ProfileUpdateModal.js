@@ -1,7 +1,7 @@
 import { Modal, useMantineTheme, Select, MultiSelect  } from '@mantine/core';
 import './ProfileUpdateModal.css'
 
-function ProfileUpdateModal({modalOpened,setModalOpened}) {
+function ProfileUpdateModal({modalOpened,setModalOpened,user}) {
   const theme = useMantineTheme();
 
 
@@ -40,6 +40,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     name = 'Name' 
                     placeholder='First Name'
+                    value = {user.firstName}
                 />
 
                 <input 
@@ -47,6 +48,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     onChange = '' 
                     placeholder='Last Name'
+                    value = {user.lastName}
                 />
             </div>
 
@@ -57,12 +59,14 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     name = 'Name' 
                     placeholder='Contact Number'
+                    value = {user.contactNumber}
                 />
                 <input 
                     type="text" 
                     className='infoInput' 
                     onChange = '' 
                     placeholder='NIC number'
+                    value = {user.nicNumber}
                 />
             </div>
 
@@ -72,6 +76,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     onChange = ''
                     placeholder='Address'
+                    value = {user.address}
                 />
             </div>
 
@@ -80,6 +85,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     style = {{width:"21rem", outline:"none"}} 
                     onChange = '' 
                     placeholder='District'
+                    value={user.district}
 
                     data={[
                         { value: 'Hambanthota', label: 'Hambanthota' },
@@ -114,6 +120,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     data={data}
                     style = {{width:"21rem", outline:"none"}}
                     placeholder="Select Known Languages"
+                    value={user.languages}
                 />
             </div>
 
@@ -123,6 +130,7 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     onChange = '' 
                     placeholder='Rate'
+                    value = {user.guideRate}
                 />
 
                 <input 
@@ -130,14 +138,16 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     onChange = '' 
                     placeholder='Per Km Rate'
+                    value = {user.perKmRate}
                 />
             </div>
 
             <div>
                 <Select 
-                style = {{width:"21rem", outline:"none"}} 
+                style = {{width:"22rem", outline:"none"}} 
                 onChange = '' 
                 placeholder='Vehicle Type'
+                value = {user.vehicleType}
 
                 data={[
                     { value: 'Car', label: 'Car' },
@@ -151,44 +161,16 @@ function ProfileUpdateModal({modalOpened,setModalOpened}) {
                     className='infoInput' 
                     onChange = '' 
                     placeholder='Vehicle Model'
+                    value = {user.model}
                 />
             </div>
 
-            <div>
-                <input 
-                    type="text" 
-                    className='infoInput' 
-                    onChange = ''
-                    placeholder='Email Address'
-                />
-            </div>
-
-            <div>
-                <input 
-                    type="password" 
-                    className='infoInput' 
-                    onChange = ''
-                    placeholder='Password'
-                />
-
-                <input 
-                    type="password" 
-                    className='infoInput' 
-                    onChange = ''
-                    placeholder='Confirm Password'
-                />
-            </div>
-
-            <div>
+            <div className='infoInput' style={{alignItems:'center', textAligh:'center', justifyContent:'center',
+        padding:8}}>
                 Profile Image
                 <input 
                     type="file" 
                     name = 'profileImg' 
-                />
-                Vehicle Image
-                <input 
-                    type="file" 
-                    name = 'coverImg' 
                 />
             </div>
             

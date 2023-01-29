@@ -9,13 +9,13 @@ import Login from './pages/AuthenticationPages/Login'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import TourGuideReg from './pages/AuthenticationPages/TourGuideReg';
 import TouristReg from './pages/AuthenticationPages/TouristReg';
-import SelectedBooker from './Components/PageComponents/BookingComponents/SelectedBooker'
 import ThingsToDo from './pages/CommonPages/ThingsToDo/ThingsToDo';
 import About from './pages/CommonPages/About/About';
 import ToursGallery from './pages/CommonPages/ToursGallery/ToursGallery';
 import AddThingsToDo from './Components/PageComponents/ThingsToDoComponents/AddThingsToDo';
 import AdminLogin from './pages/AuthenticationPages/AdminLogin';
 import { UserProvider } from './Context/UserContext';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 
@@ -31,13 +31,13 @@ function App() {
 // );
 
     return(<div className = 'app'>
+        <Toaster />
         <UserProvider>
         <Routes>
             <Route path = '/login' element = {<Login />} />
             <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
             <Route path = '/touristReg' element = {<TouristReg />}/>
             <Route path = '/' element = {<Homepage />} />
-            <Route path = '/selectedBooker' element = {<SelectedBooker />}/>
             <Route path = '/tourGuides' element = {<TourGuides />} />
             <Route path = '/tours' element = {<Tours />} />
             <Route path = '/bookings' element = {<Bookings /> }/>

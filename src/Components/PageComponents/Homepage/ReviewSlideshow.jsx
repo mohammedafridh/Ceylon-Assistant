@@ -10,7 +10,7 @@ function ReviewSlideshow() {
     const [index, setIndex] = useState(0);
     const [reviews,setReviews] = useState([])
     const [error,setError] = useState('')
-    const {tourists} = useUser()
+    const {tourists,guides} = useUser()
 
     const handleSelect = (selectedIndex, e) => {
       setIndex(selectedIndex);
@@ -19,6 +19,11 @@ function ReviewSlideshow() {
     const findTouristName = (id) => {
         const tourist = tourists.find(tourist => tourist.id === id)
         return tourist ? tourist.firstName + ' ' + tourist.lastName: null   
+      }
+
+      const findGuideName = (id) => {
+        const guide = guides.find(guide => guide.id === id)
+        return guide ? guide.firstName + ' ' + guide.lastName: null   
       }
 
     useEffect(()=>{
@@ -49,7 +54,7 @@ function ReviewSlideshow() {
                 <div className="reviewContainer">
                     <h4>"{review.review}"</h4>
                     <div className="people">
-                        <h5>Guide: <span>{review.guide}</span></h5>
+                        <h5>Guide: <span>{findGuideName(review.guide)}</span></h5>
                     </div>
                     <div className="people">
                         <h5>Tourist: <span>{findTouristName(review.tourist)}</span></h5>

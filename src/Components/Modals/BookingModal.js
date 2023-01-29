@@ -29,7 +29,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
         const addDetails = collection(db, 'pending_booking')
         await addDoc(addDetails,{guide:guide.id, tourist: user.uid, location:tourLocation,
            destination: destination, startData: startData, 
-        endDate:endDate, time: time, status:status})
+        endDate:endDate, time: time, bookingDate:addDate, status:status})
         .then(()=>{
           setModalOpened(false)
           alert('Booking Successful!')

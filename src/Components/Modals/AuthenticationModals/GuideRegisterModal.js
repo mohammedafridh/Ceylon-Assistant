@@ -24,7 +24,8 @@ const [fName, setFName] = useState('')
     const [perKm, setPerKm] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [password2, setPassword2] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [passwordMatch, setPasswordMatch] = useState(true)
     const [profileImage, setProfileImage] = useState('')
     const [nicImage, setNicImage] = useState('')
     const [status, setStatus] = useState('Active')
@@ -169,7 +170,11 @@ useEffect(() => {
 
 const guideHandler = async(e)=>{
   e.preventDefault()
+  validatePassword()
   try{
+    if(passwordMatch===false){
+      return
+    }
     const addDetails = collection(db, 'guideRequests')
     await addDoc(addDetails,{
       firstName:fName,
@@ -201,6 +206,10 @@ const guideHandler = async(e)=>{
     }
   }
 
+  const validatePassword = ()=>{
+  password === confirmPassword ? setPasswordMatch(true) : setPasswordMatch(false);
+  };
+
   return (
     <Modal
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
@@ -214,6 +223,8 @@ const guideHandler = async(e)=>{
 <form className = 'addUserForm' onSubmit = {guideHandler}>
                 
                 <h3>Register Guide</h3>
+
+                {passwordMatch? '' : <p style = {{color:"red", fontWeight:"bold", fontSize:12}}>* The passwords doesn't Match. Try Again!</p>}
     
                 <div>
                         <input 
@@ -348,12 +359,13 @@ const guideHandler = async(e)=>{
                         value = {password}
                     />
     
-                    {/* <input 
+                    <input 
                         type="password" 
                         className='infoInput' 
-                        onChange = {(e)=> setPassword2(e.target.value)}
+                        onChange = {(e)=> setConfirmPassword(e.target.value)}
                         placeholder='Confirm Password'
-                    /> */}
+                        value = {confirmPassword}
+                    />
                 </div>
     
                 <div className='userAuthImageContainer'>

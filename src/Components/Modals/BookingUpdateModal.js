@@ -1,8 +1,9 @@
 import { Modal, useMantineTheme} from '@mantine/core';
 import './ProfileUpdateModal.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {query, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
+import { toast } from 'react-hot-toast';
 
 function BookingUpdateModal({modalOpened,setModalOpened,data}) {
   const theme = useMantineTheme();
@@ -11,6 +12,14 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
   const [startDate,setStartDate] = useState(data.startData)
   const [endDate,setEndDate] = useState(data.endDate)
   const [time,setTime] = useState(data.time)
+
+  useEffect(()=>{
+    setTourLocation(data.location)
+    setDestination(data.destination)
+    setStartDate(data.startData)
+    setEndDate(data.endDate)
+    setTime(data.time)
+  },[data])
 
   const updateBooking = async(data)=>{
     console.log(data.id)
@@ -23,14 +32,14 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
       time:time
      }).then(async ()=>{
         setModalOpened(false)
-        alert('Booking Updated Successfully!')
+        toast.success('Booking Updated Successfully')
      });
   }
 
   return (
     <Modal
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-      overlayOpacity={0.55}
+      overlayOpacity={0.10}
       overlayBlur={3}
       size = '55%'
       opened = {modalOpened}

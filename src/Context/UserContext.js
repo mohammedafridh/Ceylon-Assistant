@@ -1,14 +1,15 @@
 import { createContext, useContext, useState, useEffect} from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../Firebase";
-
+import { useUserAuth } from "./Context";
 
 const usersContext = createContext();
 
 export function UserProvider({children}) {
     const [guides, setGuides] = useState([]);
     const [tourists,setTourists] = useState([])
-
+    const [userType, setUserType] = useState('')
+    const {user} = useUserAuth()
     useEffect(() => {
         const guidesCollection = onSnapshot(
           collection(db, "Guides"),
@@ -48,9 +49,20 @@ export function UserProvider({children}) {
         };
       }, []);
 
+      useEffect(()=>{
+        const isGuide = guides.find(guide => guide.id === user.uid)
+        const isTourist = tourists.find(tourist => tourist.id === user.uid)
+        if(isGuide){
+            setUserType('guide')
+        }else if(isTourist){
+            setUserType('tourist')
+        }
+      },[guides,tourists,user.uid])
+
       const context = {
         guides,
-        tourists
+        tourists,
+        userType
     }
 
     return (
