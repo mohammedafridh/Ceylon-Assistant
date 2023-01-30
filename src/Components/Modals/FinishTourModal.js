@@ -20,6 +20,9 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
   const [status,setStatus] = useState('Active')
   const { user } = useUserAuth();
 
+  // useEffect(()=>{
+  //   setGuide(details.email)
+  // },[details])
 
   const tourHandler =  (e) => {
     console.log({rating, review})

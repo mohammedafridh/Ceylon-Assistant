@@ -78,6 +78,10 @@ function AllGuides() {
     setActiveGuides(guides.filter(guide => guide.status === 'Active' && guide.firstName.toLowerCase().includes(e.toLowerCase())))
   }
 
+  const handleId = (e) => {
+    setActiveGuides(guides.filter(guide => guide.status === 'Active' && guide.id === e))
+  }
+
   const sumOfRating = (ratings) => {
     // no ratings return
     if (!ratings || ratings.length === 0) return 'No Ratings Yet';
@@ -118,7 +122,7 @@ function AllGuides() {
 
       <div className='listContainer'>
         <div className='searchGuide'>
-          <h3>Filter</h3>
+          <h3>Search</h3>
 
           <div>
             <input
@@ -137,6 +141,15 @@ function AllGuides() {
               onChange={districtHandler}
               className='typeDrop'
               required
+            />
+          </div>
+
+          <div>
+            <input
+              type="text"
+              className='input'
+              placeholder='Guide ID'
+              onChange={(e) => handleId(e.target.value)}
             />
           </div>
 
