@@ -9,7 +9,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
   const theme = useMantineTheme();
   const {user} = useUserAuth();
   const [tourGuide,setTourGuide] = useState()
-    const[tourist,setTourist] = useState(user.uid)
+    // const[tourist,setTourist] = useState(user.uid)
     const[tourLocation,setTourLocation] = useState('')
     const[destination,setDestination] = useState('')
     const[startData,setStartDate] = useState('')

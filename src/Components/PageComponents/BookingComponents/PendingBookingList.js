@@ -97,6 +97,11 @@ function PendingBookingList() {
             await updateDoc(updateStatus, {
             status: 'inactive'
             })
+
+            const updateAvailability = query(doc(db, 'Guides', booking.guide));
+            await updateDoc(updateAvailability, {
+            availability: 'On a Tour'
+            })
             toast.success('Booking Accepted Successfully')
       })
 

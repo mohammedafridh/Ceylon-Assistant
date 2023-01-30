@@ -24,6 +24,7 @@ function AllGuides() {
   const [selectedGuide, setSelectedGuide] = useState({})
   const { guides } = useUser()
   const { userType } = useUser()
+  const [color,setColor] = useState(false)
 
   const setModal = (guide) => {
     setSelectedGuide(guide)
@@ -34,7 +35,6 @@ function AllGuides() {
     setActiveGuides(guides.filter(guide => guide.status === 'Active'))
     console.log({activeGuides})
   }, [userType, guides])
-
 
 
   const districtData = [
@@ -80,7 +80,7 @@ function AllGuides() {
 
   const sumOfRating = (ratings) => {
     // no ratings return
-    if (!ratings) return 0;
+    if (!ratings || ratings.length === 0) return 'No Ratings Yet';
 
     let sum = 0
     ratings.forEach(item => {
@@ -208,10 +208,12 @@ function AllGuides() {
                 <div className={classes.otherDetails}>
                   <div className={classes.ratingBar}>
                     <span>Rating</span>
-                    <span>{sumOfRating(guide.ratings)}</span>
+                    <span>
+                      <div className={classes.ratingNum}>{sumOfRating(guide.ratings)}</div>
+                    </span>
                   </div>
-                  <div className={classes.availability}>
-                    <span>Available</span>
+                  <div className= {color? classes.availability: classes.unavailability}>
+                    <span>{guide.availability}</span>
                   </div>
 
                   {userType === 'tourist' &&

@@ -17,6 +17,7 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
   const [review, setReview] = useState("");
   const [guide, setGuide] = useState(details.email);
   const [hover, setHover] = useState(0);
+  const [status,setStatus] = useState('Active')
   const { user } = useUserAuth();
 
 
@@ -27,17 +28,23 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
     e.preventDefault();
     //update guide ratings
     const findGuide = guides.find(guide=>guide.id===details.guide)
-    const newRatings = [...findGuide.ratings, {rating, review, ratedTourist: user.uid}]
+    const newRatings = [...findGuide.ratings, {rating, review, ratedTourist: user.uid, ratingStatus:status}]
     setGuideRatings(newRatings)
     setDoc(doc(db, "Guides", details.guide), { ratings: newRatings }, { merge: true }).then(()=> {
       setRating(null)
       setReview('')
       toast.success('* Thanks for your response. Come Again!')
       setFinishTourModal(false)
+
         const cancelItem = query(doc(db,'tours',details.id));
-        updateDoc(cancelItem, {
+         updateDoc(cancelItem, {
         status: 'inactive'
         });
+
+        const updateAvailability = query(doc(db, 'Guides', details.guide));
+         updateDoc(updateAvailability, {
+        availability: 'Available'
+        })
 
     }).catch((error) => {
       toast.error('Failed to record your response!');

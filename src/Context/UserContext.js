@@ -50,14 +50,19 @@ export function UserProvider({children}) {
       }, []);
 
       useEffect(()=>{
-        const isGuide = guides.find(guide => guide.id === user.uid)
-        const isTourist = tourists.find(tourist => tourist.id === user.uid)
-        if(isGuide){
+        if(guides.length > 0 && user?.uid){
+          const guide = guides.find(guide => guide.id === user.uid)
+          if(guide){
             setUserType('guide')
-        }else if(isTourist){
-            setUserType('tourist')
+          }
         }
-      },[guides,tourists,user.uid])
+        if(tourists.length > 0 && user?.uid){
+          const tourist = tourists.find(tourist => tourist.id === user.uid)
+          if(tourist){
+            setUserType('tourist')
+          }
+        }
+      },[guides,tourists,user?.uid])
 
       const context = {
         guides,

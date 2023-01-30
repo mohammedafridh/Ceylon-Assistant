@@ -1,5 +1,5 @@
 import './App.css';
-import {Routes,Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/CommonPages/Homepage/Homepage';
 import TourGuides from './pages/CommonPages/TourGuidesPage/TourGuides';
 import Tours from './pages/CommonPages/ToursPage/Tours';
@@ -19,38 +19,55 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
 
-//     var docWidth = document.documentElement.offsetWidth;
+  //     var docWidth = document.documentElement.offsetWidth;
 
-// [].forEach.call(
-//   document.querySelectorAll('*'),
-//   function(el) {
-//     if (el.offsetWidth > docWidth) {
-//       console.log(el);
-//     }
-//   }
-// );
+  // [].forEach.call(
+  //   document.querySelectorAll('*'),
+  //   function(el) {
+  //     if (el.offsetWidth > docWidth) {
+  //       console.log(el);
+  //     }
+  //   }
+  // );
 
-    return(<div className = 'app'>
-        <Toaster />
-        <UserProvider>
-        <Routes>
-            <Route path = '/login' element = {<Login />} />
-            <Route path = '/tourGuideReg' element = {<TourGuideReg />}/>
-            <Route path = '/touristReg' element = {<TouristReg />}/>
-            <Route path = '/' element = {<Homepage />} />
-            <Route path = '/tourGuides' element = {<TourGuides />} />
-            <Route path = '/tours' element = {<Tours />} />
-            <Route path = '/bookings' element = {<Bookings /> }/>
-            <Route path = '/profile' element = {<Profile />} />
-            <Route path = '/thingsToDo' element = {<ThingsToDo />} />
-            <Route path = '/about' element = {<About />} />
-            <Route path = '/toursGallery' element = {<ToursGallery />} />
-            <Route path = '/addThingsToDo' element = {<AddThingsToDo />} />
-            <Route path = '/admin' element = {<AdminLogin />} />
-        </Routes>    
-        </UserProvider>
-    </div>  
-    )
+  return (<div className='app'>
+    <Toaster />
+    <UserProvider>
+      <Routes>
+        {/* <Route path = '/login' element = {<Login />} /> */}
+        <Route path='/tourGuideReg' element={<TourGuideReg />} />
+        <Route path='/touristReg' element={<TouristReg />} />
+        <Route path='/' element={<Homepage />} />
+        <Route path='/tourGuides' element={<TourGuides />} />
+        <Route path='/tours' element={<Tours />} />
+        {/* <Route path='/bookings' element={<Bookings />} /> */}
+        {/* <Route path = '/profile' element = {<Profile />} /> */}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/bookings"
+          element={
+            <ProtectedRoute>
+              <Bookings />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/thingsToDo' element={<ThingsToDo />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/toursGallery' element={<ToursGallery />} />
+        <Route path='/addThingsToDo' element={<AddThingsToDo />} />
+        <Route path='/admin' element={<AdminLogin />} />
+      </Routes>
+    </UserProvider>
+  </div>
+  )
 }
 
 export default App;

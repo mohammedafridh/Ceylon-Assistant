@@ -8,20 +8,19 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import TouristRegisterModal from '../Modals/AuthenticationModals/TouristRegisterModel'
 import GuideRegisterModal from '../Modals/AuthenticationModals/GuideRegisterModal'
 import LoginModal from '../Modals/AuthenticationModals/LoginModal'
+import { toast } from 'react-hot-toast'
 
 function MainNavigation(){
 
-    const {logOut} = useUserAuth();
+    const {logOut,user} = useUserAuth();
     const [touristModal,setTouristModal] = useState(false)
     const [guideModal,setGuideModal] = useState(false)
     const[loginModel,setLoginModel] = useState(false)
 
+
     const handleLogOut = async ()=>{
-        try{
-            await logOut()
-        }catch(err){
-            console.log(err.message)
-        }
+        await logOut()
+        toast.success('Logged Out Successfully!')
     }
 
     return(
@@ -41,7 +40,9 @@ function MainNavigation(){
                     <div className = {classes.dropDown}>
                         <ul>
                             <li><NavLink to = '/tourGuides'>All Guides</NavLink></li>
-                            <li><NavLink to = '/bookings'>Bookings</NavLink></li>
+                            {user &&
+                                <li><NavLink to = '/bookings'>Bookings</NavLink></li>
+                            }
                         </ul>
                     </div>
                 </li> 
@@ -63,26 +64,34 @@ function MainNavigation(){
                     <li><NavLink to = ''>Options <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></NavLink>
                         <div className = {classes.dropDown}>
                             <ul>
-                                <li><NavLink to = '/profile'>Profile</NavLink></li>
+                                {user &&
+                                <li><NavLink to = '/profile'>Profile</NavLink></li>}
+                            {!user &&
                                 <li><NavLink to = '' onClick={()=>setGuideModal(true)}>Register Guide</NavLink></li>
+                            }
                                     <GuideRegisterModal 
                                         guideModal = {guideModal} 
                                         setGuideModal = {setGuideModal}
                                     />
-
+                            {!user &&
                                 <li><NavLink to = '' onClick={()=>setTouristModal(true)}>Register Tourist</NavLink></li>
+                            }
                                     <TouristRegisterModal 
                                         touristModal = {touristModal} 
                                         setTouristModal = {setTouristModal}
                                     />
-
+                                    
+                            {!user &&
                                 <li><NavLink to = '' onClick={()=>setLoginModel(true)}>Log In</NavLink></li>
+                            }
                                     <LoginModal 
                                         loginModel = {loginModel} 
                                         setLoginModel = {setLoginModel}
                                     />
-
-                                <li><NavLink to = '/login'>Log Out</NavLink></li>
+                            
+                                {user &&
+                                    <li><NavLink to="/" onClick={handleLogOut}>Log Out</NavLink></li>
+                                }
                             </ul>
                         </div>
                     </li>
@@ -93,5 +102,4 @@ function MainNavigation(){
 }
 
 export default MainNavigation;
-
 

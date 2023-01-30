@@ -3,7 +3,7 @@ import './TouristRegisteModal.css'
 import { Modal, useMantineTheme} from '@mantine/core';
 import {useUserAuth} from '../../../Context/Context' 
 import {useNavigate} from 'react-router-dom'
-import { ClassNames } from '@emotion/react';
+import { toast } from 'react-hot-toast';
 
 function LoginModal({loginModel,setLoginModel}) {
   const theme = useMantineTheme();
@@ -23,6 +23,8 @@ const loginHandler = async (e)=>{
     try{
         await logIn(email,password)
         navigate('/')
+        setLoginModel(false)
+        toast.success("Login Successful")
     }catch(err){
         setError(err.message)
     }
