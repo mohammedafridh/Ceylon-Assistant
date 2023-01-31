@@ -15,10 +15,11 @@
 .headingImgContainer{
     width: 100%;
     background-image: url('https://www.sltda.gov.lk/images/s2.jpg');
-    background-size: 100% 20rem;
+    background-size: 100% 22rem;
     background-repeat: no-repeat;
+    background-position: center;
     height: 20rem;
-    object-fit: cover;
+    object-fit: contain;
     margin-bottom: 3rem;
 }
 
@@ -27,7 +28,7 @@
     left: 13rem;
     top: 13rem;
     color: white;
-    font-size: 60px;
+    font-size: 55px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 

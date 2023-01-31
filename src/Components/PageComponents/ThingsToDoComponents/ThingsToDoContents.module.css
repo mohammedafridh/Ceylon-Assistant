@@ -6,10 +6,11 @@
 .topContainer{
     width: 100%;
     background-image: url('https://travellemming.com/wp-content/uploads/Galle-Fort-Sri-Lanka.jpg');
-    background-size: 100% 17rem;
+    background-size: 100% 20rem;
     background-repeat: no-repeat;
-    height: 17rem;
-    object-fit: cover;
+    background-position: center;
+    height: 20rem;
+    object-fit: contain;
 }
 
 .topContainer span{
@@ -19,6 +20,8 @@
     color: white;
     font-size: 60px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
 }
 
 .thingsToDoIntroContainer{

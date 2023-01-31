@@ -6,20 +6,21 @@
 .topContainer{
     width: 100%;
     background-image: url('https://withlocals-com-res.cloudinary.com/image/upload/w_360,h_203,c_fill,g_auto,q_auto,dpr_3.0,f_auto/f6c0093c19d89c8dadb1e4148683874d');
-    background-size: 100% 18.5rem;
+    background-size: 100% 22rem;
     background-repeat: no-repeat;
-    height: 18.5rem;
-    object-fit: cover;
+    background-position: center;
+    height: 22rem;
+    object-fit: contain;
 }
 
 .topContainer span{
     position: absolute;
     left: 10rem;
-    top: 15rem;
+    top: 16rem;
     color: white;
     font-size: 60px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
 }
 
