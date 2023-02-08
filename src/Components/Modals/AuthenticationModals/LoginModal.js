@@ -4,6 +4,8 @@ import { Modal, useMantineTheme} from '@mantine/core';
 import {useUserAuth} from '../../../Context/Context' 
 import {useNavigate} from 'react-router-dom'
 import { toast } from 'react-hot-toast';
+import { ContentCutOutlined } from '@mui/icons-material';
+import { useUser } from '../../../Context/UserContext';
 
 function LoginModal({loginModel,setLoginModel}) {
   const theme = useMantineTheme();
@@ -14,19 +16,31 @@ function LoginModal({loginModel,setLoginModel}) {
     const [error,setError] = useState('')
     const {logIn} = useUserAuth();
     const navigate = useNavigate()
+    const {guides,tourists} = useUser()
 
 //adding data to firebase
+
+    const isGuideActive = guides.find(guide => guide.email === email && guide.status ==='Active')
+    const isTouristActive = tourists.find(tourist => tourist.email === email && tourist.status ==='Active') 
+    console.log(isGuideActive) 
+
 
 const loginHandler = async (e)=>{
     e.preventDefault();
     setError('')
     try{
+        if(isGuideActive || isTouristActive){
         await logIn(email,password)
         navigate('/')
         setLoginModel(false)
         toast.success("Login Successful")
+        }
+        // else{
+        //     toast.error('Sorry. Your Profile has been inactivated by Admin! Please contact admin by ceylonassistant@gmail.com for more info')
+        // }
     }catch(err){
-        setError(err.message)
+        // setError('Invalid Credentials')
+        console.log(err)
     }
 }
 

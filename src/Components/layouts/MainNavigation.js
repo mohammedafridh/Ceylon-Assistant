@@ -56,7 +56,7 @@ function MainNavigation(){
                         </ul>
                     </div>
                 </li>
-                {/* <li><NavLink to = '/admin'>Admin Login</NavLink></li>  */}
+                <li><NavLink to = '/admin'>Admin Login</NavLink></li> 
             </ul>
 
             <div>
