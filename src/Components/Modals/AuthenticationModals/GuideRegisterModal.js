@@ -7,6 +7,8 @@ import {doc, addDoc, collection } from "firebase/firestore";
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import Select from 'react-select'
+import { toast } from 'react-hot-toast';
+import { useUser } from '../../../Context/UserContext';
 
 
 function GuideRegisterModal({guideModal,setGuideModal}) {
@@ -35,6 +37,7 @@ const [fName, setFName] = useState('')
     const {signUp} = useUserAuth();
     const current = new Date();
     const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+    const {guides} = useUser()
 
     //language dropdown data
     const language = [
@@ -120,64 +123,38 @@ const [fName, setFName] = useState('')
   
 //getting image urls
 
-useEffect(() => {
-    const getImageUrl = async () => {
-        const guideProfileRef = ref(storage, `GuideProfile/${profileImage.name + v4()}`);
-        uploadBytes(guideProfileRef, profileImage)
-          .then(() => {
-            getDownloadURL(guideProfileRef)
-              .then((url) => {
-                console.log({ url });
-                setUrl(url);
-              })
-              .catch((err) => {
-                setError(err.message, "error getting the image");
-              });
-          })
-          .catch((err) => {
-            setError(err);
-          });
-      };
-    const imageUrl = async () => {
-      await getImageUrl();
-    };
-    const getNicImageUrl = async () => {
-        const guideNicRef = ref(storage, `GuideNic/${nicImage.name + v4()}`);
-        uploadBytes(guideNicRef, nicImage)
-          .then(() => {
-            getDownloadURL(guideNicRef)
-              .then((url) => {
-                console.log({ url });
-                setNicUrl(url);
-              })
-              .catch((err) => {
-                setError(err.message, "error getting the image");
-              });
-          })
-          .catch((err) => {
-            setError(err);
-          });
-      };
-    const nicImageUrl = async () => {
-      await getNicImageUrl();
-    };
-    imageUrl();
-    nicImageUrl();
-  }, [profileImage, nicImage]);
+const setImage = (e, imageFolder, setUrl) => {
+  const image = e.target.files[0];
+  const storageImageRef = ref(storage, `${imageFolder}/${image?.name + v4()}`);
+  if(image === null || image === undefined || image === '') {
+    console.log("No file selected");
+    return
+  }
+  uploadBytes(storageImageRef, image).then(() => {
+    console.log("Uploaded a blob or file!");
+    getDownloadURL(storageImageRef)
+      .then((url) => {
+        setUrl(url);
+        console.log({ profile: url });
+      })
+      .catch((error) => {
+        console.log({ error });
+      })
+  });
+}
     
 
 //adding data to firebase
 
 const guideHandler = async(e)=>{
   e.preventDefault()
-  validatePassword()
-  try{
-    if(passwordMatch===false){
-      return
-    }
+  setError('')
+    if(password===confirmPassword){
+      if(contactNumber.length === 10){
     const addDetails = collection(db, 'guideRequests')
     await addDoc(addDetails,{
       firstName:fName,
+      password:password,
       lastName:lName,
       contactNumber:contactNumber,
       nicNumber:nicNumber,
@@ -197,18 +174,20 @@ const guideHandler = async(e)=>{
       status: 'Active'
     })
     .then(()=>{
-      alert('Your Register Request is been noted. We kindly hope your Patience!')
+      toast.success('Your Register Request is been noted. We kindly request your Patience!')
       setGuideModal(false)
     })
-
-    }catch(err){
-      err.message('Cant add Your Request')
-    }
+  }else{
+    setError('*Contact Number must be 10 characters')
+  }
+  }else{
+    setError('Passwords Do Not Match!')
+  }
   }
 
-  const validatePassword = ()=>{
-  password === confirmPassword ? setPasswordMatch(true) : setPasswordMatch(false);
-  };
+  // const validatePassword = ()=>{
+  // password === confirmPassword ? setPasswordMatch(true) : setPasswordMatch(false);
+  // };
 
   return (
     <Modal
@@ -224,7 +203,7 @@ const guideHandler = async(e)=>{
                 
                 <h3>Register Guide</h3>
 
-                {passwordMatch? '' : <p style = {{color:"red", fontWeight:"bold", fontSize:12}}>* The passwords doesn't Match. Try Again!</p>}
+                <p style={{ color: error && 'red', fontWeight:'bold'}}>{error}</p>
     
                 <div>
                         <input 
@@ -374,7 +353,8 @@ const guideHandler = async(e)=>{
                         <input 
                             type="file" 
                             name = 'profileImg' 
-                            onChange = {(e) => setProfileImage(e.target.files[0])}
+                            onChange = {(e) => setImage(e, 'GuideImages', setProfileImage)}
+                            required
                         />
                     </div>
                 
@@ -383,7 +363,8 @@ const guideHandler = async(e)=>{
                         <input 
                             type="file" 
                             name = 'coverImg' 
-                            onChange = {(e)=>setNicImage(e.target.files[0])}
+                            onChange = {(e) => setImage(e, 'GuideNic', setProfileImage)}
+                            required
                         />
                     </div>
     

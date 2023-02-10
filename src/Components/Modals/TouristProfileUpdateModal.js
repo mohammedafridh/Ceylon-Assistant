@@ -1,4 +1,4 @@
-import { Modal, useMantineTheme, Select, MultiSelect  } from '@mantine/core';
+import { Modal, useMantineTheme} from '@mantine/core';
 import './ProfileUpdateModal.css'
 
 function TouristProfileUpdateModal({modalOpened,setModalOpened}) {

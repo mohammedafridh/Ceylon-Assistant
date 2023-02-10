@@ -8,15 +8,27 @@ function TopGuides() {
   const { guides } = useUser();
   const [topGuides, setTopGuides] = useState([]);
 
+  const sumOfRating = (ratings) => {
+    // no ratings return
+    if (!ratings || ratings.length === 0) return 'No Ratings Yet';
+
+    let sum = 0
+    ratings.forEach(item => {
+      sum += item.rating
+    })
+    const value = sum/ratings.length
+    return value.toFixed(1);
+  }
+
   useEffect(() => {
     //iterate through guides and find the top guides
     guides.forEach((guide) => {
-      //if the guide has more than 5 bookings
-      if (guide.guideRate > 4) {
-        //add to top guides
+      if(sumOfRating(guide.ratings) >= 4){
+        console.log('here')
         setTopGuides((prev) => [...prev, guide]);
-      }
+      } 
     });
+  
   }, [guides]);
 
   return (

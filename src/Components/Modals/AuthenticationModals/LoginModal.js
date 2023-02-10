@@ -4,7 +4,6 @@ import { Modal, useMantineTheme} from '@mantine/core';
 import {useUserAuth} from '../../../Context/Context' 
 import {useNavigate} from 'react-router-dom'
 import { toast } from 'react-hot-toast';
-import { ContentCutOutlined } from '@mui/icons-material';
 import { useUser } from '../../../Context/UserContext';
 
 function LoginModal({loginModel,setLoginModel}) {
@@ -14,7 +13,7 @@ function LoginModal({loginModel,setLoginModel}) {
     const [email,setEmail] = useState('');
     const[password,setPassword] = useState('')
     const [error,setError] = useState('')
-    const {logIn} = useUserAuth();
+    const {logIn, logOut} = useUserAuth();
     const navigate = useNavigate()
     const {guides,tourists} = useUser()
 
@@ -28,20 +27,25 @@ function LoginModal({loginModel,setLoginModel}) {
 const loginHandler = async (e)=>{
     e.preventDefault();
     setError('')
-    try{
-        if(isGuideActive || isTouristActive){
-        await logIn(email,password)
-        navigate('/')
-        setLoginModel(false)
-        toast.success("Login Successful")
+        try{
+            const isLoggedIn = await logIn(email,password)
+            if(isLoggedIn && !isGuideActive && !isTouristActive){
+                toast.error('Your account is not active')
+                logOut()
+                return
+            }
+            navigate('/')
+            toast.success('Logged in Successful. Thank You!')
+            setLoginModel(false)
+            
+        }catch(error){
+            console.log(error.message)
+            error.code === 'auth/invalid-email' && toast.error('Invalid email')
+            error.code === 'auth/user-not-found' && toast.error('User not found')
+            error.code === 'auth/wrong-password' && toast.error('Incorrect Username or Password')
+            setError('Failed to login')
         }
-        // else{
-        //     toast.error('Sorry. Your Profile has been inactivated by Admin! Please contact admin by ceylonassistant@gmail.com for more info')
-        // }
-    }catch(err){
-        // setError('Invalid Credentials')
-        console.log(err)
-    }
+    
 }
 
 return (
@@ -65,7 +69,7 @@ return (
 
         <div>
             <input 
-                type="text" 
+                type="email" 
                 className='userInput' 
                 onChange = {(e)=> setEmail(e.target.value)}
                 placeholder='Email Address'

@@ -8,6 +8,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    object-fit: cover;
 }
 .product-images-slider .swiper-button-prev {
     left: 30;
@@ -35,4 +36,5 @@
     top: 0;
     left: 0;
     width: 100%;
+    object-fit: cover;
 }

@@ -1,187 +1,313 @@
-import { Modal, useMantineTheme, Select, MultiSelect  } from '@mantine/core';
+import { useEffect, useState } from "react";
+import {
+  Modal,
+  MultiSelect,
+  NativeSelect,
+  useMantineTheme,
+} from "@mantine/core";
+// import '../Pages/AddThingsToDo/AddThingsToDoContents/AddThings.css'
+import { db, storage } from "../../Firebase";
+import { query, doc, updateDoc, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import { useUserAuth } from "../../Context/Context";
 import './ProfileUpdateModal.css'
+import { toast } from "react-hot-toast";
 
-function ProfileUpdateModal({modalOpened,setModalOpened,user}) {
+function ProfileUpdateModal({ modalOpened, setModalOpened, user }) {
   const theme = useMantineTheme();
+  const [fName, setFName] = useState(user.firstName);
+  const [lName, setLName] = useState(user.lastName);
+  const [contactNumber, setContactNumber] = useState(user.contactNumber);
+  const [address, setAddress] = useState(user.address);
+  const [guideRate, setGuideRate] = useState(user.guideRate);
+  const [model, setModel] = useState(user.model);
+  const [maxPassengers, setMaxPassengers] = useState(user.maxPassengers);
+  const [perKm, setPerKm] = useState(user.perKmRate);
+  const [profile, setProfile] = useState("");
+  const [imgError, setImgError] = useState(false);
+  const [url, setUrl] = useState(null);
+  const [formStatus, setFormStatus] = useState("");
+  const [languages, setLanguages] = useState(user.languages);
+  const [district, setDistrict] = useState(user.district);
+  const [type, setType] = useState(user);
+  const [vehicleType, setVehicleType] = useState(user.vehicleType);
 
+  useEffect(() => {
+    setFName(user.firstName);
+    setLName(user.lastName);
+    setContactNumber(user.contactNumber);
+    setAddress(user.address);
+    setGuideRate(user.guideRate);
+    setMaxPassengers(user.maxPassengers);
+    setPerKm(user.perKmRate);
+    setModel(user.model);
+    setLanguages(user.languages);
+    setVehicleType(user.vehicleType);
+    setType(user.guideType);
+    setDistrict(user.district);
+    console.log({ user });
+  }, [user]);
 
-  const data = [
-    { value: 'Sinhala', label: 'Sinhala' },
-    { value: 'English', label: 'English' },
-    { value: 'Hindi', label: 'Hindi' },
-    { value: 'Malayalam', label: 'Malayalam' },
-    { value: 'Urdu', label: 'Urdu' },   
-    { value: 'French', label: 'French' },
-    { value: 'Arabic', label: 'Arabic' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Russian', label: 'Russian' },
-    { value: 'Chinese', label: 'Chinese' },
-    { value: 'Japanese', label: 'Japanese' },
-    { value: 'Italian', label: 'Italian' },
-    { value: 'Korean', label: 'Korean' },
+  const setImage = (e, imageFolder, setUrl) => {
+    const image = e.target.files[0];
+    const storageImageRef = ref(
+      storage,
+      `${imageFolder}/${image?.name + v4()}`
+    );
+    if (image === null || image === undefined || image === "") {
+      console.log("No file selected");
+      setImgError(true);
+      return;
+    }
+    uploadBytes(storageImageRef, image).then(() => {
+      setImgError(false);
+      getDownloadURL(storageImageRef)
+        .then((url) => {
+          setUrl(url);
+          console.log({ profile: url });
+        })
+        .catch((error) => {
+          console.log({ error });
+        });
+    });
+  };
+  const languageData = [
+    "Sinhala",
+    "English",
+    "Hindi",
+    "Malayalam",
+    "Urdu",
+    "French",
+    "Arabic",
+    "Spanish",
+    "Russian",
+    "Chinese",
+    "Japanese",
+    "Italian",
+    "Korean",
   ];
+  const typeData = ["National", "Site"];
+  const districtData = [
+    "Hambanthota",
+    "Matara",
+    "Galle",
+    "Badulla",
+    "Monaragala",
+    "Trincomalee",
+    "Batticaloa",
+    "Ampara",
+    "Kegalle",
+    "Rathnapura",
+    "Matale",
+    "Kandy",
+    "Nuwara-Eliya",
+    "Anuradhapura",
+    "Polonnaruwa",
+    "Gampaha",
+    "Colombo",
+    "Kalutara",
+    "Puttalam",
+    "Kurunegala",
+    "Jaffna",
+    "Kilinochchi",
+    "Mannar",
+    "Mullativu",
+    "Vavuniya",
+  ];
+
+
+  const carType = [ 'Car', 'Van', 'Mini Jeep'];
+
+  const updateDetails = async (data) => {
+    setDoc(
+      doc(db, "Guides", data.id),
+      {
+        firstName: fName,
+        lastName: lName,
+        contactNumber: contactNumber,
+        address: address,
+        district: district,
+        guideType: type,
+        languages: languages,
+        guideRate: guideRate,
+        vehicleType: vehicleType,
+        model: model,
+        maxPassengers: maxPassengers,
+        perKmRate: perKm,
+        image: profile ? profile : data.image,
+      },
+      { merge: true }
+    ).then(() => {
+      toast.success("Details Updated Successfully");
+      setModalOpened(false);
+    });
+
+  };
 
   return (
     <Modal
-      overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-      overlayOpacity={0.55}
-      overlayBlur={3}
-      size = '55%'
-      opened = {modalOpened}
-      onClose = {()=>setModalOpened(false)}
+      overlayColor={
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[9]
+          : theme.colors.gray[2]
+      }
+      overlayOpacity={0.25}
+      overlayBlur={0.5}
+      size="60%"
+      opened={modalOpened}
+      onClose={() => {
+        setModalOpened(false);
+        //  setQuestion('');
+        //  setAnswer('')
+      }}
     >
+      <div className="infoForm">
+        <h3>Add Guide</h3>
 
-        <form className = 'infoForm'>
-            <h3>Update Profile</h3>
+        {imgError ? (
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            * Please select a valid image!
+          </p>
+        ) : (
+          ""
+        )}
 
-            <div>
-                <input 
-                    type="text" 
-                    className='infoInput' 
-                    name = 'Name' 
-                    placeholder='First Name'
-                    value = {user.firstName}
-                />
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            onChange={(e) => setFName(e.target.value)}
+            placeholder="First Name"
+            value={fName}
+            required
+          />
+          <input
+            type="text"
+            className="infoInput"
+            onChange={(e) => setLName(e.target.value)}
+            placeholder="Last Name"
+            value={lName}
+            required
+          />
+        </div>
 
-                <input 
-                    type="text" 
-                    className='infoInput' 
-                    onChange = '' 
-                    placeholder='Last Name'
-                    value = {user.lastName}
-                />
-            </div>
+        <div>
+          <input
+            type="number"
+            className="infoInput"
+            onChange={(e) => setContactNumber(e.target.value)}
+            placeholder="Contact Number"
+            value={contactNumber}
+            required
+          />
 
-        
-            <div>
-                <input 
-                    type="number" 
-                    className='infoInput' 
-                    name = 'Name' 
-                    placeholder='Contact Number'
-                    value = {user.contactNumber}
-                />
-                <input 
-                    type="text" 
-                    className='infoInput' 
-                    onChange = '' 
-                    placeholder='NIC number'
-                    value = {user.nicNumber}
-                />
-            </div>
+          <MultiSelect
+            data={languageData}
+            value={languages}
+            onChange={setLanguages}
+            style = {{minWidth:390}}
+          />
 
-            <div>
-                <input 
-                    type="text" 
-                    className='infoInput' 
-                    onChange = ''
-                    placeholder='Address'
-                    value = {user.address}
-                />
-            </div>
+        </div>
 
-            <div>
-                <Select 
-                    style = {{width:"21rem", outline:"none"}} 
-                    onChange = '' 
-                    placeholder='District'
-                    value={user.district}
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Address"
+            value={address}
+            required
+          />
+          <NativeSelect
+            className="typeDrop"
+            data={districtData}
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
+          />
 
-                    data={[
-                        { value: 'Hambanthota', label: 'Hambanthota' },
-                        { value: 'Matara', label: 'Matara' },
-                        { value: 'Galle', label: 'Galle' },
-                        { value: 'Badulla', label: 'Badulla' },
-                        { value: 'Monaragala', label: 'Monaragala' },
-                        { value: 'Trincomalee', label: 'Trincomalee' },
-                        { value: 'Batticaloa', label: 'Batticaloa' },
-                        { value: 'Ampara', label: 'Ampara' },
-                        { value: 'Kegalle', label: 'Kegalle' },
-                        { value: 'Rathnapura', label: 'Rathnapura' },
-                        { value: 'Matale', label: 'Matale' },
-                        { value: 'Kandy', label: 'Kandy' },
-                        { value: 'Nuwara-Eliya', label: 'Nuwara Eliya' },
-                        { value: 'Anuradhapura', label: 'Anuradhapura' },
-                        { value: 'Polonnaruwa', label: 'Polonnaruwa' },
-                        { value: 'Gampaha', label: 'Gampaha' },
-                        { value: 'Colombo', label: 'Colombo' },
-                        { value: 'Kalutara', label: 'Kalutara' },
-                        { value: 'Puttalam', label: 'Puttalam' },
-                        { value: 'Kurunegala', label: 'Kurunegala' },
-                        { value: 'Jaffna', label: 'Jaffna' },
-                        { value: 'Kilinochchi', label: 'Kilinochchi' },
-                        { value: 'Mannar', label: 'Mannar' },
-                        { value: 'Mullativu', label: 'Mullativu' },
-                        { value: 'Vavuniya', label: 'Vavuniya' },
-                    ]}
-                />
+        </div>
 
-                <MultiSelect
-                    data={data}
-                    style = {{width:"21rem", outline:"none"}}
-                    placeholder="Select Known Languages"
-                    value={user.languages}
-                />
-            </div>
+        <div>
+          <NativeSelect
+            className="guideDrop"
+            onChange={(e) => setType(e.target.value)}
+            data={typeData}
+            value={type}
+          />
 
-            <div>
-                <input 
-                    type="number" 
-                    className='infoInput' 
-                    onChange = '' 
-                    placeholder='Rate'
-                    value = {user.guideRate}
-                />
+          <input
+            type="number"
+            className="infoInput"
+            onChange={(e) => setGuideRate(e.target.value)}
+            placeholder="Guide Rate Per Day"
+            value={guideRate}
+            required
+          />
 
-                <input 
-                    type="number" 
-                    className='infoInput' 
-                    onChange = '' 
-                    placeholder='Per Km Rate'
-                    value = {user.perKmRate}
-                />
-            </div>
+          <div className="perKm">
+            <input
+              type="number"
+              className="infoInput"
+              onChange={(e) => setPerKm(e.target.value)}
+              placeholder="Per Km Rate"
+              value={perKm}
+              required
+            />
+            <span>*Per Km Rate for own vehicle</span>
+          </div>
+        </div>
 
-            <div>
-                <Select 
-                style = {{width:"22rem", outline:"none"}} 
-                onChange = '' 
-                placeholder='Vehicle Type'
-                value = {user.vehicleType}
+        <div>
 
-                data={[
-                    { value: 'Car', label: 'Car' },
-                    { value: 'Van', label: 'Van' },
-                    { value: 'Mini-Jeep', label: 'Mini Jeep' },
-                  ]}
-                />        
+          <NativeSelect
+            className="typeDrop"
+            // label="Vehicle Type"
+            onChange={(e) => setVehicleType(e.target.value)}
+            data={carType}
+            value={vehicleType}
+          />
 
-                <input 
-                    type="text" 
-                    className='infoInput' 
-                    onChange = '' 
-                    placeholder='Vehicle Model'
-                    value = {user.model}
-                />
-            </div>
+          <input
+            type="text"
+            className="infoInput"
+            onChange={(e) => setModel(e.target.value)}
+            placeholder="Vehicle Model"
+            value={model}
+          />
+          <input
+            type="number"
+            className="infoInput"
+            onChange={(e) => setMaxPassengers(e.target.value)}
+            placeholder="Maximum Passengers"
+            value={maxPassengers}
+            required
+          />
 
-            <div className='infoInput' style={{alignItems:'center', textAligh:'center', justifyContent:'center',
-        padding:8}}>
-                Profile Image
-                <input 
-                    type="file" 
-                    name = 'profileImg' 
-                />
-            </div>
-            
-            <button className="button infoButton">Update</button>
-        </form>
+        </div>
+
+        <span className="authProfiles">
+          <span>Profile Image</span>
+          <img src={profile ? profile : user.image} width={250} height={250} alt="profile" />
+          <input
+            type="file"
+            name="coverImg"
+            placeholder="Update Image"
+            onChange={(e) => setImage(e, "Guide_Profile", setProfile)}
+            required
+          />
+        </span>
+
+        <button
+          onClick={() => updateDetails(user)}
+          className="buttons"
+        >
+          Update Details
+        </button>
+      </div>
     </Modal>
   );
 }
 
-export default ProfileUpdateModal
-
-
-
-
+export default ProfileUpdateModal;
