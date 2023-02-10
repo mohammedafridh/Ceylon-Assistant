@@ -58,6 +58,11 @@
     color: rgb(199, 188, 188);
 }
 
+.sites>span>a:hover{
+    color: #F69C11;
+    transition: 0.5s; 
+}
+
 .contactTiles{
     display: flex;
     flex-direction: column;
