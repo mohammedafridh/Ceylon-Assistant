@@ -10,7 +10,7 @@ const Footer = () => {
 
       <div className='footerContent'>
 
-        <div>
+        <div className='topicContainer'>
           <div className='topic'>
             <span className='top'>Ceylon</span>
             <span className='sub'>Assistant</span>

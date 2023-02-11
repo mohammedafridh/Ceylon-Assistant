@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Modal, useMantineTheme, Select, MultiSelect } from "@mantine/core";
-import { doc, setDoc, collection, onSnapshot,query, updateDoc } from "firebase/firestore";
+import { doc, setDoc, collection, onSnapshot,query, updateDoc,addDoc } from "firebase/firestore";
 import { db } from "../../Firebase";
 import "./FinishTourModal.css";
 import { useUserAuth } from "../../Context/Context";
 import { useUser } from "../../Context/UserContext";
 import { toast } from "react-hot-toast";
+import { ContentCutOutlined } from "@mui/icons-material";
 
 function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
   const {guides, tourists, userType} = useUser()
@@ -20,9 +21,9 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
   const [status,setStatus] = useState('Active')
   const { user } = useUserAuth();
 
-  // useEffect(()=>{
-  //   setGuide(details.email)
-  // },[details])
+  useEffect(()=>{
+    setGuide(details.email)
+  },[details])
 
   const tourHandler =  (e) => {
     console.log({rating, review})
@@ -47,6 +48,10 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
         const updateAvailability = query(doc(db, 'Guides', details.guide));
          updateDoc(updateAvailability, {
         availability: 'Available'
+        })
+        .then(async()=>{
+          const addRatings = collection(db, 'ratings')
+          await addDoc(addRatings,{guide:details.guide, tourist: user.uid, review:review, rating:rating, status:status})
         })
 
     }).catch((error) => {

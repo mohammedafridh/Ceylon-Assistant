@@ -5,10 +5,14 @@
 
 .footerContent{
     display: grid;
-    grid-template-columns: 25rem 30rem auto;
+    grid-template-columns: 25rem 40rem auto;
     width: 100%;
     padding: 1rem;
 }
+
+/* .topicContainer{
+    text-align: left;
+} */
 
 .contentTopic{
     margin-top: 1rem;

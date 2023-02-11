@@ -35,7 +35,7 @@ function ReviewSlideshow() {
                 ...doc.data()
               })
             })
-            setReviews(list)
+            setReviews(list.filter(item=>item.status==='Published'))
           },(error)=>{
             setError(error.message)
           });
