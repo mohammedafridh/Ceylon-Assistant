@@ -14,13 +14,13 @@ const Message = () => {
     const[message,setMessage] = useState('');
     const[status,setStatus] = useState('active')
     const[formStatus,setFormStatus] = useState('')
-    const {user} = useUserAuth()
+    // const {user} = useUserAuth()
 
     const messageHandler = async(e)=>{
         e.preventDefault()
         try{
           const addDetails = collection(db, 'messages')
-          await addDoc(addDetails,{id:user.uid, name:name, email: email, subject:subject, message:message, status:status})
+          await addDoc(addDetails,{name:name, email: email, subject:subject, message:message, status:status})
           .then(()=>{
             toast.success("Message Sent!")
             setName('')

@@ -6,119 +6,106 @@ import {db,storage} from '../../../Firebase'
 import {doc, setDoc } from "firebase/firestore";
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
+import { toast } from 'react-hot-toast';
 
 function TouristRegisterModal({touristModal,setTouristModal}) {
   const theme = useMantineTheme();
 
 //setting data
-  const [fName, setFName] = useState('')
-    const [lName, setLName] = useState('')
-    const [contactNumber, setContactNumber] = useState('')
-    const [passportNumber, setPassportNumber] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [password2, setPassword2] = useState('')
-    const [profileImage, setProfileImage] = useState('')
-    const [passportImage, setPassportImage] = useState('')
-    const [status, setStatus] = useState('Active')
-    const [error, setError] = useState('')
-    const[url,setUrl] = useState(null)
-    const[passportUrl,setPassportUrl] = useState(null)
-    const {signUp} = useUserAuth();
-    const current = new Date();
-    const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+const [fName, setFName] = useState('')
+const [lName, setLName] = useState('')
+const [contactNumber, setContactNumber] = useState('')
+const [passportNumber, setPassportNumber] = useState('')
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [confirmPassword, setConfirmPassword] = useState('')
+const [passwordMatch, setPasswordMatch] = useState(true);
+const [passportImage, setPassportImage] = useState('')
+const [status, setStatus] = useState('Active')
+const [error, setError] = useState('')
+const[profileURL,setProfileURL] = useState(null)
+const[passportUrl,setPassportUrl] = useState(null)
+const [formStatus, setFormStatus] = useState('')
+const[imgError,setImgError] = useState(false)
+const[numberOk,setNumberOk] = useState(true)
+const {signUp} = useUserAuth();
+const current = new Date();
+const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
 //getting image urls
-    useEffect(() => {
-        const getImageUrl = async () => {
-            const guideProfileRef = ref(storage, `TouristProfile/${profileImage.name + v4()}`);
-            uploadBytes(guideProfileRef, profileImage)
-              .then(() => {
-                getDownloadURL(guideProfileRef)
-                  .then((url) => {
-                    console.log({ url });
-                    setUrl(url);
-                  })
-                  .catch((err) => {
-                    setError(err.message, "error getting the image");
-                  });
-              })
-              .catch((err) => {
-                setError(err);
-              });
-          };
-        const imageUrl = async () => {
-          await getImageUrl();
-        };
-        const getPassPortImageUrl = async () => {
-            const guidePassportRef = ref(storage, `TouristPassport/${passportImage.name + v4()}`);
-            uploadBytes(guidePassportRef, passportImage)
-              .then(() => {
-                getDownloadURL(guidePassportRef)
-                  .then((url) => {
-                    console.log({ url });
-                    setPassportUrl(url);
-                  })
-                  .catch((err) => {
-                    setError(err.message, "error getting the image");
-                  });
-              })
-              .catch((err) => {
-                setError(err);
-              });
-          };
-        const passPortImageUrl = async () => {
-          await getPassPortImageUrl();
-        };
-        imageUrl();
-        passPortImageUrl();
-      }, [profileImage, passportImage]);
+const setImage = (e, imageFolder, setUrl) => {
+  const image = e.target.files[0];
+  const storageImageRef = ref(storage, `${imageFolder}/${image?.name + v4()}`);
+  if(image === null || image === undefined || image === '') {
+    console.log("No file selected");
+    setImgError(true)
+    return
+  }
+  uploadBytes(storageImageRef, image).then(() => {
+    setImgError(false)
+    getDownloadURL(storageImageRef)
+      .then((url) => {
+        setUrl(url);
+        console.log({ profile: url });
+      })
+      .catch((error) => {
+        console.log({ error });
+      })
+  });
+}
 
 //adding data to firebase
 
 const touristHandler = async (e) => {
-    try {
-        signUp(email, password)
-          .then((data) => {
-            const addDetails = doc(db, "Tourist", data.user.uid);    
-            const details = {
-                firstName:fName,
-                lastName:lName,
-                contactNumber: contactNumber,
-                image: url,
-                passPortImage: passportUrl,
-                email: email,
-                password:password,
-                publishedDate:addDate,
-                status:status
-            };
-            setDoc(addDetails, details);
-            setFName('')
-            setLName('')
-            setContactNumber('')
-            setUrl('')
-            setPassportUrl('')
-            setEmail('')
-            setPassword('')
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } catch (err) {
-        setError(err.message);
-        console.log(err);
+  // validatePassword()
+  e.preventDefault();
+  setError("");
+    if(password === confirmPassword) {
+      if(contactNumber.length===10){
+        if(!imgError){
+      signUp(email, password)
+        .then((data) => {
+          const addDetails = doc(db, "Tourist", data.user.uid);    
+          const details = {
+              firstName:fName,
+              lastName:lName,
+              contactNumber: contactNumber,
+              image: profileURL,
+              passPortImage: passportUrl,
+              email: email,
+              publishedDate:addDate,
+              status:status
+          };
+          setDoc(addDetails, details);
+          setFName('')
+          setLName('')
+          setContactNumber('')
+          setPassportNumber('')
+          setProfileURL('')
+          setPassportUrl('')
+          setEmail('')
+          setPassword('')
+          setConfirmPassword('');
+          toast.success('Tourist added successfully!')
+          setTouristModal(false)
+        })
+      }else{
+        setError('*Select a valid image')
       }
-
+      }else{
+        setError('*Contact Number must be 10 characters')
+      }
+      }else{
+        setError('Passwords Do Not Match!')
+      }
 }
-
-
 
   return (
     <Modal
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
       overlayOpacity={0.25}
       overlayBlur={0.5}
-      size = '55%'
+      size = '60%'
       opened = {touristModal}
       onClose = {()=>setTouristModal(false)}
     >
@@ -126,6 +113,8 @@ const touristHandler = async (e) => {
     <div className = 'addUserForm'>
                 
         <h3>Register Tourist</h3>
+
+        <p style={{ color: error && 'red', fontWeight:'bold'}}>{error}</p>
     
         <div>
                 <input 
@@ -173,46 +162,51 @@ const touristHandler = async (e) => {
         </div>
 
         <div>
-            <input 
-                type="password" 
-                className='userInput' 
-                onChange = {(e)=> setPassword(e.target.value)}
-                placeholder='Password'
-                value = {password}
-            />
+                <input 
+                    type="password" 
+                    className='userInput' 
+                    onChange = {(e)=> setPassword(e.target.value)}
+                    placeholder='Password'
+                    value = {password}
+                    required
+                />
 
-            {/* <input 
-                type="password" 
-                className='userInput' 
-                onChange = {(e)=> setPassword2(e.target.value)}
-                placeholder='Confirm Password'
-            /> */}
-        </div>
+                <input 
+                    type="password" 
+                    className='userInput' 
+                    onChange = {(e)=> setConfirmPassword(e.target.value)}
+                    placeholder='Confirm Password'
+                    value = {confirmPassword}
+                    required
+                />
+            </div>
 
         <div className='userAuthImageContainer'>
-            <div className="authProfile">
-                Profile Image
-                <input 
-                    type="file" 
-                    name = 'profileImg' 
-                    onChange = {(e) => setProfileImage(e.target.files[0])}
-                />
-            </div>
-        
-            <div className="authProfile">
-                <label>Passport Image</label>
-                <input 
-                    type="file" 
-                    name = 'coverImg' 
-                    onChange = {(e)=>setPassportImage(e.target.files[0])}
-                />
-            </div>
+          <div className="authProfile">
+                    Profile Image
+                    <img src={profileURL} width={70} height={70} alt="profile" />
+                    <input 
+                        type="file" 
+                        name = 'profileImg' 
+                        onChange = {(e) => setImage(e, 'TouristProfile', setProfileURL)}
+                        required
+                    />
+
+                </div>
+            
+                <div className="authProfile">
+                  <label>Passport Image</label>
+                  <img src={passportUrl} width={70} height={70} alt="profile" />
+                    <input 
+                        type="file" 
+                        name = 'coverImg' 
+                        onChange = {(e) => setImage(e, 'TouristPassport', setPassportUrl)}
+                        required
+                    />
+                </div>
         </div>
         <button className="button" onClick={touristHandler}>Add Tourist </button>
     </div>
-
-
-
     </Modal>
   );
 }

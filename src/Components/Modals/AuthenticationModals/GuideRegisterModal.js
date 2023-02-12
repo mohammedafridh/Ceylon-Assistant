@@ -31,9 +31,11 @@ const [fName, setFName] = useState('')
     const [profileImage, setProfileImage] = useState('')
     const [nicImage, setNicImage] = useState('')
     const [status, setStatus] = useState('Active')
+    const[profileUrl,setProfileUrl] = useState('')
     const [error, setError] = useState('')
+    const[imgError,setImgError] = useState(false)
     const[url,setUrl] = useState(null)
-    const[nicUrl,setNicUrl] = useState(null)
+    const[nicUrl,setNicUrl] = useState('')
     const {signUp} = useUserAuth();
     const current = new Date();
     const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
@@ -128,10 +130,11 @@ const setImage = (e, imageFolder, setUrl) => {
   const storageImageRef = ref(storage, `${imageFolder}/${image?.name + v4()}`);
   if(image === null || image === undefined || image === '') {
     console.log("No file selected");
+    setImgError(true)
     return
   }
   uploadBytes(storageImageRef, image).then(() => {
-    console.log("Uploaded a blob or file!");
+    setImgError(false)
     getDownloadURL(storageImageRef)
       .then((url) => {
         setUrl(url);
@@ -142,7 +145,6 @@ const setImage = (e, imageFolder, setUrl) => {
       })
   });
 }
-    
 
 //adding data to firebase
 
@@ -151,6 +153,7 @@ const guideHandler = async(e)=>{
   setError('')
     if(password===confirmPassword){
       if(contactNumber.length === 10){
+        if(!imgError){
     const addDetails = collection(db, 'guideRequests')
     await addDoc(addDetails,{
       firstName:fName,
@@ -167,16 +170,31 @@ const guideHandler = async(e)=>{
       model:model,
       maxPassengers:maxPassengers,
       perKmRate: perKm,
-      image: url,
+      image: profileUrl,
       nicImage: nicUrl,
       email: email,
       registeredDate:addDate,
       status: 'Active'
     })
     .then(()=>{
-      toast.success('Your Register Request is been noted. We kindly request your Patience!')
       setGuideModal(false)
+      toast.success('Your Register Request is been noted. We kindly request your Patience!')
+      setFName('')
+      setLName('')
+      setContactNumber('')
+      setNicNumber('')
+      setAddress('')
+      setGuideRate('')
+      setModel('')
+      setMaxPassengers('')
+      setPerKm('')
+      setEmail('')
+      setPassword('')
+      setConfirmPassword('')
     })
+  }else{
+    setError('*Select a valid image')
+  }
   }else{
     setError('*Contact Number must be 10 characters')
   }
@@ -347,26 +365,29 @@ const guideHandler = async(e)=>{
                     />
                 </div>
     
-                <div className='userAuthImageContainer'>
-                    <div className="authProfile">
-                        Profile Image
-                        <input 
-                            type="file" 
-                            name = 'profileImg' 
-                            onChange = {(e) => setImage(e, 'GuideImages', setProfileImage)}
-                            required
-                        />
-                    </div>
-                
-                    <div className="authProfile">
-                        NIC Image
-                        <input 
-                            type="file" 
-                            name = 'coverImg' 
-                            onChange = {(e) => setImage(e, 'GuideNic', setProfileImage)}
-                            required
-                        />
-                    </div>
+              <div className='userAuthImageContainer'>
+                <div className="authProfile">
+                    Profile Image
+                    <img src={profileUrl} width={70} height={70} alt="profile" />
+                    <input 
+                        type="file" 
+                        name = 'profileImg' 
+                        onChange = {(e) => setImage(e, 'GuideProfile', setProfileUrl)}
+                        required
+                    />
+
+                </div>
+            
+                <div className="authProfile">
+                  <label>Passport Image</label>
+                  <img src={nicUrl} width={70} height={70} alt="profile" />
+                    <input 
+                        type="file" 
+                        name = 'coverImg' 
+                        onChange = {(e) => setImage(e, 'GuideNic', setNicUrl)}
+                        required
+                    />
+                </div>
     
                 </div>
                 <button type = 'submit' className="button infoButton">Add Guide</button>
