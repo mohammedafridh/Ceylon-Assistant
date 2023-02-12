@@ -49,9 +49,13 @@ const loginHandler = async (e)=>{
 }
 
 const forgotPasswordHandler = async()=>{
-    const email = emailRef.current.value;
-    await forgotPassword(email);
+    const emailVal = emailRef.current.value;
+    if(emailVal === null){
+        toast.error('Provide your email address and press Reset Password')
+    }else{
+    await forgotPassword(emailVal);
     toast.success('done')
+    }
 }
 
 return (
@@ -71,7 +75,6 @@ return (
         </div>
 
     <div className='addUserForm'>
-
 
         <div>
             <input 
@@ -96,7 +99,7 @@ return (
 
         <button type = 'submit' className="buttonLogin">Login </button>
 
-        <span>Forgot Password? <a onClick={forgotPasswordHandler}>ResetPassword</a></span>
+        <span>Forgot Password? <a onClick={forgotPasswordHandler} className='resetPassword'>ResetPassword</a></span>
         </div>
     </form>
     </Modal>

@@ -159,3 +159,7 @@
     font-weight: 400!important;
     text-align: left!important;
 }
+
+.resetPassword{
+    cursor: pointer;
+}
