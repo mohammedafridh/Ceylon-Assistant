@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import './TouristRegisteModal.css'
 import { Modal, useMantineTheme} from '@mantine/core';
 import {useUserAuth} from '../../../Context/Context' 
@@ -13,9 +13,10 @@ function LoginModal({loginModel,setLoginModel}) {
     const [email,setEmail] = useState('');
     const[password,setPassword] = useState('')
     const [error,setError] = useState('')
-    const {logIn, logOut} = useUserAuth();
+    const {logIn, logOut, forgotPassword} = useUserAuth();
     const navigate = useNavigate()
     const {guides,tourists} = useUser()
+    const emailRef = useRef()
 
 //adding data to firebase
 
@@ -44,8 +45,13 @@ const loginHandler = async (e)=>{
             error.code === 'auth/user-not-found' && toast.error('User not found')
             error.code === 'auth/wrong-password' && toast.error('Incorrect Username or Password')
             setError('Failed to login')
-        }
-    
+        }  
+}
+
+const forgotPasswordHandler = async()=>{
+    const email = emailRef.current.value;
+    await forgotPassword(email);
+    toast.success('done')
 }
 
 return (
@@ -73,6 +79,7 @@ return (
                 className='userInput' 
                 onChange = {(e)=> setEmail(e.target.value)}
                 placeholder='Email Address'
+                ref = {emailRef}
                 required
             />    
         </div>
@@ -88,6 +95,8 @@ return (
         </div>
 
         <button type = 'submit' className="buttonLogin">Login </button>
+
+        <span>Forgot Password? <a onClick={forgotPasswordHandler}>ResetPassword</a></span>
         </div>
     </form>
     </Modal>
