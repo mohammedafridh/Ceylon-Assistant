@@ -5,6 +5,7 @@ import {useUserAuth} from '../../../Context/Context'
 import {useNavigate} from 'react-router-dom'
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../../Context/UserContext';
+import loadingGif from '../../../assets/loading-gif.gif'
 
 function LoginModal({loginModel,setLoginModel}) {
   const theme = useMantineTheme();
@@ -17,6 +18,7 @@ function LoginModal({loginModel,setLoginModel}) {
     const navigate = useNavigate()
     const {guides,tourists} = useUser()
     const emailRef = useRef()
+    const[loading,setLoading] = useState(false)
 
 //adding data to firebase
 
@@ -29,12 +31,15 @@ const loginHandler = async (e)=>{
     e.preventDefault();
     setError('')
         try{
+            setLoading(true)
             const isLoggedIn = await logIn(email,password)
             if(isLoggedIn && !isGuideActive && !isTouristActive){
+                setLoading(false)
                 toast.error('Your account is not active')
                 logOut()
                 return
             }
+            setLoading(false)
             navigate('/')
             toast.success('Logged in Successful. Thank You!')
             setLoginModel(false)
@@ -97,9 +102,14 @@ return (
             />
         </div>
 
-        <button type = 'submit' className="buttonLogin">Login </button>
+        {loading?
+            <button type = 'submit' className="buttonLogin">
+                <img className='loadingIcon' src={loadingGif} />
+            </button>:
+            <button type = 'submit' className="buttonLogin">Login </button>
+        }
 
-        <span>Forgot Password? <a onClick={forgotPasswordHandler} className='resetPassword'>ResetPassword</a></span>
+        <span>Forgot Password? <a onClick={forgotPasswordHandler} className='resetPassword'>Reset Password</a></span>
         </div>
     </form>
     </Modal>

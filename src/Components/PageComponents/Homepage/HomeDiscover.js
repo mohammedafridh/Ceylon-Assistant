@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from 'react'
 import classes from './HomeDiscover.module.css'
-import {Gallery} from '../Tours gallery/Gallery'
 import {db} from '../../../Firebase'
 import {collection, onSnapshot} from 'firebase/firestore'
 

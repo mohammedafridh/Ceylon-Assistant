@@ -163,3 +163,8 @@
 .resetPassword{
     cursor: pointer;
 }
+
+.loadingIcon{
+    width: 25px;
+    height: 25px;
+}

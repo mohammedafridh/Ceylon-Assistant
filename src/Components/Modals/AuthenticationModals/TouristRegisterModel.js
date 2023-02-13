@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useRef } from 'react';
 import './TouristRegisteModal.css'
 import { Modal, useMantineTheme} from '@mantine/core';
 import {useUserAuth} from '../../../Context/Context' 
@@ -31,6 +31,8 @@ const[numberOk,setNumberOk] = useState(true)
 const {signUp} = useUserAuth();
 const current = new Date();
 const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+const profileRef = useRef()
+const passportRef = useRef()
 
 //getting image urls
 const setImage = (e, imageFolder, setUrl) => {
@@ -60,6 +62,7 @@ const touristHandler = async (e) => {
   // validatePassword()
   e.preventDefault();
   setError("");
+  try{
     if(password === confirmPassword) {
       if(contactNumber.length===10){
         if(!imgError){
@@ -86,6 +89,8 @@ const touristHandler = async (e) => {
           setEmail('')
           setPassword('')
           setConfirmPassword('');
+          profileRef.current.value = "";
+          passportRef.current.value = "";
           toast.success('Tourist added successfully!')
           setTouristModal(false)
         })
@@ -98,6 +103,9 @@ const touristHandler = async (e) => {
       }else{
         setError('Passwords Do Not Match!')
       }
+    }catch(error){
+      error.code === 'auth/email-already-in-use' && toast.error('*Email Already Taken. Please Try Another!')
+    }
 }
 
   return (
@@ -184,24 +192,28 @@ const touristHandler = async (e) => {
         <div className='userAuthImageContainer'>
           <div className="authProfile">
                     Profile Image
-                    <img src={profileURL} width={70} height={70} alt="profile" />
+                    {profileURL &&
+                    <img src={profileURL} width={70} height={70} alt="profile" />}
                     <input 
                         type="file" 
                         name = 'profileImg' 
                         onChange = {(e) => setImage(e, 'TouristProfile', setProfileURL)}
                         required
+                        ref={profileRef}
                     />
 
                 </div>
             
                 <div className="authProfile">
                   <label>Passport Image</label>
-                  <img src={passportUrl} width={70} height={70} alt="profile" />
+                  {passportUrl &&
+                  <img src={passportUrl} width={70} height={70} alt="profile" />}
                     <input 
                         type="file" 
                         name = 'coverImg' 
                         onChange = {(e) => setImage(e, 'TouristPassport', setPassportUrl)}
                         required
+                        ref={passportRef}
                     />
                 </div>
         </div>

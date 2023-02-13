@@ -193,7 +193,7 @@ function AllGuides() {
 
                   <div className={classes.details}>
                     <span>Languages : </span>
-                    <span>{guide.languages}</span>
+                    <span>{guide.languages.join(', ')}</span>
                   </div>
 
                   <div className={classes.details}>

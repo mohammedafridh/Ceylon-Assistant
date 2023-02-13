@@ -31,7 +31,7 @@ function MainNavigation(){
             <ul>
                 <li>
                     <NavLink to = '/' className={({ isActive }) =>
-                        isActive ? "navigationItem active" : "navigationItem"} end>
+                        isActive ? classes.active:''} end>
                         Home
                     </NavLink>
                 </li>
@@ -39,20 +39,28 @@ function MainNavigation(){
                 <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></NavLink>
                     <div className = {classes.dropDown}>
                         <ul>
-                            <li><NavLink to = '/tourGuides'>All Guides</NavLink></li>
+                            <li><NavLink to = '/tourGuides' className={({ isActive }) =>
+                        isActive ? classes.active:''} end>All Guides</NavLink></li>
                             {user &&
-                                <li><NavLink to = '/bookings'>Bookings</NavLink></li>
+
+                                <li><NavLink to = '/bookings' className={({ isActive }) =>
+                                isActive ? classes.active:''} end>Bookings</NavLink></li>
                             }
                         </ul>
                     </div>
                 </li> 
-                <li><NavLink to = '/thingsToDo'>Things To Do</NavLink></li>                 
+                <li><NavLink to = '/thingsToDo' className={({ isActive }) =>
+                        isActive ? classes.active:''} end>Things To Do</NavLink></li>   
+
                 <li><NavLink to = ''>About Us
                 <FontAwesomeIcon icon={faChevronDown} className = {classes.iconRight}/></NavLink>
                     <div className = {classes.dropDown}>
                         <ul>
-                            <li><NavLink to = '/about'> About</NavLink></li>
-                            <li><NavLink to = '/toursGallery'>Tours Gallery</NavLink></li>
+                            <li><NavLink to = '/about' className={({ isActive }) =>
+                        isActive ? classes.active:''} end> About</NavLink></li>
+
+                            <li><NavLink to = '/toursGallery' className={({ isActive }) =>
+                        isActive ? classes.active:''} end>Tours Gallery</NavLink></li>
                         </ul>
                     </div>
                 </li>
@@ -65,7 +73,10 @@ function MainNavigation(){
                         <div className = {classes.dropDown}>
                             <ul>
                                 {user &&
-                                <li><NavLink to = '/profile'>Profile</NavLink></li>}
+                                <li><NavLink to = '/profile' 
+                                className={({ isActive }) =>
+                                 isActive ? classes.active:''} end>Profile</NavLink></li>}
+
                             {!user &&
                                 <li><NavLink to = '' onClick={()=>setGuideModal(true)}>Register Guide</NavLink></li>
                             }
@@ -82,7 +93,9 @@ function MainNavigation(){
                                     />
                                     
                             {!user &&
-                                <li><NavLink to = '' onClick={()=>setLoginModel(true)}>Log In</NavLink></li>
+                                <li><NavLink to = '' onClick={()=>setLoginModel(true)}
+                                className={({ isActive }) =>isActive ? classes.active:''} end>
+                            Log In</NavLink></li>
                             }
                                     <LoginModal 
                                         loginModel = {loginModel} 
@@ -90,7 +103,9 @@ function MainNavigation(){
                                     />
                             
                                 {user &&
-                                    <li><NavLink to="/" onClick={handleLogOut}>Log Out</NavLink></li>
+                                    <li><NavLink to="/" onClick={handleLogOut}
+                                    className={({ isActive }) =>isActive ? classes.active:''} end>
+                                        Log Out</NavLink></li>
                                 }
                             </ul>
                         </div>

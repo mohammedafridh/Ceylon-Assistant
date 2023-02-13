@@ -1,12 +1,12 @@
-import { Modal, useMantineTheme} from '@mantine/core';
-import React, {useState, useEffect} from 'react'
+import { Modal, useMantineTheme,Select,MultiSelect} from '@mantine/core';
+import React, {useState, useEffect,useRef} from 'react'
 import './TouristRegisteModal.css'
 import { useUserAuth } from '../../../Context/Context';
 import {db,storage} from '../../../Firebase'
 import {doc, addDoc, collection } from "firebase/firestore";
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
-import Select from 'react-select'
+// import Select from 'react-select'
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../../Context/UserContext';
 
@@ -37,31 +37,50 @@ const [fName, setFName] = useState('')
     const[url,setUrl] = useState(null)
     const[nicUrl,setNicUrl] = useState('')
     const {signUp} = useUserAuth();
+    const[languages,setLanguages] = useState()
     const current = new Date();
     const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
     const {guides} = useUser()
+    const profileRef = useRef()
+    const nicRef = useRef()
 
     //language dropdown data
-    const language = [
-        { value: 'Sinhala', label: 'Sinhala' },
-        { value: 'English', label: 'English' },
-        { value: 'Hindi', label: 'Hindi' },
-        { value: 'Malayalam', label: 'Malayalam' },
-        { value: 'Urdu', label: 'Urdu' },
-        { value: 'French', label: 'French' },
-        { value: 'Arabic', label: 'Arabic' },
-        { value: 'Spanish', label: 'Spanish' },
-        { value: 'Russian', label: 'Russian' },
-        { value: 'Chinese', label: 'Chinese' },
-        { value: 'Japanese', label: 'Japanese' },
-        { value: 'Italian', label: 'Italian' },
-        { value: 'Korean', label: 'Korean' },
-      ];
+    // const language = [
+    //     { value: 'Sinhala', label: 'Sinhala' },
+    //     { value: 'English', label: 'English' },
+    //     { value: 'Hindi', label: 'Hindi' },
+    //     { value: 'Malayalam', label: 'Malayalam' },
+    //     { value: 'Urdu', label: 'Urdu' },
+    //     { value: 'French', label: 'French' },
+    //     { value: 'Arabic', label: 'Arabic' },
+    //     { value: 'Spanish', label: 'Spanish' },
+    //     { value: 'Russian', label: 'Russian' },
+    //     { value: 'Chinese', label: 'Chinese' },
+    //     { value: 'Japanese', label: 'Japanese' },
+    //     { value: 'Italian', label: 'Italian' },
+    //     { value: 'Korean', label: 'Korean' },
+    //   ];
 
-    const[languages,setLanguages] = useState()
-    const languageHandler = (e)=>{
-        setLanguages(Array.isArray(e)?e.map(x=>x.label):[]);
-    }
+    // const[languages,setLanguages] = useState()
+    // const languageHandler = (e)=>{
+    //     setLanguages(Array.isArray(e)?e.map(x=>x.label):[]);
+    // }
+
+    const languageData = [
+      "Sinhala",
+      "English",
+      "Hindi",
+      "Malayalam",
+      "Urdu",
+      "French",
+      "Arabic",
+      "Spanish",
+      "Russian",
+      "Chinese",
+      "Japanese",
+      "Italian",
+      "Korean",
+    ];
 
     //guide dropdown data
       const typeData = [
@@ -69,9 +88,9 @@ const [fName, setFName] = useState('')
         {value:'Site', label: 'Site'}
       ]
   
-      const[type,setType] = useState(typeData.label)
+      const[type,setType] = useState()
       const typeHandler = (e)=>{
-        setType(e.label)
+        setType(e)
       }
 
       //district dropdown data
@@ -104,9 +123,9 @@ const [fName, setFName] = useState('')
         { value: 'Vavuniya', label: 'Vavuniya' },
     ]
 
-    const[district,setDistrict] = useState(typeData.label)
+    const[district,setDistrict] = useState()
       const districtHandler = (e)=>{
-        setDistrict(e.label)
+        setDistrict(e)
       }
 
     //car dropdown data
@@ -117,9 +136,9 @@ const [fName, setFName] = useState('')
       { value: 'Mini-Jeep', label: 'Mini Jeep' },
     ]
 
-    const[vehicleType,setVehicleType] = useState(typeData.label)
+    const[vehicleType,setVehicleType] = useState()
       const vehicleHandler = (e)=>{
-        setVehicleType(e.label)
+        setVehicleType(e)
       }
 
   
@@ -187,10 +206,18 @@ const guideHandler = async(e)=>{
       setGuideRate('')
       setModel('')
       setMaxPassengers('')
+      setDistrict([])
+      setLanguages([])
+      setType([])
+      setVehicleType([])
+      setNicUrl('')
+      setProfileUrl('')
       setPerKm('')
       setEmail('')
       setPassword('')
       setConfirmPassword('')
+      profileRef.current.value = "";
+      nicRef.current.value = "";
     })
   }else{
     setError('*Select a valid image')
@@ -268,28 +295,32 @@ const guideHandler = async(e)=>{
                     /> 
     
                     <Select 
-                      options = {districtData} 
+                      data = {districtData} 
                       placeholder = 'Select District' 
                       onChange={districtHandler}
                       className = 'typeDrop'
+                      value = {district}
+                      required
                     />
                 </div>
     
                 <div>
-                  <Select isMulti
-                    options={language}
+                  <MultiSelect 
+                    data={languageData}
                     placeholder = 'Select Languages'
-                    onChange={languageHandler}
+                    onChange={setLanguages}
+                    value = {languages}
                     className = 'langDrop'
+                    required
                   />
-                </div>
-    
-                <div>
-                    <Select 
-                      options = {typeData} 
+
+                  <Select 
+                      data = {typeData} 
                       placeholder = 'Guide Type' 
                       onChange={typeHandler}
                       className = 'guideDrop'
+                      value = {type}
+                      required
                     />
     
                     <input 
@@ -301,12 +332,33 @@ const guideHandler = async(e)=>{
                     />
                 </div>
     
+                {/* <div>
+                    <Select 
+                      data = {typeData} 
+                      placeholder = 'Guide Type' 
+                      onChange={typeHandler}
+                      className = 'guideDrop'
+                      value = {type}
+                      required
+                    />
+    
+                    <input 
+                        type="number" 
+                        className='userInput' 
+                        onChange = {(e)=> setGuideRate(e.target.value)} 
+                        placeholder='Guide Rate Per Day'
+                        value = {guideRate}
+                    />
+                </div> */}
+    
                 <div>
                     <Select 
-                      options = {carType} 
+                      data = {carType} 
                       placeholder = 'Vehicle Type' 
                       onChange={vehicleHandler}
                       className = 'typeDrop'
+                      value = {vehicleType}
+                      required
                     />
     
                     <input 
@@ -368,24 +420,28 @@ const guideHandler = async(e)=>{
               <div className='userAuthImageContainer'>
                 <div className="authProfile">
                     Profile Image
-                    <img src={profileUrl} width={70} height={70} alt="profile" />
+                    {profileUrl &&
+                    <img src={profileUrl} width={70} height={70} alt="profile" />}
                     <input 
                         type="file" 
                         name = 'profileImg' 
                         onChange = {(e) => setImage(e, 'GuideProfile', setProfileUrl)}
                         required
+                        ref={profileRef}
                     />
 
                 </div>
             
                 <div className="authProfile">
                   <label>Passport Image</label>
-                  <img src={nicUrl} width={70} height={70} alt="profile" />
+                  {nicUrl &&
+                  <img src={nicUrl} width={70} height={70} alt="profile" />}
                     <input 
                         type="file" 
                         name = 'coverImg' 
                         onChange = {(e) => setImage(e, 'GuideNic', setNicUrl)}
                         required
+                        ref={nicRef}
                     />
                 </div>
     

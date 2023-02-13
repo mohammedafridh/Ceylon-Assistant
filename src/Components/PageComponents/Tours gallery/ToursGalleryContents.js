@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react'
 import './ToursGalleryContents.css'
-import {Gallery} from './Gallery'
 import ViewGalleryModal from '../../Modals/ViewGalleryModal'
 import {db} from '../../../Firebase'
 import {collection, onSnapshot,query,doc,updateDoc, deleteDoc} from 'firebase/firestore'
@@ -14,6 +13,7 @@ const ToursGalleryContents = () => {
     const[loading,setLoading] = useState(false);
     const[error,setError] = useState('')
     const[gallery,setGallery] = useState([])
+    const[newGallery,setNewGallery] = useState([])
     // const[galleryOpen,setGalleryOpen] = useState('')
     const[currentItem,setCurrentItem] = useState({})
     const {guides, userType} = useUser()
@@ -30,30 +30,36 @@ const ToursGalleryContents = () => {
         setModalOpened(true)
     }
 
-    const getGallery = async () => {
-        setLoading(true);
-        const allData = onSnapshot(collection(db,'toursGallery'),(snapshot)=>{
-          console.log({allData});
-          let list = []
-          snapshot.docs.forEach((doc)=>{
-            list.push({
-              id:doc.id,
-              ...doc.data()
-            })
-          })
-          setGallery(list.filter(item => item.status === 'Active'))
-          setLoading(false)
-        },(error)=>{
-          setError(error.message)
+    useEffect(()=>{
+      setLoading(true)
+      const allData = onSnapshot(collection(db,'toursGallery'),(snapshot)=>{
+        let list = []
+        snapshot.docs.forEach((doc)=>{
+          list.push({
+            id:doc.id,
+            ...doc.data()
+          });
         });
-        return ()=>{
-          allData()
-        };
-      }
-    
-      useEffect(()=>{
-        getGallery();
-      },[]);
+  
+        setGallery(list.filter(item => item.status ==='Active'))
+        setLoading(false)
+      },(error)=>{
+        setError(error.message)
+      });
+      return ()=>{
+        allData()
+      };
+    },[]);
+
+    // const districtHandler = (e) => {
+    //   if(userType === 'guide'){
+    //     const guideGallery = gallery.filter(gal=>gal.guideId===user.uid && gal.status === 'Active')
+    //     setNewGallery(guideGallery)
+    //   }else{
+    //     setNewGallery(gallery)
+    //   }
+    //   console.log(newGallery)
+    // }
 
       useEffect(() => {
         setUserTour(userType === 'guide'? gallery.filter(gallery => gallery.guideId === user.uid):gallery)
