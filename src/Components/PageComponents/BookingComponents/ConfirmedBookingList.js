@@ -8,6 +8,9 @@ import {getDoc, doc, collection, onSnapshot, query,updateDoc} from 'firebase/fir
 import { onAuthStateChanged } from 'firebase/auth'
 import { useUser } from '../../../Context/UserContext'
 import { toast } from 'react-hot-toast'
+import { useUserAuth } from '../../../Context/Context';
+import loadingGif from '../../../assets/loading-gif.gif'
+import emailjs from '@emailjs/browser';
 
 const ConfirmedBookingList = () => {
 
@@ -23,18 +26,34 @@ const ConfirmedBookingList = () => {
   const[bookings,setBookings] = useState([])
   const [selectedGuide,setSelectedGuide] = useState({})
   const {guides,tourists, userType} = useUser()
+  const {user} = useUserAuth()
+  const[userTour,setUserTour] = useState([])
 
   const finishTour = (tour)=>{
     setSelectedGuide(tour)
     setFinishTourModal(true)
   }
 
-  const finishHandler = (id)=>{
-    const cancelItem = query(doc(db,'tours',id));
+  const finishHandler = (tour)=>{
+    setLoading(true)
+    const cancelItem = query(doc(db,'tours',tour.id));
     updateDoc(cancelItem, {
     status: 'inactive'
-});
+    });
+
+    const updateAvailability = query(doc(db, 'Guides', tour.guide));
+    updateDoc(updateAvailability, {
+    availability: 'Available'
+    })
+
+toast.success('Tour Completion Successful!')
+setLoading(false)
   }
+
+  useEffect(() => {
+    setUserTour(userType === 'guide'? tours.filter(tour => tour.guide === user.uid):
+    tours.filter(tour => tour.tourist === user.uid))
+  }, [userType, guides,tours,user])
 
   useEffect(()=>{
     setLoading(true)
@@ -60,6 +79,8 @@ const ConfirmedBookingList = () => {
     const guide = guides.find(guide => guide.id === id)
     return guide ? guide.email : null   
   }
+
+
 
   const findTouristEmail = (id) => {
     const tourist = tourists.find(tourist => tourist.id === id)
@@ -96,7 +117,7 @@ const ConfirmedBookingList = () => {
            <th>Time</th>
            <th>Actions</th>
          </tr>
-      {tours.map((tour)=>(
+      {userTour?.map((tour)=>(
          <tr key = {tour.id}>
            <td>{tour.id}</td>
            <td>{userType ===  'tourist'? findGuideEmail(tour.guide):findTouristEmail(tour.tourist)}</td>
@@ -106,9 +127,18 @@ const ConfirmedBookingList = () => {
            <td>{tour.startDate}</td>
            <td>{tour.endDate}</td>
            <td>{tour.time}</td>
-           <td><button 
-           style = {{backgroundColor:'#3498DB', padding:5, color:'white', borderRadius:5, width: 100}}
-           onClick = {userType === 'tourist'? ()=>finishTour(tour) : ()=>finishHandler(tour.id)}>Finish</button></td>
+           <td>
+            {loading?
+            <button type = 'submit' className={classes.finishTourBtn}>
+              <img className='loadingIcon' src={loadingGif} />
+            </button>: 
+
+            <button 
+           className={classes.finishTourBtn}
+           onClick = {userType === 'tourist'? ()=>finishTour(tour) : ()=>finishHandler(tour)}>Finish
+           </button>}
+           </td>
+           
            {finishTourModal && <FinishTourModal
               finishTourModal={finishTourModal}
               setFinishTourModal={setFinishTourModal}

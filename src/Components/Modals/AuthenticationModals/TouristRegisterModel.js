@@ -7,6 +7,7 @@ import {doc, setDoc } from "firebase/firestore";
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import { toast } from 'react-hot-toast';
+import loadingGif from '../../../assets/loading-gif.gif'
 
 function TouristRegisterModal({touristModal,setTouristModal}) {
   const theme = useMantineTheme();
@@ -33,6 +34,7 @@ const current = new Date();
 const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 const profileRef = useRef()
 const passportRef = useRef()
+const[loading,setLoading] = useState(false)
 
 //getting image urls
 const setImage = (e, imageFolder, setUrl) => {
@@ -66,6 +68,7 @@ const touristHandler = async (e) => {
     if(password === confirmPassword) {
       if(contactNumber.length===10){
         if(!imgError){
+          setLoading(true)
       signUp(email, password)
         .then((data) => {
           const addDetails = doc(db, "Tourist", data.user.uid);    
@@ -73,6 +76,7 @@ const touristHandler = async (e) => {
               firstName:fName,
               lastName:lName,
               contactNumber: contactNumber,
+              passportNumber:passportNumber,
               image: profileURL,
               passPortImage: passportUrl,
               email: email,
@@ -93,6 +97,7 @@ const touristHandler = async (e) => {
           passportRef.current.value = "";
           toast.success('Tourist added successfully!')
           setTouristModal(false)
+          setLoading(false)
         })
       }else{
         setError('*Select a valid image')
@@ -217,7 +222,11 @@ const touristHandler = async (e) => {
                     />
                 </div>
         </div>
-        <button className="button" onClick={touristHandler}>Add Tourist </button>
+        {loading ?
+          <button type = 'submit' className="buttonLogin">
+            <img className='loadingIcon' src={loadingGif} />
+        </button>
+        :<button className="button" onClick={touristHandler}>Add Tourist </button>}
     </div>
     </Modal>
   );

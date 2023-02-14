@@ -80,7 +80,7 @@
 }
 
 .unavailability{
-    color: #EC0020 ;
+    color: #c4001a ;
     font-weight: bold;
     font-size: 20px;
     margin: 20px;
@@ -136,8 +136,7 @@
 
 .bookingBtn:hover{
     cursor: pointer;
-    color: var(--orange);
-    background: transparent;
-    border: 2px solid var(--orange);
+    color: white;
+    background: linear-gradient(98.63deg, #f7940b 0%, #ec4314 100%);
 }
 

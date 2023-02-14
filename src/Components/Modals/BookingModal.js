@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import {useUserAuth} from '../../Context/Context' 
 import {collection, addDoc} from 'firebase/firestore'
 import {db} from '../../Firebase'
+import loadingGif from '../../assets/loading-gif.gif'
+import { toast } from 'react-hot-toast';
 
 function BookingModal({modalOpened,setModalOpened, guide}) {
   const theme = useMantineTheme();
@@ -15,6 +17,7 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
     const[startData,setStartDate] = useState('')
     const[endDate,setEndDate] = useState('')
     const[time,setTime] = useState('')
+    const[loading,setLoading] = useState(false)
     const [status,setStatus] = useState('Active')
     const current = new Date();
     const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
@@ -26,18 +29,21 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
     const bookingHandler = async(e)=>{
       e.preventDefault();
       try{
+        setLoading(true)
         const addDetails = collection(db, 'pending_booking')
         await addDoc(addDetails,{guide:guide.id, tourist: user.uid, location:tourLocation,
            destination: destination, startData: startData, 
         endDate:endDate, time: time, bookingDate:addDate, status:status})
         .then(()=>{
+          setLoading(false)
           setModalOpened(false)
-          alert('Booking Successful!')
+          toast.success('Booking Successful!')
         })
 
       }catch(err){
         err.message('Error!')
         alert('Booking Unsuccessful! Please Try Again.')
+        setLoading(false)
       }
       
     }
@@ -46,8 +52,8 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
   return (
     <Modal
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
-      overlayOpacity={0.10}
-      overlayBlur={0.5}
+      overlayOpacity={0.50}
+      overlayBlur={0.8}
       size = '25%'
       opened = {modalOpened}
       onClose = {()=>{setModalOpened(false); setTourLocation(''); setDestination('')
@@ -110,7 +116,11 @@ function BookingModal({modalOpened,setModalOpened, guide}) {
                     required
                 />
             </div>
-            <button  onClick={bookingHandler} className="button infoButton">Confirm</button>
+            {loading?
+            <button type = 'submit' className="confirmActionBtn">
+              <img className='loadingIcon' src={loadingGif} />
+            </button>:           
+            <button  onClick={bookingHandler} className="confirmActionBtn">Confirm</button>}
         </div>
     </Modal>
   );

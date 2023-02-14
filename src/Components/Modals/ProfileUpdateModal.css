@@ -60,3 +60,65 @@
     outline: none!important;
     font-size:17px!important;
 }
+
+.confirmActionBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+    height: 2.5rem;
+    width: 8rem;
+}
+
+.confirmActionBtn:hover{
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(98.63deg, #f7940b 0%, #ec4314 100%);
+    transition: 0.7s;
+}
+
+/* Booking Update Modal*/
+.bookingUpdateBtn{
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background: rgb(28, 113, 192);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+    width: 6rem;
+    cursor: pointer;
+}
+
+.bookingUpdateBtn:hover{
+    cursor: pointer;
+    color: white;
+    background: rgb(17, 99, 177);
+}
+
+.profileUpdateBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+    height: 2.5rem;
+    width: 8rem;
+}
+
+.profileUpdateBtn:hover{
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(98.63deg, #f7940b 0%, #ec4314 100%);
+    transition: 0.7s;
+}

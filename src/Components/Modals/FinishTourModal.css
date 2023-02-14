@@ -52,20 +52,20 @@ button {
 }
 
 .reviewBtn{
-    display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     border: none;
-    border-radius: 0.5rem;
-    background: var(--buttonBg);
+    border-radius: 5px;
+    background: rgb(28, 113, 192);
     transition: all 100ms ease-out;
     padding: 5px 10px;
+    width: 6rem;
+    cursor: pointer;
 }
 
 .reviewBtn:hover{
     cursor: pointer;
-    color: var(--orange);
-    background: transparent;
-    border: 2px solid var(--orange);
+    color: white;
+    background: rgb(17, 99, 177);
 }

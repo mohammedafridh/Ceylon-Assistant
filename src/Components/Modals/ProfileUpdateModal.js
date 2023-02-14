@@ -13,6 +13,7 @@ import { v4 } from "uuid";
 import { useUserAuth } from "../../Context/Context";
 import './ProfileUpdateModal.css'
 import { toast } from "react-hot-toast";
+import loadingGif from '../../assets/loading-gif.gif'
 
 function ProfileUpdateModal({ modalOpened, setModalOpened, user }) {
   const theme = useMantineTheme();
@@ -32,6 +33,7 @@ function ProfileUpdateModal({ modalOpened, setModalOpened, user }) {
   const [district, setDistrict] = useState(user.district);
   const [type, setType] = useState(user);
   const [vehicleType, setVehicleType] = useState(user.vehicleType);
+  const[loading,setLoading] = useState(false)
 
   useEffect(() => {
     setFName(user.firstName);
@@ -120,6 +122,7 @@ function ProfileUpdateModal({ modalOpened, setModalOpened, user }) {
   const carType = [ 'Car', 'Van', 'Mini Jeep'];
 
   const updateDetails = async (data) => {
+    setLoading(true)
     setDoc(
       doc(db, "Guides", data.id),
       {
@@ -139,6 +142,7 @@ function ProfileUpdateModal({ modalOpened, setModalOpened, user }) {
       },
       { merge: true }
     ).then(() => {
+      setLoading(false)
       toast.success("Details Updated Successfully");
       setModalOpened(false);
     });
@@ -299,12 +303,17 @@ function ProfileUpdateModal({ modalOpened, setModalOpened, user }) {
           />
         </span>
 
+      {loading?
+        <button type = 'submit' className="profileUpdateBtn">
+        <img className='loadingIcon' src={loadingGif} />
+        </button>: 
+
         <button
           onClick={() => updateDetails(user)}
-          className="buttons"
+          className="profileUpdateBtn"
         >
           Update Details
-        </button>
+        </button>}
       </div>
     </Modal>
   );

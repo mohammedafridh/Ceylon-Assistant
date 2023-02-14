@@ -5,6 +5,7 @@ import {db} from '../../../../Firebase'
 import SuccessMessageModal from '../../../Modals/successMessageModal';
 import { useUserAuth } from '../../../../Context/Context';
 import { toast } from 'react-hot-toast';
+import loadingGif from '../../../../assets/loading-gif.gif'
 
 const Message = () => {
 
@@ -14,11 +15,13 @@ const Message = () => {
     const[message,setMessage] = useState('');
     const[status,setStatus] = useState('active')
     const[formStatus,setFormStatus] = useState('')
+    const[loading,setLoading]=useState(false)
     // const {user} = useUserAuth()
 
     const messageHandler = async(e)=>{
         e.preventDefault()
         try{
+          setLoading(true)
           const addDetails = collection(db, 'messages')
           await addDoc(addDetails,{name:name, email: email, subject:subject, message:message, status:status})
           .then(()=>{
@@ -27,12 +30,14 @@ const Message = () => {
             setEmail('')
             setSubject('')
             setMessage('')
+            setLoading(false)
             
             // setFormStatus('Success')
           })
     
         }catch(err){
           err.message('Cant Connect. Please Try Again!')
+          setLoading(false)
         }
         
       }
@@ -78,7 +83,11 @@ const Message = () => {
                     </textarea>
                 </span>
 
-                <button type = 'submit' className = {classes.bookBtn}>Send </button>
+              {loading?
+                  <button type = 'submit' className={classes.bookBtn}>
+                  <img className='loadingIcon' src={loadingGif} />
+                </button>:  
+                <button type = 'submit' className = {classes.bookBtn}>Send Message</button>}
                 <SuccessMessageModal modalOpened={formStatus === 'Success' ?  true : false} setModalOpened={() => {setFormStatus('')}}/>
             </form>
             

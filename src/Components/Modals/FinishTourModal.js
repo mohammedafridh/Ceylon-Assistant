@@ -6,7 +6,7 @@ import "./FinishTourModal.css";
 import { useUserAuth } from "../../Context/Context";
 import { useUser } from "../../Context/UserContext";
 import { toast } from "react-hot-toast";
-import { ContentCutOutlined } from "@mui/icons-material";
+import loadingGif from '../../assets/loading-gif.gif'
 
 function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
   const {guides, tourists, userType} = useUser()
@@ -20,6 +20,7 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
   const [hover, setHover] = useState(0);
   const [status,setStatus] = useState('Active')
   const { user } = useUserAuth();
+  const[loading,setLoading] = useState(false)
 
   useEffect(()=>{
     setGuide(details.email)
@@ -34,11 +35,13 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
     const findGuide = guides.find(guide=>guide.id===details.guide)
     const newRatings = [...findGuide.ratings, {rating, review, ratedTourist: user.uid, ratingStatus:status}]
     setGuideRatings(newRatings)
+    setLoading(true)
     setDoc(doc(db, "Guides", details.guide), { ratings: newRatings }, { merge: true }).then(()=> {
       setRating(null)
       setReview('')
       toast.success('* Thanks for your response. Come Again!')
       setFinishTourModal(false)
+      setLoading(false)
 
         const cancelItem = query(doc(db,'tours',details.id));
          updateDoc(cancelItem, {
@@ -54,13 +57,16 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
           await addDoc(addRatings,{guide:details.guide, tourist: user.uid, review:review, rating:rating, status:status})
         })
 
+
     }).catch((error) => {
       toast.error('Failed to record your response!');
+      setLoading(false)
     });
   }
 
   const onModalClose = () => {
     setFinishTourModal(false);
+    setLoading(false)
     setRating(null)
     setReview('')
   };
@@ -106,9 +112,13 @@ function FinishTourModal({ finishTourModal, setFinishTourModal, details }) {
             })}
           </div>
         </div>
+        {loading?
+        <button type = 'submit' className="reviewBtn">
+          <img className='loadingIcon' src={loadingGif} />
+        </button>:  
         <button disabled={!rating || !review} type="submit" className="reviewBtn">
           Submit
-        </button>
+        </button>}
       </form>
     </Modal>
   );

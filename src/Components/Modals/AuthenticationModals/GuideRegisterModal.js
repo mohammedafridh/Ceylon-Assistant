@@ -9,6 +9,7 @@ import {v4} from 'uuid'
 // import Select from 'react-select'
 import { toast } from 'react-hot-toast';
 import { useUser } from '../../../Context/UserContext';
+import loadingGif from '../../../assets/loading-gif.gif'
 
 
 function GuideRegisterModal({guideModal,setGuideModal}) {
@@ -43,6 +44,7 @@ const [fName, setFName] = useState('')
     const {guides} = useUser()
     const profileRef = useRef()
     const nicRef = useRef()
+    const[loading,setLoading] = useState(false)
 
     //language dropdown data
     // const language = [
@@ -173,6 +175,7 @@ const guideHandler = async(e)=>{
     if(password===confirmPassword){
       if(contactNumber.length === 10){
         if(!imgError){
+          setLoading(true)
     const addDetails = collection(db, 'guideRequests')
     await addDoc(addDetails,{
       firstName:fName,
@@ -196,6 +199,7 @@ const guideHandler = async(e)=>{
       status: 'Active'
     })
     .then(()=>{
+      setLoading(false)
       setGuideModal(false)
       toast.success('Your Register Request is been noted. We kindly request your Patience!')
       setFName('')
@@ -446,7 +450,11 @@ const guideHandler = async(e)=>{
                 </div>
     
                 </div>
-                <button type = 'submit' className="button infoButton">Add Guide</button>
+                {loading?
+                    <button type = 'submit' className="buttonLogin">
+                      <img className='loadingIcon' src={loadingGif} />
+                  </button>:
+                <button type = 'submit' className="button infoButton">Add Guide</button>}
             </form>
     </Modal>
   );

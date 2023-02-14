@@ -105,6 +105,7 @@ table {
     box-shadow:3px 3px 4px 1px #ccc;
     border-radius: 1rem;
     align-items: center;
+    width: 95%;
 }
 
 .bookingList>img{
@@ -141,24 +142,24 @@ table {
     margin-top: 1rem;
 }
 
-.mainBtn {
+.mainBtn{
     margin-right: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     border: none;
-    border-radius: 0.5rem;
-    background: rgb(116, 194, 0);
+    border-radius: 5px;
+    background: rgb(21, 105, 184);
     transition: all 100ms ease-out;
     padding: 5px 10px;
+    width: 6rem;
 }
 
 .mainBtn:hover{
     cursor: pointer;
-    color: black;
-    background: transparent;
-    border: 2px solid rgb(116, 194, 0);
+    color: white;
+    background: rgb(17, 99, 177);
 }
 
 .cancelBtn {
@@ -168,16 +169,36 @@ table {
     justify-content: center;
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 5px;
     background-color: rgb(199, 4, 4);
     transition: all 100ms ease-out;
     padding: 5px 10px;
+    width: 6rem;
 }
 
 .cancelBtn:hover{
     cursor: pointer;
-    color: black;
-    background: transparent;
-    border: 2px solid rgb(199, 4, 4);
+    color: white;
+    background: rgb(160, 0, 0);
 }
 
+/* Tours css */
+.finishTourBtn{
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background: rgb(33, 117, 196);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+    width: 6rem;
+}
+
+.finishTourBtn:hover{
+    cursor: pointer;
+    color: white;
+    background: rgb(17, 99, 177);
+}

@@ -11,6 +11,7 @@ import ViewBookingDetailsModal from '../../Modals/ViewBookingDetailsModal'
 import FinishTourModal from '../../Modals/FinishTourModal'
 import { useUser } from '../../../Context/UserContext'
 import { toast } from 'react-hot-toast'
+import emailjs from '@emailjs/browser';
 
 function PendingBookingList() {
 
@@ -24,6 +25,8 @@ function PendingBookingList() {
   const [modalOpened, setModalOpened] = useState(false)
   const [selectedooking, setSelectedBooking] = useState({})
   const {guides,tourists, userType} = useUser()
+  const {user} = useUserAuth()
+  const[userBooking,setUserBooking] = useState([])
   const current = new Date();
   const addDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
@@ -56,6 +59,11 @@ function PendingBookingList() {
     const tourist = tourists.find(tourist => tourist.id === id)
     return tourist ? tourist.contactNumber : null   
   }
+
+  useEffect(() => {
+    setUserBooking(userType === 'guide'? bookings.filter(booking => booking.guide === user.uid):
+    bookings.filter(booking => booking.tourist === user.uid))
+  }, [userType, guides,bookings,user])
 
   useEffect(()=>{
     setLoading(true)
@@ -102,12 +110,38 @@ function PendingBookingList() {
             await updateDoc(updateAvailability, {
             availability: 'On a Tour'
             })
+
+            const templateParams = {
+              subject: 'Booking Confirmed',
+              to_name: `${findTouristName(booking.tourist)}`,
+              to_email:`${findTouristEmail(booking.tourist)}`,
+              message: `Your Booking to ${booking.destination} from 
+              ${booking.startData} to ${booking.endDate} is Approved by ${findGuideName(booking.guide)}. Thank You!`,
+            };
+            
+            emailjs.send('service_b42ex4l', 'template_d7m6944', templateParams, 'ta7ULFlbVnrfwWRuQ')
+              .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+              }, (err) => {
+                console.log('FAILED...', err);
+              });
+
             toast.success('Booking Accepted Successfully')
       })
 
       }catch(err){
         toast.error('Something Went Wrong. Please Try Again!')
       }
+  }
+
+  const findGuideName = (id) => {
+    const guide = guides.find(guide => guide.id === id)
+    return guide ? guide.firstName + ' ' + guide.lastName : null   
+  }
+
+  const findTouristName = (id) => {
+    const tourist = tourists.find(tourist => tourist.id === id)
+    return tourist ? tourist.firstName + ' ' + tourist.lastName : null   
   }
 
   const updateBooking = (booking)=>{
@@ -122,7 +156,7 @@ function PendingBookingList() {
       <div className={classes.bookingComponents}>
         <div className={classes.bookingContainer}>
           <h1>Bookings</h1>
-          {bookings.map((booking,index) => (
+          {userBooking?.map((booking,index) => (
             <div className={classes.bookingList} key={index}>
               <img src={userType === 'tourist' ? findGuideImage(booking.guide) : findTouristImage(booking.tourist)}
                 alt='' />

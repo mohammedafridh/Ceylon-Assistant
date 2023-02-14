@@ -15,7 +15,7 @@ function Homepage() {
     <Layout>
         <HomeContents />
         <ReviewSlideshow />
-        <MailList />
+        {/* <MailList /> */}
 
     </Layout>
   )

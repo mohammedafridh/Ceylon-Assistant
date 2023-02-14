@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import {query, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../Firebase'
 import { toast } from 'react-hot-toast';
+import loadingGif from '../../assets/loading-gif.gif'
 
 function BookingUpdateModal({modalOpened,setModalOpened,data}) {
   const theme = useMantineTheme();
@@ -12,6 +13,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
   const [startDate,setStartDate] = useState(data.startData)
   const [endDate,setEndDate] = useState(data.endDate)
   const [time,setTime] = useState(data.time)
+  const[loading,setLoading] = useState(false)
 
   useEffect(()=>{
     setTourLocation(data.location)
@@ -24,6 +26,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
   const updateBooking = async(data)=>{
     console.log(data.id)
     const bookingUpdate = query(doc(db,'pending_booking',data.id));
+    setLoading(true)
      await updateDoc(bookingUpdate, {
       location:tourLocation,
       destination:destination,
@@ -33,6 +36,7 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
      }).then(async ()=>{
         setModalOpened(false)
         toast.success('Booking Updated Successfully')
+        setLoading(false)
      });
   }
 
@@ -97,7 +101,11 @@ function BookingUpdateModal({modalOpened,setModalOpened,data}) {
                     value = {time}
                 />
             </div>
-            <button onClick = {()=>updateBooking(data)} className="button infoButton">Update</button>
+            {loading?
+                <button type = 'submit' className="bookingUpdateBtn">
+                    <img className='loadingIcon' src={loadingGif} />
+                </button>: 
+            <button onClick = {()=>updateBooking(data)} className="bookingUpdateBtn">Update</button>}
         </div>
     </Modal>
   );

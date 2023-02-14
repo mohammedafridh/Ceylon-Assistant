@@ -8,6 +8,7 @@ import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import { useUserAuth } from '../../../Context/Context';
 import { toast } from 'react-hot-toast';
+import loadingGif from '../../../assets/loading-gif.gif'
 
 const AddGallery = () => {
 
@@ -26,6 +27,7 @@ const AddGallery = () => {
   const image2Ref = useRef()
   const image3Ref = useRef()
   const image4Ref = useRef()
+  const[loading,setLoading] = useState(false)
 
   const districtData=[
     { value: 'Hambanthota', label: 'Hambanthota' },
@@ -86,6 +88,7 @@ const[district,setDistrict] = useState()
   const tourHandler = async(e)=>{
     e.preventDefault()
     try{
+      setLoading(true)
       const addTour = collection(db, "toursGallery")
       await addDoc(addTour,{guideId:user.uid, destination:destination, district: district,
       mainImage:mainImage, image1:image1, image2:image2, image3:image3, image4:image4, status:status})
@@ -103,10 +106,12 @@ const[district,setDistrict] = useState()
           image3Ref.current.value = "";
           image4Ref.current.value = "";
           setError(false)
+          setLoading(false)
           toast.success('Tour Added Successfully!')
         })
     }catch(err){
       setError(true)
+      setLoading(false)
       toast.error('Sorry Something Went Wrong. Please Try Again!')
     }
 
@@ -219,7 +224,12 @@ const[district,setDistrict] = useState()
             </div>
 
           <div className='addGalleryAction'>
-              <button type = 'submit' className='addGalleryBtn'> Add Tour</button>
+            {loading?
+              <button type = 'submit' className="addGalleryBtn">
+                <img className='loadingIcon' src={loadingGif} />
+              </button>:
+
+              <button type = 'submit' className='addGalleryBtn'> Add Tour</button>}
           </div>   
         </form>
       </div>

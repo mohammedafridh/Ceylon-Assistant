@@ -82,6 +82,22 @@
     margin-top: 1rem;
 }
 
+.addUserForm>button:hover{
+    width: 8rem;
+    height: 2.5rem;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(98.63deg, #f7940b 0%, #ec4314 100%);
+    /* transition: all 100ms ease-out; */
+    transition: 0.5s;
+    margin-top: 1rem;
+}
+
 
 .perKm{
     display: flex;

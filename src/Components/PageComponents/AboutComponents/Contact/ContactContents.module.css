@@ -185,22 +185,18 @@
     border-radius: 0.5rem;
     background: var(--buttonBg);
     transition: all 100ms ease-out;
-    padding: 5px 20px;
-    /* align-self: flex-start; */
-    width: 10rem;
-    height: 3rem;
-    /* position: relative;
-    left: 2rem; */
-    /* margin-bottom: 2rem; */
+    padding: 5px 10px;
+    height: 2.5rem;
+    width: 11rem;
+    font-weight: 500;
   }
   
 .bookBtn:hover{
     cursor: pointer;
-    color: black;
-    background: transparent;
-    border: 2px solid var(--orange);
-    width: 10rem;
-    height: 3rem;
+    color: white;
+    background: linear-gradient(98.63deg, #f7940b 0%, #ec4314 100%);
+    transition: 0.7s;
+    font-weight: 500;
   }
 
   .contactInfo{

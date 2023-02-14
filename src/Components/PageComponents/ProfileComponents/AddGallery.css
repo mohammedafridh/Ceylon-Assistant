@@ -93,11 +93,25 @@
 }
 
 .addGalleryBtn{
-    background-color: orange;
-    padding: 10px;
-    border-radius: 8px;
-    color: black;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    background: var(--buttonBg);
+    transition: all 100ms ease-out;
+    padding: 5px 10px;
+    height: 2.5rem;
+    width: 8rem;
+    font-weight: 500;
+}
+
+.addGalleryBtn:hover{
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(98.63deg, #f7940b 0%, #ec4314 100%);
+    transition: 0.7s;
 }
 
 

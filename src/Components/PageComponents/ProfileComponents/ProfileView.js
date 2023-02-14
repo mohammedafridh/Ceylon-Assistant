@@ -83,7 +83,7 @@ function ProfileView() {
             
             </div>
           }
-            <button className = {classes.updateBtn} onClick = {()=>setModalOpened(true)}>Update</button>
+            <button className = {classes.updateBtn} onClick = {()=>setModalOpened(true)}>Update Profile</button>
             {userType==='guide'?
               <ProfileUpdateModal 
               modalOpened = {modalOpened} 

@@ -63,7 +63,7 @@ const ToursGalleryContents = () => {
 
       useEffect(() => {
         setUserTour(userType === 'guide'? gallery.filter(gallery => gallery.guideId === user.uid):gallery)
-      }, [userType, guides])
+      }, [userType, guides,gallery,user])
 
       const findGuideName = (id) => {
         const guide = guides.find(guide => guide.id === id)
@@ -104,7 +104,8 @@ const ToursGalleryContents = () => {
 
         <div className='imageGallery'>
             <div className='gallery'>
-                {gallery.map((galleryItem)=>(
+                {userTour?.map((galleryItem)=>(
+                  // {userTour?.map((galleryItem)=>(                                    
                     <div className='images' key = {galleryItem.id}>
                       <div onClick = {()=>galleryOpen(galleryItem)} className = 'view'>
                         <img src = {galleryItem.mainImage} alt = '' />
@@ -128,7 +129,6 @@ const ToursGalleryContents = () => {
                     galleryData = {currentItem}
                     />     
                     </div>
-                    
                 ))}                
                 </div>
             </div>
