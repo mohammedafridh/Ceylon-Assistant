@@ -67,7 +67,7 @@ const ToursGalleryContents = () => {
 
       const findGuideName = (id) => {
         const guide = guides.find(guide => guide.id === id)
-        return guide ? guide.firstName : null   
+        return guide ? guide.firstName +' '+ guide.lastName : null   
       }
 
       const findGuideId = (id) => {

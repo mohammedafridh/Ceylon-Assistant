@@ -43,13 +43,13 @@ function TopGuides() {
         return (         
             <div className="featuredItems">
               <img
-                src={guide.image ? guide.image : "https://picsum.photos/200"}
+                src={guide.image ? guide.image : "https://i.pinimg.com/736x/ca/52/e6/ca52e6e168595f767c2121a68cc227b0.jpg"}
                 alt="abc"
                 className="featuredImg"
               />
               <div className="featuredTitles">
                 <h2>{guide.firstName}</h2>
-                <h5>{guide.guideRate}</h5>
+                <h5>{sumOfRating(guide.ratings)}</h5>
               </div>
             </div>
           
