@@ -48,7 +48,7 @@ function TopGuides() {
                 className="featuredImg"
               />
               <div className="featuredTitles">
-                <h2>{guide.firstName}</h2>
+                <h2>{guide.firstName} {guide.lastName}</h2>
                 <h5>{sumOfRating(guide.ratings)}</h5>
               </div>
             </div>

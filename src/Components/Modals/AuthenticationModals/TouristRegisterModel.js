@@ -99,17 +99,25 @@ const touristHandler = async (e) => {
           setTouristModal(false)
           setLoading(false)
         })
+        .catch((error) => {
+          setLoading(false)
+          error.code === 'auth/email-already-in-use' && toast.error('*Email Already Taken. Please Try Another!')
+        })
       }else{
         setError('*Select a valid image')
+        setLoading(false)
       }
       }else{
         setError('*Contact Number must be 10 characters')
+        setLoading(false)
       }
       }else{
         setError('Passwords Do Not Match!')
+        setLoading(false)
       }
     }catch(error){
       error.code === 'auth/email-already-in-use' && toast.error('*Email Already Taken. Please Try Another!')
+      setLoading(false)
     }
 }
 

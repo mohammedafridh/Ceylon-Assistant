@@ -50,6 +50,7 @@ const loginHandler = async (e)=>{
             error.code === 'auth/user-not-found' && toast.error('User not found')
             error.code === 'auth/wrong-password' && toast.error('Incorrect Username or Password')
             setError('Failed to login')
+            setLoading(false)
         }  
 }
 

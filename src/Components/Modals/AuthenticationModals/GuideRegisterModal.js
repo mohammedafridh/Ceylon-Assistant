@@ -167,11 +167,17 @@ const setImage = (e, imageFolder, setUrl) => {
   });
 }
 
+const isGuideRegistered = guides.find((guide) => guide.email === email);
+
 //adding data to firebase
 
 const guideHandler = async(e)=>{
   e.preventDefault()
   setError('')
+  if(isGuideRegistered) {
+    setError('Email already exists')
+    return
+  }
     if(password===confirmPassword){
       if(contactNumber.length === 10){
         if(!imgError){
@@ -225,12 +231,15 @@ const guideHandler = async(e)=>{
     })
   }else{
     setError('*Select a valid image')
+    setLoading(false)
   }
   }else{
     setError('*Contact Number must be 10 characters')
+    setLoading(false)
   }
   }else{
     setError('Passwords Do Not Match!')
+    setLoading(false)
   }
   }
 

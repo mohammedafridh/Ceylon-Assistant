@@ -11,7 +11,7 @@
 .profileWrapper{
     margin: 8rem 0rem 1rem 0rem;
     display: grid;
-    grid-template-columns: 21rem auto;
+    grid-template-columns: 25rem auto;
     border: 1px solid gray;
     padding: 1rem;
 }
@@ -25,8 +25,8 @@
 }
 
 .image{
-    width: 20rem;
-    height: 22rem;
+    width: 23rem;
+    height: 23rem;
 }
 
 .touristImg{
@@ -46,7 +46,7 @@
 }
 
 .titleContainer>h3{
-    color: teal;
+    color: #23103E;
     font-weight: bold;
 }
 
