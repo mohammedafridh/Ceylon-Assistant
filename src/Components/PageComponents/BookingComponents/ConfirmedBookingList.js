@@ -65,7 +65,11 @@ setLoading(false)
           ...doc.data()
         });
       });
-      setTours(list.filter(item => item.status === 'Active'))
+      // const currentMonth = new Date().getMonth();
+      // setTours(list.filter(item => new Date(item.startDate).getMonth()===currentMonth))
+
+      setTours(list.filter(item => item.status==='Active'))
+      console.log(tours)
       setLoading(false)
     },(error)=>{
       setError(error.message)

@@ -15,7 +15,7 @@ function AboutContents() {
         <div className = {classes.aboutMeContainer}>        
             <div className = {classes.activityHeader}>About Ceylon Assistant</div>
             <div className = {classes.activityImage}>
-                <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202023-01-03%20at%2010.36.49%20AM.jpeg?alt=media&token=78057366-2352-4268-ae44-13ff588d97d4' alt = '' />
+                <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logo%2FWhatsApp%20Image%202023-06-08%20at%2015.16.03.jpeg?alt=media&token=4d6cb193-6b1d-4b9b-b41a-a5487a0bde86&_gl=1*vka2z2*_ga*NDAyMzI1MTA4LjE2NjY5NTk3NTE.*_ga_CW55HF8NVT*MTY4NjIxNjAyNi4yLjEuMTY4NjIxNzczMi4wLjAuMA..' alt = '' />
             </div>
             <div className = {classes.activityParagraph}>
                 <div>

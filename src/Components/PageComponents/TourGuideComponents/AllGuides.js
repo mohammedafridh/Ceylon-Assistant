@@ -82,17 +82,32 @@ function AllGuides() {
     setActiveGuides(guides.filter(guide => guide.status === 'Active' && guide.id === e))
   }
 
-  const sumOfRating = (ratings) => {
-    // no ratings return
-    if (!ratings || ratings.length === 0) return 'No Ratings Yet';
+// const sumOfRating = (ratings)=>{
+//   if(!ratings || ratings.length ===0) return 'No ratings Yet'
 
-    let sum = 0
-    ratings.forEach(item => {
-      sum += item.rating
-    })
-    const value = sum/ratings.length
-    return value.toFixed(1);
-  }
+//   let sum = 0;
+
+//   ratings.forEach((item)=>{
+//     sum+=item.rating
+//   })
+
+//   const value = sum/ratings.length
+//   return value.toFixed(1)
+// }
+
+const sumOfRating = (ratings)=>{
+  if(!ratings || ratings.length === 0) return 'No Ratings Yet'
+
+  let sum = 0
+
+  ratings.forEach((item)=>{
+    sum+=item.rating
+  })
+
+  const value = sum/ratings.length
+  return value.toFixed(1)
+}
+
   return (
     <div className='guideBackground'>
       <div className='headingImgContainer'>

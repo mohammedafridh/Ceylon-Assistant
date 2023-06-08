@@ -141,7 +141,7 @@ const comparedTourGuides = tourGuides.length
             </div>
 
             <div className = {classes.introductionLogo}>
-              <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logos%2FWhatsApp%20Image%202022-12-28%20at%2010.52.01%20AM.jpeg?alt=media&token=6809fdab-7ee5-4906-9b12-f69d21f8f732' alt = '' />
+              <img src = 'https://firebasestorage.googleapis.com/v0/b/ceylon-assistant.appspot.com/o/logo%2Fca%20logo.jpeg?alt=media&token=e220fec0-fbf6-4ad5-b817-16064b84248c&_gl=1*199zush*_ga*NDAyMzI1MTA4LjE2NjY5NTk3NTE.*_ga_CW55HF8NVT*MTY4NjIxNjAyNi4yLjEuMTY4NjIxNzg3MC4wLjAuMA..' alt = '' />
             </div>
           </div>
           {/* <div className = {classes.optionsContainer}>
