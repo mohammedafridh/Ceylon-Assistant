@@ -42,7 +42,7 @@
 .addUserForm>div{
     display: flex;
     gap: 1rem;
-    height: 2rem;
+    height: 40px;
     width: 100%;
 }
 
@@ -53,6 +53,7 @@
     border-radius: 8px;
     padding: 10px;
     flex: 1;
+    height: 40px;
 }
 
 .form-select{
